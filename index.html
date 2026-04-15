@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moove & Dream — Sélecteur de Maquettes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C8A96E;
+      --green: #1B4332;
+      --cream: #F5F0E8;
+      --taupe: #8B7355;
+      --bordeaux: #6B1229;
+      --dark: #0D0D0D;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--dark);
+      color: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      background: #0a0a0a;
+      border-bottom: 1px solid rgba(200,169,110,0.2);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .brand span {
+      font-style: normal;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: block;
+      color: rgba(200,169,110,0.6);
+      margin-top: -2px;
+    }
+
+    .subtitle {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.35);
+    }
+
+    /* Tabs */
+    .tabs-bar {
+      background: #111;
+      border-bottom: 1px solid rgba(200,169,110,0.15);
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tabs-bar::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0 1.75rem;
+      height: 52px;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      color: rgba(245,240,232,0.45);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .tab-btn:hover { color: var(--cream); }
+    .tab-btn.active { color: var(--cream); }
+    .tab-btn[data-tab="vert-dore"].active   { border-color: var(--gold); }
+    .tab-btn[data-tab="mineral"].active     { border-color: #C4A882; }
+    .tab-btn[data-tab="bordeaux"].active    { border-color: var(--bordeaux); }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-gold     { background: var(--gold);    box-shadow: 0 0 6px var(--gold); }
+    .dot-taupe    { background: #C4A882;         box-shadow: 0 0 6px #C4A882; }
+    .dot-bordeaux { background: var(--bordeaux); box-shadow: 0 0 6px var(--bordeaux); }
+
+    .palette {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      opacity: 0.7;
+    }
+    .chip {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Frames */
+    .frame-wrapper {
+      flex: 1;
+      position: relative;
+      display: none;
+    }
+    .frame-wrapper.active { display: block; }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 64px - 52px);
+      border: none;
+      display: block;
+    }
+
+    /* Loading overlay */
+    .loading {
+      position: absolute;
+      inset: 0;
+      background: var(--dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      z-index: 10;
+      transition: opacity 0.5s;
+    }
+    .loading.hidden { opacity: 0; pointer-events: none; }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 2px solid rgba(200,169,110,0.15);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.5);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 0 1rem; }
+      .subtitle { display: none; }
+      .tabs-bar { padding: 0 0.5rem; }
+      .tab-btn { padding: 0 1rem; font-size: 0.7rem; gap: 0.5rem; }
+      .palette { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      Moove &amp; Dream
+      <span>Private Driver — Maquettes</span>
+    </div>
+    <div class="subtitle">3 propositions de design</div>
+  </header>
+
+  <nav class="tabs-bar" role="tablist">
+    <button class="tab-btn active" data-tab="vert-dore" role="tab" aria-selected="true">
+      <span class="dot dot-gold"></span>
+      Vert Doré
+      <div class="palette">
+        <div class="chip" style="background:#1B4332"></div>
+        <div class="chip" style="background:#C8A96E"></div>
+        <div class="chip" style="background:#F5F0E8"></div>
+        <div class="chip" style="background:#0D0D0D"></div>
+      </div>
+    </button>
+
+    <button class="tab-btn" data-tab="mineral" role="tab" aria-selected="false">
+      <span class="dot dot-taupe"></span>
+      Minéral
+      <div class="palette">
+        <div class="chip" style="background:#8B7355"></div>
+        <div class="chip" style="background:#4A3728"></div>
+        <div class="chip" style="background:#FFFFFF; border-color:rgba(0,0,0,0.2)"></div>
+        <div class="chip" style="background:#E8E4E0"></div>
+      </div>
+    </button>
+
+    <button class="tab-btn" data-tab="bordeaux" role="tab" aria-selected="false">
+      <span class="dot dot-bordeaux"></span>
+      Luxe Intemporel
+      <div class="palette">
+        <div class="chip" style="background:#6B1229"></div>
+        <div class="chip" style="background:#C4956A"></div>
+        <div class="chip" style="background:#1A1008"></div>
+        <div class="chip" style="background:#B8962E"></div>
+      </div>
+    </button>
+  </nav>
+
+  <div class="frame-wrapper active" id="frame-vert-dore">
+    <div class="loading" id="loading-vert-dore">
+      <div class="spinner" style="border-top-color:#C8A96E"></div>
+      <div class="loading-label">Vert Doré</div>
+    </div>
+    <iframe src="vert-dore.html" title="Maquette Vert Doré" onload="hideLoading('vert-dore')"></iframe>
+  </div>
+
+  <div class="frame-wrapper" id="frame-mineral">
+    <div class="loading" id="loading-mineral">
+      <div class="spinner" style="border-top-color:#C4A882"></div>
+      <div class="loading-label">Minéral</div>
+    </div>
+    <iframe src="mineral.html" title="Maquette Minéral" onload="hideLoading('mineral')"></iframe>
+  </div>
+
+  <div class="frame-wrapper" id="frame-bordeaux">
+    <div class="loading" id="loading-bordeaux">
+      <div class="spinner" style="border-top-color:#6B1229"></div>
+      <div class="loading-label">Luxe Intemporel</div>
+    </div>
+    <iframe src="bordeaux.html" title="Maquette Bordeaux" onload="hideLoading('bordeaux')"></iframe>
+  </div>
+
+  <script>
+    function hideLoading(name) {
+      var l = document.getElementById('loading-' + name);
+      if (l) l.classList.add('hidden');
+    }
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = btn.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(function(b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        document.querySelectorAll('.frame-wrapper').forEach(function(f) {
+          f.classList.remove('active');
+        });
+        document.getElementById('frame-' + target).classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>

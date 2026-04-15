@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Moove & Dream - Private Driver Toufik. Chauffeur privé VTC de luxe à Paris. Transferts aéroports CDG, Orly, Beauvais. Mercedes Classe V 7 places. Pureté & Précision." />
+  <meta name="keywords" content="VTC Paris, chauffeur privé, transfert aéroport CDG, Orly, Beauvais, Mercedes Classe V, Toufik" />
+  <title>Moove & Dream — Private Driver Toufik | VTC Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN MINÉRAL — Moove & Dream
+       Palette : Taupe chaud #8B7355 · Moka #4A3728 · Blanc #FFFFFF
+                 Gris perle #E8E4E0 · Or sable #C4A882
+    ============================================================ */
+
+    :root {
+      --taupe:       #8B7355;
+      --moka:        #4A3728;
+      --moka-clair:  #6B5040;
+      --blanc:       #FFFFFF;
+      --perle:       #E8E4E0;
+      --perle-sombre:#D8D2CB;
+      --accent:      #C4A882;
+      --accent-clair:#D9C4A8;
+      --text-dark:   #2C2118;
+      --text-mid:    #6B5F52;
+      --text-light:  #9E9188;
+      --font-titre:  'Cormorant Garamond', Georgia, serif;
+      --font-corps:  'Inter', system-ui, sans-serif;
+      --transition:  all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ombre-douce: 0 8px 32px rgba(74,55,40,0.08);
+      --ombre-forte: 0 20px 60px rgba(74,55,40,0.14);
+      --radius:      0px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      color: var(--text-mid);
+      background-color: var(--blanc);
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { display: block; }
+
+    /* ============================================================
+       UTILITAIRES
+    ============================================================ */
+    .section-badge {
+      display: inline-block;
+      font-family: var(--font-corps);
+      font-weight: 400;
+      font-size: 0.6rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-titre);
+      font-weight: 400;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      color: var(--moka);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--taupe);
+    }
+
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 1.6rem 0;
+    }
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--perle-sombre);
+    }
+    .rule-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .rule-center {
+      justify-content: center;
+    }
+    .rule-center .rule-line {
+      flex: 0 0 60px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-corps);
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 1rem 2.8rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-solid {
+      background: var(--moka);
+      color: var(--blanc);
+      border-color: var(--moka);
+    }
+    .btn-solid:hover {
+      background: var(--moka-clair);
+      border-color: var(--moka-clair);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(74,55,40,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--moka);
+      border-color: var(--taupe);
+    }
+    .btn-outline:hover {
+      background: var(--moka);
+      color: var(--blanc);
+      border-color: var(--moka);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--blanc);
+      border-color: var(--accent);
+    }
+    .btn-accent:hover {
+      background: var(--accent-clair);
+      border-color: var(--accent-clair);
+      color: var(--moka);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(196,168,130,0.3);
+    }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--perle);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-logo-main {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.45rem;
+      color: var(--moka);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-sub {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.5rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      position: relative;
+      padding-bottom: 3px;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--moka); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      padding: 0.55rem 1.4rem;
+      font-size: 0.6rem;
+    }
+
+    #nav-toggle { display: none; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--moka);
+      transition: var(--transition);
+    }
+
+    /* ============================================================
+       HERO — minéral, fond blanc / gris perle, géométrique
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 100px;
+      background: var(--perle);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grille de fond géométrique ultra-légère */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 60px,
+          rgba(139,115,85,0.06) 60px,
+          rgba(139,115,85,0.06) 61px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 60px,
+          rgba(139,115,85,0.06) 60px,
+          rgba(139,115,85,0.06) 61px
+        );
+      pointer-events: none;
+    }
+
+    /* Cadre décoratif coin haut-gauche */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 100px;
+      left: 5%;
+      width: 80px;
+      height: 80px;
+      border-top: 1px solid rgba(196,168,130,0.4);
+      border-left: 1px solid rgba(196,168,130,0.4);
+      pointer-events: none;
+    }
+
+    /* Cadre décoratif coin bas-droit */
+    .hero-frame-br {
+      position: absolute;
+      bottom: 80px;
+      right: 5%;
+      width: 80px;
+      height: 80px;
+      border-bottom: 1px solid rgba(196,168,130,0.4);
+      border-right: 1px solid rgba(196,168,130,0.4);
+      pointer-events: none;
+    }
+
+    /* Ligne verticale gauche */
+    .hero-vline {
+      position: absolute;
+      left: 5%;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(196,168,130,0.3) 30%, rgba(196,168,130,0.3) 70%, transparent);
+      pointer-events: none;
+    }
+
+    /* Cercle géométrique décoratif */
+    .hero-circle {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(139,115,85,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-circle::after {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(139,115,85,0.05);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-corps);
+      font-weight: 400;
+      font-size: 0.6rem;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 2.4rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.2s;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.7;
+    }
+
+    .hero-title {
+      font-family: var(--font-titre);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      color: var(--moka);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      animation: fadeInUp 0.7s ease both;
+      animation-delay: 0.35s;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.5s;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-rule {
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.65s;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-slogan {
+      font-family: var(--font-titre);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+      color: var(--text-mid);
+      letter-spacing: 0.06em;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.75s;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.9s;
+    }
+
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeInUp 0.6s ease both 1.2s, scrollPulse 2.5s ease-in-out 2s infinite;
+    }
+    .hero-scroll-text {
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    /* ============================================================
+       BANDE DE CHIFFRES (stats rapides)
+    ============================================================ */
+    #stats-band {
+      background: var(--moka);
+      padding: 3rem 5%;
+    }
+    .stats-band-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(196,168,130,0.2);
+    }
+    .stat-bloc {
+      background: var(--moka);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .stat-val {
+      font-family: var(--font-titre);
+      font-weight: 300;
+      font-size: 2.4rem;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+    }
+    .stat-lbl {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(232,228,224,0.5);
+      margin-top: 0.5rem;
+      display: block;
+    }
+
+    /* ============================================================
+       SERVICES
+    ============================================================ */
+    #services {
+      background: var(--blanc);
+      padding: 8rem 5%;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 4rem;
+      max-width: 1080px;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--perle-sombre);
+    }
+
+    .service-card {
+      background: var(--blanc);
+      padding: 3rem 2.5rem;
+      text-align: left;
+      transition: var(--transition);
+      position: relative;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+    .service-card:hover {
+      background: var(--perle);
+    }
+    .service-card:hover::after {
+      width: 100%;
+    }
+
+    .service-num {
+      font-family: var(--font-titre);
+      font-weight: 300;
+      font-size: 3rem;
+      color: var(--perle-sombre);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-titre);
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: var(--moka);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--text-light);
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    .service-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      color: var(--taupe);
+      border: 1px solid var(--perle-sombre);
+      padding: 0.3rem 0.8rem;
+      text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .service-tag:hover {
+      border-color: var(--accent);
+      color: var(--moka);
+    }
+
+    /* ============================================================
+       À PROPOS
+    ============================================================ */
+    #apropos {
+      background: var(--perle);
+      padding: 8rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Motif de fond */
+    #apropos::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 40px,
+          rgba(139,115,85,0.03) 40px,
+          rgba(139,115,85,0.03) 41px
+        );
+      pointer-events: none;
+    }
+
+    .apropos-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .apropos-text .section-title { color: var(--moka); }
+
+    .apropos-text p {
+      font-size: 0.92rem;
+      line-height: 2.1;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+
+    .apropos-signature {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--perle-sombre);
+    }
+    .apropos-signature .sig-name {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--moka);
+      display: block;
+    }
+    .apropos-signature .sig-role {
+      font-size: 0.58rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.3rem;
+      display: block;
+    }
+
+    .apropos-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--perle-sombre);
+    }
+
+    .aside-item {
+      background: var(--blanc);
+      padding: 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      transition: background 0.3s ease;
+    }
+    .aside-item:hover { background: var(--perle); }
+
+    .aside-icon {
+      width: 40px;
+      height: 40px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .aside-body {}
+    .aside-title {
+      font-family: var(--font-corps);
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--moka);
+      margin-bottom: 0.4rem;
+    }
+    .aside-desc {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       FLOTTE
+    ============================================================ */
+    #flotte {
+      background: var(--blanc);
+      padding: 8rem 5%;
+      text-align: center;
+    }
+
+    .flotte-card {
+      max-width: 900px;
+      margin: 4rem auto 0;
+      border: 1px solid var(--perle-sombre);
+      transition: var(--transition);
+      overflow: hidden;
+      position: relative;
+    }
+    .flotte-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--ombre-forte);
+    }
+
+    .flotte-header {
+      background: var(--perle);
+      padding: 4rem 5% 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .flotte-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg, transparent, transparent 30px,
+          rgba(139,115,85,0.04) 30px, rgba(139,115,85,0.04) 31px
+        ),
+        repeating-linear-gradient(
+          90deg, transparent, transparent 30px,
+          rgba(139,115,85,0.04) 30px, rgba(139,115,85,0.04) 31px
+        );
+    }
+
+    /* SVG Mercedes Van stylisé */
+    .car-svg {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 16px 32px rgba(74,55,40,0.12));
+    }
+
+    .flotte-body {
+      padding: 2.5rem 3rem 3rem;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+      background: var(--blanc);
+    }
+
+    .flotte-model {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--moka);
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+    .flotte-class {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .flotte-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .flotte-feature {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--perle-sombre);
+      color: var(--taupe);
+      transition: var(--transition);
+    }
+    .flotte-feature:hover {
+      border-color: var(--accent);
+      color: var(--moka);
+    }
+
+    .flotte-cta-area { text-align: right; }
+
+    .flotte-note {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--text-light);
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    /* ============================================================
+       RÉSERVATION
+    ============================================================ */
+    #reservation {
+      background: var(--perle);
+      padding: 8rem 5%;
+      text-align: center;
+      position: relative;
+    }
+
+    #reservation::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          90deg, transparent, transparent 80px,
+          rgba(139,115,85,0.04) 80px, rgba(139,115,85,0.04) 81px
+        );
+      pointer-events: none;
+    }
+
+    .resa-form-wrap {
+      max-width: 680px;
+      margin: 4rem auto 0;
+      background: var(--blanc);
+      padding: 3.5rem;
+      border: 1px solid var(--perle-sombre);
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 2rem;
+    }
+
+    .form-field {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--perle-sombre);
+      padding: 0.8rem 0;
+      font-family: var(--font-corps);
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-dark);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.3s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-bottom-color: var(--accent);
+    }
+    .form-field textarea {
+      resize: none;
+      min-height: 80px;
+    }
+    .form-field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C4A882'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0 center;
+      padding-right: 20px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--moka);
+      color: var(--blanc);
+      border: none;
+      height: 56px;
+      font-family: var(--font-corps);
+      font-weight: 500;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+    .btn-submit:hover {
+      background: var(--moka-clair);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(74,55,40,0.25);
+    }
+
+    .resa-alt {
+      margin-top: 2rem;
+      font-size: 0.78rem;
+      color: var(--text-light);
+      position: relative;
+      z-index: 1;
+    }
+    .resa-alt a {
+      color: var(--moka);
+      font-weight: 500;
+      border-bottom: 1px solid var(--perle-sombre);
+      padding-bottom: 1px;
+      transition: border-color 0.3s;
+    }
+    .resa-alt a:hover { border-color: var(--accent); }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact {
+      background: var(--moka);
+      padding: 7rem 5%;
+      text-align: center;
+    }
+
+    #contact .section-title { color: var(--perle); }
+    #contact .section-badge { color: var(--accent); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      max-width: 860px;
+      margin: 4rem auto 0;
+      background: rgba(196,168,130,0.2);
+    }
+
+    .contact-item {
+      background: var(--moka);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.3s ease;
+    }
+    .contact-item:hover {
+      background: var(--moka-clair);
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      color: var(--accent);
+    }
+    .contact-item-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(232,228,224,0.45);
+    }
+    .contact-item-value {
+      font-family: var(--font-titre);
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--perle);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .contact-item-value a {
+      color: inherit;
+      transition: color 0.3s;
+    }
+    .contact-item-value a:hover { color: var(--accent); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--text-dark);
+      padding: 3rem 5%;
+    }
+    .footer-rule {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(196,168,130,0.25), transparent);
+      margin-bottom: 3rem;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: rgba(196,168,130,0.6);
+    }
+    .footer-copy {
+      font-size: 0.62rem;
+      color: rgba(232,228,224,0.25);
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(232,228,224,0.25);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ============================================================
+       ANIMATIONS CSS
+    ============================================================ */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* Scroll reveal — classes ajoutées par CSS seul via :has / animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.7s ease both;
+    }
+    /* Délais de révélation en cascade */
+    .reveal:nth-child(1) { animation-delay: 0.1s; }
+    .reveal:nth-child(2) { animation-delay: 0.2s; }
+    .reveal:nth-child(3) { animation-delay: 0.3s; }
+    .reveal:nth-child(4) { animation-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 960px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        background: none;
+        gap: 1px;
+        background: var(--perle-sombre);
+      }
+      .apropos-inner {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+      .apropos-aside {
+        max-width: 500px;
+        margin: 0 auto;
+        width: 100%;
+      }
+      .flotte-body {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .flotte-cta-area { text-align: center; }
+      .flotte-features { justify-content: center; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+      }
+      .stats-band-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-wrap { display: none; }
+      .hamburger { display: flex; }
+
+      #nav-toggle:checked ~ .nav-menu {
+        display: flex !important;
+      }
+      .nav-menu {
+        display: none;
+        position: fixed;
+        top: 76px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255,255,255,0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        list-style: none;
+      }
+      .nav-menu a {
+        font-family: var(--font-titre);
+        font-style: italic;
+        font-size: 2.2rem;
+        color: var(--moka);
+        letter-spacing: 0.03em;
+      }
+      .nav-menu a:hover { color: var(--accent); }
+      .nav-menu .nav-menu-cta { margin-top: 1rem; }
+
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .resa-form-wrap { padding: 2.5rem 1.5rem; }
+
+      .hero-circle { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 3rem; }
+      .hero-ctas { flex-direction: column; align-items: stretch; text-align: center; }
+      .btn { text-align: center; }
+      #services, #apropos, #flotte, #reservation, #contact { padding: 5rem 5%; }
+      .stats-band-inner { grid-template-columns: repeat(2, 1fr); }
+      .flotte-body { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <a href="#hero" class="nav-logo" aria-label="Moove & Dream - Accueil">
+      <span class="nav-logo-main">Moove &amp; Dream</span>
+      <span class="nav-logo-sub">Private Driver</span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" aria-label="Ouvrir le menu" />
+    <label for="nav-toggle" class="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À Propos</a></li>
+      <li><a href="#flotte">Flotte</a></li>
+      <li><a href="#reservation">Réservation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <a href="tel:+33769385715" class="btn btn-solid nav-cta">Réserver</a>
+    </div>
+
+    <ul class="nav-menu" role="list">
+      <li><a href="#services" onclick="document.getElementById('nav-toggle').checked=false">Services</a></li>
+      <li><a href="#apropos" onclick="document.getElementById('nav-toggle').checked=false">À Propos</a></li>
+      <li><a href="#flotte" onclick="document.getElementById('nav-toggle').checked=false">Flotte</a></li>
+      <li><a href="#reservation" onclick="document.getElementById('nav-toggle').checked=false">Réservation</a></li>
+      <li><a href="#contact" onclick="document.getElementById('nav-toggle').checked=false">Contact</a></li>
+      <li class="nav-menu-cta"><a href="tel:+33769385715" class="btn btn-solid">Appeler Toufik</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" aria-label="Accueil">
+
+    <span class="hero-vline" aria-hidden="true"></span>
+    <span class="hero-frame-br" aria-hidden="true"></span>
+    <span class="hero-circle" aria-hidden="true"></span>
+
+    <div class="hero-content">
+
+      <div class="hero-eyebrow">Chauffeur Privé Paris</div>
+
+      <h1 class="hero-title">Moove &amp; Dream</h1>
+      <p class="hero-subtitle">Private Driver &nbsp;·&nbsp; Toufik</p>
+
+      <div class="hero-rule rule rule-center" aria-hidden="true">
+        <span class="rule-line"></span>
+        <span class="rule-diamond"></span>
+        <span class="rule-line"></span>
+      </div>
+
+      <p class="hero-slogan">Pureté &amp; Précision</p>
+
+      <div class="hero-ctas">
+        <a href="#reservation" class="btn btn-solid">Réserver un trajet</a>
+        <a href="tel:+33769385715" class="btn btn-outline">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-right:8px" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          07 69 38 57 15
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <span class="hero-scroll-text">Découvrir</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+
+  <!-- ===================== BANDE STATS ===================== -->
+  <div id="stats-band" aria-label="Chiffres clés">
+    <div class="stats-band-inner">
+      <div class="stat-bloc">
+        <span class="stat-val">7</span>
+        <span class="stat-lbl">Places confort</span>
+      </div>
+      <div class="stat-bloc">
+        <span class="stat-val">3</span>
+        <span class="stat-lbl">Aéroports couverts</span>
+      </div>
+      <div class="stat-bloc">
+        <span class="stat-val">24/7</span>
+        <span class="stat-lbl">Disponibilité</span>
+      </div>
+      <div class="stat-bloc">
+        <span class="stat-val">100%</span>
+        <span class="stat-lbl">Satisfaction clients</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================== SERVICES ===================== -->
+  <section id="services" aria-label="Nos services">
+
+    <span class="section-badge">Prestations</span>
+    <div class="rule rule-center" aria-hidden="true">
+      <span class="rule-line"></span>
+      <span class="rule-diamond"></span>
+      <span class="rule-line"></span>
+    </div>
+    <h2 class="section-title">Nos <em>Services</em></h2>
+    <p style="max-width:500px;margin:0 auto;color:var(--text-light);font-size:0.88rem;line-height:1.9">
+      Un service personnalisé, ponctuel et discret pour tous vos déplacements en Île-de-France et au-delà.
+    </p>
+
+    <div class="services-grid">
+
+      <article class="service-card reveal">
+        <div class="service-num" aria-hidden="true">01</div>
+        <h3>Transferts Aéroports</h3>
+        <p>Prise en charge à domicile, suivi de vol en temps réel, attente incluse. Ponctualité garantie à chaque envol et atterrissage.</p>
+        <div class="service-tags">
+          <span class="service-tag">CDG</span>
+          <span class="service-tag">Orly</span>
+          <span class="service-tag">Beauvais</span>
+        </div>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-num" aria-hidden="true">02</div>
+        <h3>Transferts Paris</h3>
+        <p>Gares, hôtels, restaurants, salles d'événements — votre chauffeur vous attend où vous en avez besoin, avec discrétion et élégance.</p>
+        <div class="service-tags">
+          <span class="service-tag">Gare du Nord</span>
+          <span class="service-tag">Lyon</span>
+          <span class="service-tag">Montparnasse</span>
+        </div>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-num" aria-hidden="true">03</div>
+        <h3>Mise à Disposition</h3>
+        <p>Votre chauffeur dédié pour la journée ou la demi-journée. Idéal pour les événements d'entreprise, voyages d'affaires ou occasions spéciales.</p>
+        <div class="service-tags">
+          <span class="service-tag">Demi-journée</span>
+          <span class="service-tag">Journée</span>
+          <span class="service-tag">Événements</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== À PROPOS ===================== -->
+  <section id="apropos" aria-label="À propos de Toufik">
+    <div class="apropos-inner">
+
+      <div class="apropos-text">
+        <span class="section-badge">Le Chauffeur</span>
+        <div class="rule" aria-hidden="true">
+          <span class="rule-line" style="flex:0 0 40px"></span>
+          <span class="rule-diamond"></span>
+        </div>
+        <h2 class="section-title">L'Excellence <em>comme standard</em></h2>
+        <p>
+          Toufik est chauffeur privé VTC certifié, fort d'une expérience reconnue dans le transport haut de gamme à Paris et en Île-de-France. Sa mission : vous offrir un trajet fluide, confortable et sans surprise.
+        </p>
+        <p>
+          Chaque détail compte — de la ponctualité à la présentation du véhicule, en passant par la discrétion et la courtoisie. Vous montez, vous vous détendez. Le reste, c'est son affaire.
+        </p>
+
+        <div class="apropos-signature">
+          <span class="sig-name">Toufik</span>
+          <span class="sig-role">Chauffeur Privé Certifié · Paris</span>
+        </div>
+      </div>
+
+      <div class="apropos-aside">
+
+        <div class="aside-item">
+          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <circle cx="24" cy="24" r="20"/>
+            <path d="M24 14v10l6 4"/>
+          </svg>
+          <div class="aside-body">
+            <p class="aside-title">Ponctualité Garantie</p>
+            <p class="aside-desc">Suivi en temps réel des vols et anticipation du trafic pour une présence sans faille.</p>
+          </div>
+        </div>
+
+        <div class="aside-item">
+          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M24 4l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z"/>
+          </svg>
+          <div class="aside-body">
+            <p class="aside-title">Service Premium</p>
+            <p class="aside-desc">Eau fraîche, chargeurs, ambiance soignée — chaque trajet est une expérience à part entière.</p>
+          </div>
+        </div>
+
+        <div class="aside-item">
+          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <rect x="8" y="8" width="32" height="32" rx="2"/>
+            <path d="M16 24h16M16 18h10M16 30h12"/>
+          </svg>
+          <div class="aside-body">
+            <p class="aside-title">Discrétion Absolue</p>
+            <p class="aside-desc">Confidentialité totale, pour vos déplacements professionnels comme personnels.</p>
+          </div>
+        </div>
+
+        <div class="aside-item">
+          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M6 24 C6 13 13 6 24 6 C35 6 42 13 42 24"/>
+            <path d="M6 24 C6 35 13 42 24 42 C35 42 42 35 42 24"/>
+            <path d="M14 14 L34 34M34 14 L14 34"/>
+          </svg>
+          <div class="aside-body">
+            <p class="aside-title">Disponible 24h/24</p>
+            <p class="aside-desc">Early morning, late night — Toufik s'adapte à vos horaires, sans exception.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===================== FLOTTE ===================== -->
+  <section id="flotte" aria-label="Notre flotte">
+
+    <span class="section-badge">Véhicule</span>
+    <div class="rule rule-center" aria-hidden="true">
+      <span class="rule-line"></span>
+      <span class="rule-diamond"></span>
+      <span class="rule-line"></span>
+    </div>
+    <h2 class="section-title">Notre <em>Flotte</em></h2>
+    <p style="max-width:480px;margin:0 auto;color:var(--text-light);font-size:0.88rem;line-height:1.9">
+      Un véhicule grand luxe soigneusement entretenu, adapté à vos déplacements de groupe ou en famille.
+    </p>
+
+    <div class="flotte-card">
+
+      <div class="flotte-header">
+        <!-- Mercedes Van SVG stylisé -->
+        <svg class="car-svg" viewBox="0 0 620 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mercedes Classe V">
+          <!-- Carrosserie principale -->
+          <path d="M60 140 L60 100 C60 78 75 65 110 60 L160 52 C185 48 240 44 310 44 C380 44 435 48 470 55 L520 65 C545 72 560 85 562 105 L562 140 Z"
+            fill="#E8E4E0" stroke="#C4A882" stroke-width="1.5"/>
+          <!-- Toit arrière légèrement incliné -->
+          <path d="M310 44 C360 44 430 46 470 55 L520 65 C545 72 558 82 562 100"
+            fill="none" stroke="#8B7355" stroke-width="1"/>
+          <!-- Vitres latérales avant -->
+          <rect x="110" y="68" width="90" height="50" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
+          <!-- Vitres latérales milieu -->
+          <rect x="208" y="62" width="90" height="56" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
+          <!-- Vitres latérales arrière -->
+          <rect x="306" y="58" width="90" height="56" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
+          <!-- Vitres latérales arrière 2 -->
+          <rect x="404" y="58" width="80" height="54" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
+          <!-- Pare-brise -->
+          <path d="M60 100 L108 68 L110 118 L60 118 Z" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
+          <!-- Feux avant -->
+          <ellipse cx="68" cy="110" rx="8" ry="12" fill="#C4A882" opacity="0.5"/>
+          <!-- Feux arrière -->
+          <rect x="554" y="95" width="10" height="30" rx="1" fill="#C4A882" opacity="0.5"/>
+          <!-- Bas de caisse -->
+          <path d="M60 140 L562 140" stroke="#8B7355" stroke-width="1.5"/>
+          <!-- Jantes avant -->
+          <circle cx="140" cy="155" r="24" fill="#D8D2CB" stroke="#8B7355" stroke-width="1.5"/>
+          <circle cx="140" cy="155" r="14" fill="#E8E4E0" stroke="#C4A882" stroke-width="1"/>
+          <circle cx="140" cy="155" r="5" fill="#C4A882"/>
+          <!-- Jantes arrière -->
+          <circle cx="460" cy="155" r="24" fill="#D8D2CB" stroke="#8B7355" stroke-width="1.5"/>
+          <circle cx="460" cy="155" r="14" fill="#E8E4E0" stroke="#C4A882" stroke-width="1"/>
+          <circle cx="460" cy="155" r="5" fill="#C4A882"/>
+          <!-- Détails jantes : rayons -->
+          <line x1="140" y1="141" x2="140" y2="169" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="126" y1="155" x2="154" y2="155" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="130" y1="145" x2="150" y2="165" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="150" y1="145" x2="130" y2="165" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="460" y1="141" x2="460" y2="169" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="446" y1="155" x2="474" y2="155" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="450" y1="145" x2="470" y2="165" stroke="#8B7355" stroke-width="0.8"/>
+          <line x1="470" y1="145" x2="450" y2="165" stroke="#8B7355" stroke-width="0.8"/>
+          <!-- Bas de caisse relief -->
+          <path d="M60 138 L562 138 L562 144 L60 144 Z" fill="#D8D2CB"/>
+          <!-- Étoile Mercedes sobre -->
+          <circle cx="310" cy="44" r="8" fill="none" stroke="#C4A882" stroke-width="1"/>
+          <line x1="310" y1="36" x2="310" y2="44" stroke="#C4A882" stroke-width="0.8"/>
+          <line x1="310" y1="44" x2="303" y2="50" stroke="#C4A882" stroke-width="0.8"/>
+          <line x1="310" y1="44" x2="317" y2="50" stroke="#C4A882" stroke-width="0.8"/>
+        </svg>
+      </div>
+
+      <div class="flotte-body">
+        <div>
+          <p class="flotte-model">Mercedes Classe V</p>
+          <p class="flotte-class">Van Premium · 7 Places</p>
+          <div class="flotte-features">
+            <span class="flotte-feature">7 Passagers</span>
+            <span class="flotte-feature">Grand Coffre</span>
+            <span class="flotte-feature">Climatisation</span>
+            <span class="flotte-feature">Wifi</span>
+            <span class="flotte-feature">Eau fraîche</span>
+            <span class="flotte-feature">Chargeurs USB</span>
+            <span class="flotte-feature">Sièges cuir</span>
+          </div>
+        </div>
+        <div class="flotte-cta-area">
+          <a href="#reservation" class="btn btn-solid">Réserver ce véhicule</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="flotte-note">
+      Véhicule régulièrement entretenu &amp; désinfecté — votre confort est notre priorité.
+    </p>
+
+  </section>
+
+
+  <!-- ===================== RÉSERVATION ===================== -->
+  <section id="reservation" aria-label="Formulaire de réservation">
+
+    <span class="section-badge">Réserver</span>
+    <div class="rule rule-center" aria-hidden="true">
+      <span class="rule-line"></span>
+      <span class="rule-diamond"></span>
+      <span class="rule-line"></span>
+    </div>
+    <h2 class="section-title">Votre <em>Trajet</em></h2>
+    <p style="max-width:480px;margin:0 auto;color:var(--text-mid);font-size:0.88rem;line-height:1.9;position:relative;z-index:1">
+      Remplissez le formulaire ci-dessous et recevez une confirmation sous 30 minutes.
+    </p>
+
+    <div class="resa-form-wrap">
+      <form action="mailto:adouditoufik@gmail.com" method="post" enctype="text/plain">
+        <div class="form-grid">
+
+          <div class="form-field">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="Prénom" placeholder="Votre prénom" required />
+          </div>
+
+          <div class="form-field">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="Nom" placeholder="Votre nom" required />
+          </div>
+
+          <div class="form-field">
+            <label for="tel">Téléphone</label>
+            <input type="tel" id="tel" name="Téléphone" placeholder="06 XX XX XX XX" required />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" placeholder="votre@email.com" />
+          </div>
+
+          <div class="form-field">
+            <label for="service">Type de service</label>
+            <select id="service" name="Service">
+              <option value="">Choisir...</option>
+              <option value="Transfert aéroport CDG">Transfert aéroport CDG</option>
+              <option value="Transfert aéroport Orly">Transfert aéroport Orly</option>
+              <option value="Transfert aéroport Beauvais">Transfert aéroport Beauvais</option>
+              <option value="Transfert Paris">Transfert Paris</option>
+              <option value="Mise à disposition">Mise à disposition</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="passagers">Nombre de passagers</label>
+            <select id="passagers" name="Passagers">
+              <option value="1">1 passager</option>
+              <option value="2">2 passagers</option>
+              <option value="3">3 passagers</option>
+              <option value="4">4 passagers</option>
+              <option value="5">5 passagers</option>
+              <option value="6">6 passagers</option>
+              <option value="7">7 passagers</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="Date" required />
+          </div>
+
+          <div class="form-field">
+            <label for="heure">Heure de prise en charge</label>
+            <input type="time" id="heure" name="Heure" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="depart">Adresse de départ</label>
+            <input type="text" id="depart" name="Départ" placeholder="Rue, ville..." required />
+          </div>
+
+          <div class="form-field full">
+            <label for="arrivee">Adresse d'arrivée</label>
+            <input type="text" id="arrivee" name="Arrivée" placeholder="Rue, ville, aéroport..." required />
+          </div>
+
+          <div class="form-field full">
+            <label for="message">Informations complémentaires</label>
+            <textarea id="message" name="Message" placeholder="Vol, bagages, demandes particulières..."></textarea>
+          </div>
+
+        </div>
+        <button type="submit" class="btn-submit">Envoyer la demande</button>
+      </form>
+    </div>
+
+    <p class="resa-alt">
+      Préférez un contact direct ?
+      <a href="tel:+33769385715">07 69 38 57 15</a>
+      &nbsp;—&nbsp;
+      <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+    </p>
+
+  </section>
+
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" aria-label="Contact">
+
+    <span class="section-badge">Nous Joindre</span>
+    <div class="rule rule-center" style="justify-content:center;margin-left:auto;margin-right:auto;width:fit-content;" aria-hidden="true">
+      <span class="rule-line" style="background:rgba(196,168,130,0.3)"></span>
+      <span class="rule-diamond"></span>
+      <span class="rule-line" style="background:rgba(196,168,130,0.3)"></span>
+    </div>
+    <h2 class="section-title" style="color:var(--perle)">Nous <em style="color:var(--accent)">Contacter</em></h2>
+
+    <div class="contact-grid">
+
+      <div class="contact-item">
+        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M40 31.68v5.5a3.67 3.67 0 01-4 3.67A36.3 36.3 0 017.15 25.17 35.79 35.79 0 011.5 9.33 3.67 3.67 0 015.14 5.33h5.5a3.67 3.67 0 013.66 3.15 23.55 23.55 0 001.29 5.15 3.67 3.67 0 01-.82 3.87l-2.33 2.33a29.32 29.32 0 0011.53 11.53l2.33-2.33a3.67 3.67 0 013.87-.82 23.55 23.55 0 005.15 1.29 3.67 3.67 0 013.18 3.68z"/>
+        </svg>
+        <span class="contact-item-label">Téléphone</span>
+        <div class="contact-item-value">
+          <a href="tel:+33769385715">07 69 38 57 15</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <rect x="6" y="10" width="36" height="28" rx="3"/>
+          <path d="M6 14l18 12 18-12"/>
+        </svg>
+        <span class="contact-item-label">Email</span>
+        <div class="contact-item-value" style="font-size:0.9rem">
+          <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M24 6C17 6 11 12 11 19c0 10.5 13 25 13 25s13-14.5 13-25c0-7-6-13-13-13z"/>
+          <circle cx="24" cy="19" r="4"/>
+        </svg>
+        <span class="contact-item-label">Zone de service</span>
+        <div class="contact-item-value">Paris &amp; Île-de-France</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-rule"></div>
+    <div class="footer-inner">
+      <span class="footer-brand">Moove &amp; Dream</span>
+      <p class="footer-copy">
+        &copy; 2025 Moove &amp; Dream — Private Driver Toufik<br>
+        VTC Paris &amp; Île-de-France
+      </p>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#reservation">Réservation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Moove & Dream - Private Driver Toufik. Chauffeur privé VTC de luxe à Paris. Transferts aéroports CDG, Orly, Beauvais. Mercedes Classe V 7 places. Votre Confort, Notre Priorité." />
+  <meta name="keywords" content="VTC Paris, chauffeur privé, transfert aéroport CDG, Orly, Beauvais, Mercedes Classe V, Toufik" />
+  <title>Moove & Dream — Private Driver Toufik | VTC Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* === VARIABLES & RESET === */
+    :root {
+      --vert:        #1B4332;
+      --vert-clair:  #2D6A4F;
+      --vert-sombre: #122d22;
+      --or:          #C8A96E;
+      --or-clair:    #E8C98E;
+      --or-sombre:   #9e7f4a;
+      --creme:       #F5F0E8;
+      --creme-sombre:#e8e0d0;
+      --noir:        #0D0D0D;
+      --gris:        #3a3a3a;
+      --gris-clair:  #888;
+      --blanc:       #FFFFFF;
+      --font-titre:  'Playfair Display', Georgia, serif;
+      --font-corps:  'Lato', Arial, sans-serif;
+      --transition:  all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ombre-douce: 0 10px 40px rgba(0,0,0,0.08);
+      --ombre-forte: 0 20px 60px rgba(0,0,0,0.3);
+      --radius:      2px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      color: var(--gris);
+      background-color: var(--noir);
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img { display: block; }
+
+    /* === UTILITAIRES === */
+    .section-badge {
+      display: inline-block;
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--or);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem auto;
+      width: fit-content;
+    }
+    .ornament-line {
+      width: 60px;
+      height: 1px;
+      background: var(--or);
+      opacity: 0.6;
+    }
+    .ornament svg {
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-corps);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: var(--radius);
+    }
+
+    .btn-or {
+      background: var(--or);
+      color: var(--noir);
+      border-color: var(--or);
+    }
+    .btn-or:hover {
+      background: var(--or-clair);
+      border-color: var(--or-clair);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--creme);
+      border-color: var(--or);
+    }
+    .btn-outline:hover {
+      background: var(--or);
+      color: var(--noir);
+      transform: translateY(-2px);
+    }
+
+    /* === NAVIGATION === */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13, 13, 13, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,110,0.1);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .nav-logo-main {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--or);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-sub {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.55rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.7);
+      position: relative;
+      padding-bottom: 4px;
+      transition: var(--transition);
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--or);
+      transition: var(--transition);
+    }
+    .nav-links a:hover {
+      color: var(--or);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+    }
+
+    /* Hamburger mobile */
+    #nav-toggle {
+      display: none;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--or);
+      transition: var(--transition);
+    }
+
+    /* === HERO === */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5% 80px;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(27,67,50,0.6) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 30%, rgba(200,169,110,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #0D0D0D 0%, #1a2e23 40%, #1B4332 65%, #0D0D0D 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Motif géométrique de fond */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 80px,
+          rgba(200,169,110,0.03) 80px,
+          rgba(200,169,110,0.03) 81px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 80px,
+          rgba(200,169,110,0.03) 80px,
+          rgba(200,169,110,0.03) 81px
+        );
+      pointer-events: none;
+    }
+
+    /* Ligne décorative gauche */
+    #hero::after {
+      content: '';
+      position: absolute;
+      left: 5%;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--or) 30%, var(--or) 70%, transparent);
+      opacity: 0.2;
+    }
+
+    .hero-content {
+      max-width: 820px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--or);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.6s ease both;
+      animation-delay: 0.2s;
+    }
+    .hero-badge::before,
+    .hero-badge::after {
+      content: '';
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background: var(--or);
+      opacity: 0.6;
+    }
+
+    .hero-title {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-weight: 900;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      color: var(--creme);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      text-shadow: 0 0 100px rgba(200,169,110,0.25), 0 4px 30px rgba(0,0,0,0.5);
+      animation: fadeInUp 0.7s ease both;
+      animation-delay: 0.4s;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-titre);
+      font-weight: 400;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      color: var(--or);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fadeInUp 0.7s ease both;
+      animation-delay: 0.6s;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-slogan {
+      font-family: var(--font-corps);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+      color: rgba(245,240,232,0.6);
+      letter-spacing: 0.08em;
+      animation: fadeInUp 0.7s ease both;
+      animation-delay: 0.8s;
+      margin-bottom: 3rem;
+    }
+
+    .hero-ornament {
+      animation: fadeInUp 0.5s ease both;
+      animation-delay: 0.9s;
+      margin-bottom: 3rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      animation: fadeInUp 0.7s ease both;
+      animation-delay: 1s;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeInUp 0.6s ease both, bounce 2s ease-in-out 2s infinite;
+    }
+    .hero-scroll-text {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.5);
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--or), transparent);
+      opacity: 0.5;
+    }
+
+    /* === SERVICES === */
+    #services {
+      background: var(--creme);
+      padding: 8rem 5%;
+      text-align: center;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .service-card {
+      background: var(--blanc);
+      padding: 3rem 2.5rem;
+      border-radius: var(--radius);
+      border-bottom: 3px solid var(--or);
+      box-shadow: var(--ombre-douce);
+      transition: var(--transition);
+      text-align: left;
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.14);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 2rem;
+      color: var(--or);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--vert);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--gris-clair);
+    }
+
+    .service-card .airports {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.2rem;
+    }
+    .service-card .airport-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      color: var(--vert);
+      background: rgba(27,67,50,0.08);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    /* === À PROPOS === */
+    #apropos {
+      background: var(--vert);
+      padding: 8rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    #apropos::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .apropos-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .apropos-text .section-badge { color: var(--or); }
+    .apropos-text .section-title { color: var(--creme); }
+
+    .apropos-text p {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: rgba(245,240,232,0.7);
+      margin-bottom: 1.2rem;
+    }
+
+    .apropos-text .signature {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--or);
+      margin-top: 2rem;
+      margin-bottom: 0.3rem;
+    }
+    .apropos-text .signature-titre {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.4);
+    }
+
+    .apropos-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(200,169,110,0.2);
+      border: 1px solid rgba(200,169,110,0.2);
+    }
+    .stat-item {
+      background: rgba(18, 45, 34, 0.6);
+      padding: 1.8rem 1rem;
+      text-align: center;
+    }
+    .stat-value {
+      font-family: var(--font-titre);
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--or);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      margin-top: 0.4rem;
+    }
+
+    .contact-card {
+      background: rgba(18, 45, 34, 0.6);
+      border: 1px solid rgba(200,169,110,0.2);
+      padding: 2rem;
+    }
+    .contact-card-title {
+      font-family: var(--font-corps);
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.6);
+      margin-bottom: 1.5rem;
+    }
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(200,169,110,0.1);
+    }
+    .contact-line:last-child { border-bottom: none; }
+    .contact-line svg { color: var(--or); flex-shrink: 0; }
+    .contact-line a, .contact-line span {
+      font-size: 0.88rem;
+      color: rgba(245,240,232,0.8);
+      transition: var(--transition);
+    }
+    .contact-line a:hover { color: var(--or); }
+
+    /* === FLOTTE === */
+    #flotte {
+      background: var(--noir);
+      padding: 8rem 5%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #flotte::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(27,67,50,0.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    #flotte .section-title { color: var(--creme); }
+
+    .flotte-card {
+      max-width: 850px;
+      margin: 4rem auto 0;
+      background: linear-gradient(145deg, #1a1a1a 0%, #222 100%);
+      border: 1px solid rgba(200,169,110,0.2);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      z-index: 1;
+    }
+    .flotte-card:hover {
+      border-color: rgba(200,169,110,0.5);
+      box-shadow: 0 0 60px rgba(200,169,110,0.1);
+    }
+
+    .flotte-card-visual {
+      padding: 4rem 5% 2rem;
+      position: relative;
+      background: linear-gradient(180deg, rgba(27,67,50,0.15) 0%, transparent 100%);
+    }
+
+    /* SVG Van / Mercedes Classe V stylisé */
+    .car-svg {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(200,169,110,0.15));
+    }
+
+    .flotte-card-info {
+      padding: 2.5rem 3rem 3rem;
+      text-align: left;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .flotte-model {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--creme);
+      margin-bottom: 0.4rem;
+    }
+    .flotte-class {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.6);
+    }
+
+    .flotte-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .flotte-badge {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(200,169,110,0.3);
+      color: rgba(200,169,110,0.8);
+      transition: var(--transition);
+    }
+    .flotte-badge:hover {
+      background: rgba(200,169,110,0.1);
+      border-color: var(--or);
+      color: var(--or);
+    }
+
+    .flotte-cta-area {
+      text-align: right;
+    }
+    .flotte-note {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: rgba(245,240,232,0.4);
+      margin-top: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === RÉSERVATION === */
+    #reservation {
+      background: var(--creme);
+      padding: 8rem 5%;
+      text-align: center;
+    }
+
+    .resa-form-wrap {
+      max-width: 700px;
+      margin: 4rem auto 0;
+      background: var(--blanc);
+      padding: 3.5rem;
+      box-shadow: var(--ombre-forte);
+      border-radius: var(--radius);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 2rem;
+    }
+
+    .form-field {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    .form-field.full { grid-column: 1 / -1; }
+
+    .form-field label {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gris-clair);
+      margin-bottom: 0.6rem;
+      font-weight: 400;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      padding: 0.8rem 0;
+      font-family: var(--font-corps);
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--gris);
+      background: transparent;
+      outline: none;
+      transition: border-color 0.3s ease;
+      border-radius: 0;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-bottom-color: var(--or);
+    }
+    .form-field textarea {
+      resize: none;
+      min-height: 80px;
+    }
+    .form-field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C8A96E'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0 center;
+      padding-right: 20px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--or) 0%, var(--vert) 100%);
+      color: var(--blanc);
+      border: none;
+      height: 58px;
+      font-family: var(--font-corps);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: var(--radius);
+      margin-top: 1rem;
+    }
+    .btn-submit:hover {
+      background: linear-gradient(135deg, var(--or-clair) 0%, var(--vert-clair) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(27,67,50,0.35);
+    }
+
+    /* === CONTACT === */
+    #contact {
+      background: var(--vert);
+      padding: 6rem 5%;
+      text-align: center;
+    }
+    #contact .section-title { color: var(--creme); }
+
+    .contact-blocs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 900px;
+      margin: 4rem auto 0;
+    }
+
+    .contact-bloc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(200,169,110,0.15);
+      transition: var(--transition);
+    }
+    .contact-bloc:hover {
+      border-color: rgba(200,169,110,0.5);
+      background: rgba(200,169,110,0.04);
+    }
+
+    .contact-bloc-icon {
+      width: 48px;
+      height: 48px;
+      color: var(--or);
+    }
+    .contact-bloc-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.6);
+    }
+    .contact-bloc-value {
+      font-family: var(--font-titre);
+      font-size: 1.1rem;
+      color: var(--creme);
+      text-align: center;
+    }
+    .contact-bloc-value a {
+      color: inherit;
+      transition: color 0.3s;
+    }
+    .contact-bloc-value a:hover { color: var(--or); }
+
+    /* === FOOTER === */
+    footer {
+      background: var(--noir);
+      padding: 3rem 5%;
+    }
+    .footer-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--or), transparent);
+      opacity: 0.25;
+      margin-bottom: 3rem;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-brand {
+      font-family: var(--font-titre);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--or);
+      opacity: 0.7;
+    }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(245,240,232,0.3);
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.3);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--or); }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    /* === RESPONSIVE — TABLET === */
+    @media (max-width: 900px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+      .apropos-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .flotte-card-info {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .flotte-cta-area { text-align: center; }
+      .flotte-badges { justify-content: center; }
+      .contact-blocs {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta-wrap { display: none; }
+      .hamburger { display: flex; }
+
+      #nav-toggle:checked ~ .nav-menu {
+        display: flex !important;
+      }
+
+      .nav-menu {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(13,13,13,0.98);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3rem;
+        list-style: none;
+      }
+      .nav-menu a {
+        font-family: var(--font-titre);
+        font-style: italic;
+        font-size: 2rem;
+        color: var(--creme);
+        letter-spacing: 0.05em;
+      }
+      .nav-menu a:hover { color: var(--or); }
+      .nav-menu .nav-menu-cta { margin-top: 1rem; }
+
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .resa-form-wrap { padding: 2rem 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.8rem; }
+      .hero-ctas { flex-direction: column; align-items: stretch; text-align: center; }
+      .btn { text-align: center; }
+      #services, #apropos, #flotte, #reservation, #contact { padding: 5rem 5%; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .flotte-card-info { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav id="nav" role="navigation" aria-label="Navigation principale">
+    <a href="#hero" class="nav-logo" aria-label="Moove & Dream - Accueil">
+      <span class="nav-logo-main">Moove &amp; Dream</span>
+      <span class="nav-logo-sub">Private Driver</span>
+    </a>
+
+    <!-- Toggle mobile -->
+    <input type="checkbox" id="nav-toggle" aria-label="Ouvrir le menu" />
+    <label for="nav-toggle" class="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+
+    <!-- Menu desktop -->
+    <ul class="nav-links" role="list">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À Propos</a></li>
+      <li><a href="#flotte">Flotte</a></li>
+      <li><a href="#reservation">Réservation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <a href="tel:+33769385715" class="btn btn-or nav-cta">Réserver</a>
+    </div>
+
+    <!-- Menu mobile overlay -->
+    <ul class="nav-menu" role="list">
+      <li><a href="#services" onclick="document.getElementById('nav-toggle').checked=false">Services</a></li>
+      <li><a href="#apropos" onclick="document.getElementById('nav-toggle').checked=false">À Propos</a></li>
+      <li><a href="#flotte" onclick="document.getElementById('nav-toggle').checked=false">Flotte</a></li>
+      <li><a href="#reservation" onclick="document.getElementById('nav-toggle').checked=false">Réservation</a></li>
+      <li><a href="#contact" onclick="document.getElementById('nav-toggle').checked=false">Contact</a></li>
+      <li class="nav-menu-cta"><a href="tel:+33769385715" class="btn btn-or">Appeler Toufik</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero" aria-label="Accueil">
+    <div class="hero-content">
+
+      <div class="hero-badge">Chauffeur Privé Paris</div>
+
+      <h1 class="hero-title">Moove &amp; Dream</h1>
+      <p class="hero-subtitle">Private Driver</p>
+      <p class="hero-slogan">Votre Confort, Notre Priorité</p>
+
+      <div class="hero-ornament ornament" aria-hidden="true">
+        <span class="ornament-line"></span>
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="0" width="8.485" height="8.485" transform="rotate(45 6 0)" fill="none" stroke="#C8A96E" stroke-width="1"/>
+        </svg>
+        <span class="ornament-line"></span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#reservation" class="btn btn-or">Réserver un trajet</a>
+        <a href="tel:+33769385715" class="btn btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-right:8px">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+          07 69 38 57 15
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="hero-scroll-text">Découvrir</span>
+      <span class="hero-scroll-line"></span>
+    </div>
+  </section>
+
+
+  <!-- ===================== SERVICES ===================== -->
+  <section id="services" aria-label="Nos services">
+    <span class="section-badge">Ce que nous proposons</span>
+
+    <div class="ornament" aria-hidden="true">
+      <span class="ornament-line" style="background:#1B4332"></span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <rect x="6" y="0" width="8.485" height="8.485" transform="rotate(45 6 0)" fill="none" stroke="#C8A96E" stroke-width="1"/>
+      </svg>
+      <span class="ornament-line" style="background:#1B4332"></span>
+    </div>
+
+    <h2 class="section-title" style="color:var(--vert)">Nos Prestations</h2>
+    <p style="max-width:520px;margin:0 auto;color:var(--gris-clair);font-size:0.95rem;line-height:1.9">
+      Un service personnalisé, ponctuel et discret pour tous vos déplacements en Île-de-France et au-delà.
+    </p>
+
+    <div class="services-grid">
+
+      <!-- Service 1 : Transferts Aéroports -->
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M44 32H4l8-14h24l8 14z"/>
+          <path d="M24 18V6M18 10l6-4 6 4"/>
+          <line x1="4" y1="36" x2="44" y2="36"/>
+          <path d="M8 32l2 4M40 32l-2 4"/>
+        </svg>
+        <h3>Transferts Aéroports</h3>
+        <p>Prise en charge à domicile ou en entreprise, suivi de vol en temps réel, attente incluse. Ponctualité garantie pour chaque envol ou atterrissage.</p>
+        <div class="airports">
+          <span class="airport-badge">CDG</span>
+          <span class="airport-badge">Orly</span>
+          <span class="airport-badge">Beauvais</span>
+        </div>
+      </article>
+
+      <!-- Service 2 : Transferts Paris -->
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M24 4C15.16 4 8 11.16 8 20c0 13 16 28 16 28s16-15 16-28c0-8.84-7.16-16-16-16z"/>
+          <circle cx="24" cy="20" r="5"/>
+          <path d="M12 38h24"/>
+          <path d="M6 44h36"/>
+        </svg>
+        <h3>Transferts Paris</h3>
+        <p>Gares parisiennes (Gare du Nord, Gare de Lyon, Montparnasse…), hôtels, salles d'événements, restaurants — votre chauffeur vous attend où vous en avez besoin.</p>
+      </article>
+
+      <!-- Service 3 : Mise à Disposition -->
+      <article class="service-card">
+        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <circle cx="24" cy="24" r="18"/>
+          <polyline points="24,12 24,24 32,28"/>
+          <path d="M16 6l-4-4M32 6l4-4M8 14L4 10M40 14l4-4"/>
+        </svg>
+        <h3>Mise à Disposition</h3>
+        <p>Réservez votre chauffeur à l'heure pour une journée entière, un événement d'entreprise, un mariage ou tout déplacement prolongé nécessitant discrétion et flexibilité.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== À PROPOS ===================== -->
+  <section id="apropos" aria-label="À propos de Toufik">
+    <div class="apropos-inner">
+
+      <div class="apropos-text">
+        <span class="section-badge">L'Excellence au service de votre mobilité</span>
+        <h2 class="section-title">Votre Chauffeur Toufik</h2>
+
+        <p>Professionnel du transport privé à Paris, Toufik met son expertise et son sens aigu du service au cœur de chaque trajet. Discrétion absolue, ponctualité rigoureuse et confort optimal sont les piliers de sa promesse.</p>
+
+        <p>Formé aux standards des services de transport haut de gamme, il anticipe vos besoins et adapte son attitude pour que chaque déplacement devienne une expérience apaisante — que vous soyez en déplacement d'affaires, en transit aéroportuaire ou pour une occasion spéciale.</p>
+
+        <p>À bord de son Mercedes Classe V, profitez d'un espace conçu pour votre bien-être : climatisation, espace bagages généreux, connexion et intimité préservée.</p>
+
+        <div class="signature">Toufik</div>
+        <div class="signature-titre">Chauffeur Privé VTC — Paris &amp; Île-de-France</div>
+
+        <div style="margin-top:2.5rem">
+          <a href="#reservation" class="btn btn-or">Réserver avec Toufik</a>
+        </div>
+      </div>
+
+      <div class="apropos-aside">
+        <div class="stats-grid" role="list">
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">7</span>
+            <span class="stat-label">Places</span>
+          </div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">24/7</span>
+            <span class="stat-label">Disponible</span>
+          </div>
+          <div class="stat-item" role="listitem">
+            <span class="stat-value">IDF</span>
+            <span class="stat-label">Zone</span>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-title">Contact Direct</div>
+          <div class="contact-line">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <a href="tel:+33769385715">07 69 38 57 15</a>
+          </div>
+          <div class="contact-line">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+          </div>
+          <div class="contact-line">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Paris &amp; Île-de-France</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== FLOTTE ===================== -->
+  <section id="flotte" aria-label="Notre flotte">
+    <span class="section-badge">Véhicule d'exception</span>
+
+    <div class="ornament" aria-hidden="true">
+      <span class="ornament-line"></span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <rect x="6" y="0" width="8.485" height="8.485" transform="rotate(45 6 0)" fill="none" stroke="#C8A96E" stroke-width="1"/>
+      </svg>
+      <span class="ornament-line"></span>
+    </div>
+
+    <h2 class="section-title">Notre Flotte</h2>
+
+    <div class="flotte-card">
+      <div class="flotte-card-visual">
+
+        <!-- SVG Silhouette Mercedes Classe V (Van de luxe) -->
+        <svg class="car-svg" viewBox="0 0 700 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mercedes Classe V — Van de luxe 7 places" role="img">
+          <!-- Carrosserie principale -->
+          <path d="M60 190 Q55 190 50 185 L35 165 Q30 155 35 148 L50 140 L90 130 L130 100 Q140 85 160 80 L520 75 Q540 75 555 85 L590 120 L640 130 L660 140 Q670 148 668 158 L655 175 Q650 185 640 190 Z"
+            fill="url(#carGrad)" stroke="#C8A96E" stroke-width="1.2"/>
+
+          <!-- Toit légèrement bombé -->
+          <path d="M130 100 Q140 85 160 80 L520 75 Q540 75 555 85 L590 120 L130 120 Z"
+            fill="url(#toitGrad)" opacity="0.6"/>
+
+          <!-- Pare-brise avant -->
+          <path d="M555 85 L590 120 L535 120 L530 82 Z"
+            fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.85"/>
+
+          <!-- Vitres latérales (6 vitres) -->
+          <rect x="150" y="88" width="55" height="32" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+          <rect x="215" y="86" width="60" height="34" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+          <rect x="285" y="84" width="65" height="36" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+          <rect x="360" y="83" width="65" height="36" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+          <rect x="435" y="82" width="60" height="37" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+          <rect x="505" y="83" width="35" height="36" rx="2" fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.8"/>
+
+          <!-- Pare-brise arrière -->
+          <path d="M90 130 L130 100 L130 130 Z"
+            fill="url(#vitreGrad)" stroke="#C8A96E" stroke-width="0.8" opacity="0.7"/>
+
+          <!-- Bas de caisse -->
+          <rect x="50" y="176" width="610" height="14" rx="1" fill="#111" stroke="#C8A96E" stroke-width="0.5"/>
+
+          <!-- Roue avant -->
+          <circle cx="155" cy="195" r="36" fill="#111" stroke="#C8A96E" stroke-width="1.5"/>
+          <circle cx="155" cy="195" r="26" fill="none" stroke="#C8A96E" stroke-width="0.8" opacity="0.4"/>
+          <circle cx="155" cy="195" r="14" fill="url(#jantGrad)"/>
+          <!-- Rayons roue avant -->
+          <line x1="155" y1="181" x2="155" y2="169" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="155" y1="209" x2="155" y2="221" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="141" y1="195" x2="129" y2="195" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="169" y1="195" x2="181" y2="195" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+
+          <!-- Roue arrière -->
+          <circle cx="555" cy="195" r="36" fill="#111" stroke="#C8A96E" stroke-width="1.5"/>
+          <circle cx="555" cy="195" r="26" fill="none" stroke="#C8A96E" stroke-width="0.8" opacity="0.4"/>
+          <circle cx="555" cy="195" r="14" fill="url(#jantGrad)"/>
+          <!-- Rayons roue arrière -->
+          <line x1="555" y1="181" x2="555" y2="169" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="555" y1="209" x2="555" y2="221" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="541" y1="195" x2="529" y2="195" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+          <line x1="569" y1="195" x2="581" y2="195" stroke="#C8A96E" stroke-width="0.8" opacity="0.5"/>
+
+          <!-- Phares avant -->
+          <path d="M618 140 L650 148 L648 158 L616 158 Z" fill="url(#phareGrad)" opacity="0.9"/>
+
+          <!-- Phares arrière -->
+          <rect x="38" y="148" width="20" height="20" rx="1" fill="#c0392b" opacity="0.6"/>
+          <rect x="40" y="150" width="16" height="16" rx="1" fill="#e74c3c" opacity="0.5"/>
+
+          <!-- Poignée porte coulissante -->
+          <rect x="375" y="150" width="30" height="4" rx="2" fill="#C8A96E" opacity="0.6"/>
+
+          <!-- Étoile Mercedes (avant) -->
+          <circle cx="645" cy="153" r="8" fill="none" stroke="#C8A96E" stroke-width="1" opacity="0.8"/>
+          <line x1="645" y1="145" x2="645" y2="161" stroke="#C8A96E" stroke-width="0.8" opacity="0.6"/>
+          <line x1="638" y1="149" x2="652" y2="157" stroke="#C8A96E" stroke-width="0.8" opacity="0.6"/>
+          <line x1="652" y1="149" x2="638" y2="157" stroke="#C8A96E" stroke-width="0.8" opacity="0.6"/>
+
+          <!-- Reflet sur le toit -->
+          <path d="M200 80 Q350 68 500 78" stroke="white" stroke-width="1.5" opacity="0.06" fill="none"/>
+
+          <!-- Ombre portée au sol -->
+          <ellipse cx="355" cy="232" rx="290" ry="12" fill="black" opacity="0.35"/>
+
+          <!-- Dégradés -->
+          <defs>
+            <linearGradient id="carGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="50%" stop-color="#1a1a1a"/>
+              <stop offset="100%" stop-color="#0d0d0d"/>
+            </linearGradient>
+            <linearGradient id="toitGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3a3a3a"/>
+              <stop offset="100%" stop-color="#1a1a1a"/>
+            </linearGradient>
+            <linearGradient id="vitreGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1B4332" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#0d1a12" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="jantGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C8A96E"/>
+              <stop offset="100%" stop-color="#7a6040"/>
+            </linearGradient>
+            <linearGradient id="phareGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fff5cc" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#ffe066" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+      </div>
+
+      <div class="flotte-card-info">
+        <div>
+          <div class="flotte-class">Mercedes-Benz</div>
+          <div class="flotte-model">Classe V</div>
+          <div class="flotte-badges">
+            <span class="flotte-badge">7 Passagers</span>
+            <span class="flotte-badge">Climatisation</span>
+            <span class="flotte-badge">Wi-Fi</span>
+            <span class="flotte-badge">Cuir</span>
+            <span class="flotte-badge">Vitres Teintées</span>
+            <span class="flotte-badge">Chargeurs USB</span>
+            <span class="flotte-badge">Eau Minérale</span>
+          </div>
+        </div>
+        <div class="flotte-cta-area">
+          <a href="#reservation" class="btn btn-or">Réserver ce véhicule</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="flotte-note">Confort, espace et élégance pour chaque trajet — groupes, familles et déplacements d'affaires</p>
+  </section>
+
+
+  <!-- ===================== RÉSERVATION ===================== -->
+  <section id="reservation" aria-label="Formulaire de réservation">
+    <span class="section-badge">Planifiez votre trajet</span>
+
+    <div class="ornament" aria-hidden="true">
+      <span class="ornament-line" style="background:var(--vert)"></span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <rect x="6" y="0" width="8.485" height="8.485" transform="rotate(45 6 0)" fill="none" stroke="#C8A96E" stroke-width="1"/>
+      </svg>
+      <span class="ornament-line" style="background:var(--vert)"></span>
+    </div>
+
+    <h2 class="section-title" style="color:var(--vert)">Réserver votre Trajet</h2>
+    <p style="max-width:480px;margin:0 auto;color:var(--gris-clair);font-size:0.9rem;line-height:1.9">
+      Remplissez le formulaire ci-dessous et Toufik vous confirmera votre réservation dans les meilleurs délais.
+    </p>
+
+    <div class="resa-form-wrap">
+      <form action="mailto:adouditoufik@gmail.com" method="POST" enctype="text/plain" novalidate>
+
+        <div class="form-grid">
+
+          <div class="form-field">
+            <label for="nom">Nom complet *</label>
+            <input type="text" id="nom" name="nom" placeholder="Jean Dupont" required />
+          </div>
+
+          <div class="form-field">
+            <label for="telephone">Téléphone *</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="+33 6 XX XX XX XX" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="email">Adresse email *</label>
+            <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+          </div>
+
+          <div class="form-field">
+            <label for="service">Type de service *</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Choisir un service</option>
+              <option value="transfert-paris">Transfert Paris</option>
+              <option value="aeroport-cdg">Aéroport CDG</option>
+              <option value="aeroport-orly">Aéroport Orly</option>
+              <option value="aeroport-beauvais">Aéroport Beauvais</option>
+              <option value="mise-a-dispo">Mise à Disposition</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="passagers">Nombre de passagers</label>
+            <select id="passagers" name="passagers">
+              <option value="1">1 passager</option>
+              <option value="2">2 passagers</option>
+              <option value="3">3 passagers</option>
+              <option value="4">4 passagers</option>
+              <option value="5">5 passagers</option>
+              <option value="6">6 passagers</option>
+              <option value="7">7 passagers</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="date">Date souhaitée *</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+
+          <div class="form-field">
+            <label for="heure">Heure de prise en charge *</label>
+            <input type="time" id="heure" name="heure" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="depart">Lieu de prise en charge *</label>
+            <input type="text" id="depart" name="depart" placeholder="Adresse complète ou nom du lieu" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="destination">Destination *</label>
+            <input type="text" id="destination" name="destination" placeholder="Adresse complète ou terminal aéroport" required />
+          </div>
+
+          <div class="form-field full">
+            <label for="message">Informations complémentaires</label>
+            <textarea id="message" name="message" placeholder="Vol, nombre de bagages, besoin particulier…"></textarea>
+          </div>
+
+        </div>
+
+        <button type="submit" class="btn-submit">Envoyer ma demande de réservation</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- ===================== CONTACT ===================== -->
+  <section id="contact" aria-label="Contact">
+    <span class="section-badge">Nous sommes disponibles</span>
+
+    <div class="ornament" aria-hidden="true">
+      <span class="ornament-line"></span>
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <rect x="6" y="0" width="8.485" height="8.485" transform="rotate(45 6 0)" fill="none" stroke="#C8A96E" stroke-width="1"/>
+      </svg>
+      <span class="ornament-line"></span>
+    </div>
+
+    <h2 class="section-title">Contactez Toufik</h2>
+
+    <div class="contact-blocs">
+
+      <div class="contact-bloc">
+        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M44 32.84v6a4 4 0 01-4.36 4 39.58 39.58 0 01-17.26-6.14A39 39 0 016.5 20.62 39.58 39.58 0 01.44 3.52 4 4 0 014.36 0h6a4 4 0 014 3.44 25.66 25.66 0 001.4 5.62A4 4 0 0114.86 13L13.82 14a32 32 0 0012.58 12.58l1-.9a4 4 0 014.22-.9 25.66 25.66 0 005.62 1.4A4 4 0 0144 32.84z"/>
+        </svg>
+        <div class="contact-bloc-label">Téléphone</div>
+        <div class="contact-bloc-value">
+          <a href="tel:+33769385715">07 69 38 57 15</a>
+        </div>
+      </div>
+
+      <div class="contact-bloc">
+        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M8 8h32c2.2 0 4 1.8 4 4v24c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V12c0-2.2 1.8-4 4-4z"/>
+          <polyline points="44,12 24,26 4,12"/>
+        </svg>
+        <div class="contact-bloc-label">Email</div>
+        <div class="contact-bloc-value" style="font-size:0.9rem">
+          <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-bloc">
+        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <path d="M42 20c0 14-18 26-18 26S6 34 6 20a18 18 0 0136 0z"/>
+          <circle cx="24" cy="20" r="6"/>
+        </svg>
+        <div class="contact-bloc-label">Zone de service</div>
+        <div class="contact-bloc-value">Paris &amp;<br/>Île-de-France</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer role="contentinfo">
+    <div class="footer-divider" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">Moove &amp; Dream</div>
+      <p class="footer-copy">
+        &copy; 2025 Moove &amp; Dream — Private Driver Toufik. Tous droits réservés.<br/>
+        <span style="font-size:0.62rem;opacity:0.6">Chauffeur Privé VTC Paris &mdash; Île-de-France</span>
+      </p>
+      <ul class="footer-links" role="list">
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">CGV</a></li>
+        <li><a href="#reservation">Réserver</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
