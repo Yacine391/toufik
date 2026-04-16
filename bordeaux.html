@@ -1,1857 +1,802 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Moove & Dream - Private Driver Toufik. Chauffeur privé VTC de luxe à Paris. Transferts aéroports CDG, Orly, Beauvais. Mercedes Classe V 7 places. Le Voyage d'Excellence." />
-  <meta name="keywords" content="VTC Paris, chauffeur privé, transfert aéroport CDG, Orly, Beauvais, Mercedes Classe V, Toufik, luxe" />
-  <title>Moove & Dream — Private Driver Toufik | Le Voyage d'Excellence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@200;300;400;500;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* =========================================================
-       VARIABLES & RESET — THÈME BORDEAUX BAROQUE
-    ========================================================= */
-    :root {
-      --bordeaux:        #6B1229;
-      --bordeaux-fonce:  #4A0C1C;
-      --bordeaux-sombre: #2D0710;
-      --bordeaux-clair:  #8B1F38;
-      --cachemire:       #C4956A;
-      --cachemire-clair: #D9AF8A;
-      --cachemire-sombre:#9A6E48;
-      --ebene:           #1A1008;
-      --ebene-clair:     #2A1C0E;
-      --ebene-medium:    #221408;
-      --or:              #B8962E;
-      --or-clair:        #D4B050;
-      --or-sombre:       #8A6E20;
-      --or-shimmer:      #E8CC6A;
-      --creme:           #F7F0E6;
-      --creme-sombre:    #E8DDD0;
-      --blanc:           #FFFFFF;
-      --gris-chaud:      #6B5D52;
-
-      --font-titre:  'Libre Baskerville', Georgia, serif;
-      --font-corps:  'Raleway', Arial, sans-serif;
-
-      --transition:  all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --ombre-or:    0 8px 40px rgba(184,150,46,0.15);
-      --ombre-forte: 0 25px 80px rgba(0,0,0,0.6);
-      --radius:      1px;
-
-      --grad-bordeaux: linear-gradient(135deg, var(--bordeaux-sombre) 0%, var(--bordeaux) 50%, var(--bordeaux-fonce) 100%);
-      --grad-or:       linear-gradient(135deg, var(--or-sombre) 0%, var(--or) 50%, var(--or-clair) 100%);
-    }
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      color: var(--creme-sombre);
-      background-color: var(--ebene);
-      overflow-x: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img { display: block; }
-
-    /* =========================================================
-       ANIMATIONS KEYFRAMES
-    ========================================================= */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0);    }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(-10px); }
-    }
-
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position:  200% center; }
-    }
-
-    @keyframes glow-pulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(184,150,46,0.2), 0 0 30px rgba(107,18,41,0.15); }
-      50%       { box-shadow: 0 0 30px rgba(184,150,46,0.4), 0 0 60px rgba(107,18,41,0.3); }
-    }
-
-    @keyframes glow-text {
-      0%, 100% { text-shadow: 0 0 40px rgba(184,150,46,0.3), 0 4px 30px rgba(0,0,0,0.7); }
-      50%       { text-shadow: 0 0 80px rgba(184,150,46,0.6), 0 4px 40px rgba(107,18,41,0.4); }
-    }
-
-    @keyframes border-shimmer {
-      0%   { opacity: 0.3; }
-      50%  { opacity: 0.8; }
-      100% { opacity: 0.3; }
-    }
-
-    @keyframes line-expand {
-      from { width: 0; opacity: 0; }
-      to   { width: 60px; opacity: 0.6; }
-    }
-
-    /* =========================================================
-       UTILITAIRES
-    ========================================================= */
-    .section-badge {
-      display: inline-block;
-      font-family: var(--font-corps);
-      font-weight: 300;
-      font-size: 0.65rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--cachemire);
-      margin-bottom: 1rem;
-    }
-
-    .section-title {
-      font-family: var(--font-titre);
-      font-weight: 700;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.2;
-      margin-bottom: 1.5rem;
-    }
-
-    .ornament {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1.5rem auto;
-      width: fit-content;
-    }
-    .ornament-line {
-      width: 60px;
-      height: 1px;
-      background: var(--or);
-      opacity: 0.5;
-    }
-    .ornament svg { flex-shrink: 0; }
-
-    .btn {
-      display: inline-block;
-      font-family: var(--font-corps);
-      font-weight: 700;
-      font-size: 0.7rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      padding: 1rem 2.5rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
-      border-radius: var(--radius);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Bouton or principal */
-    .btn-or {
-      background: var(--grad-or);
-      color: var(--ebene);
-      border-color: var(--or);
-    }
-    .btn-or::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-    }
-    .btn-or:hover {
-      background: linear-gradient(135deg, var(--or) 0%, var(--or-shimmer) 50%, var(--or-clair) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 35px rgba(184,150,46,0.45);
-    }
-
-    /* Bouton outline bordeaux-or */
-    .btn-outline {
-      background: transparent;
-      color: var(--creme);
-      border-color: var(--or);
-    }
-    .btn-outline:hover {
-      background: rgba(184,150,46,0.12);
-      border-color: var(--or-clair);
-      color: var(--or-clair);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(184,150,46,0.2);
-    }
-
-    /* =========================================================
-       NAVIGATION
-    ========================================================= */
-    #nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 0 5%;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(26, 16, 8, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(184,150,46,0.15);
-      transition: var(--transition);
-    }
-
-    /* Filet bordeaux décoratif en bas de nav */
-    #nav::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 15%;
-      right: 15%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--bordeaux-clair), transparent);
-      opacity: 0.4;
-    }
-
-    .nav-logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .nav-logo-main {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-weight: 700;
-      font-size: 1.45rem;
-      background: linear-gradient(135deg, var(--cachemire) 0%, var(--or-clair) 60%, var(--cachemire-clair) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: 0.02em;
-    }
-    .nav-logo-sub {
-      font-family: var(--font-corps);
-      font-weight: 200;
-      font-size: 0.52rem;
-      letter-spacing: 0.42em;
-      text-transform: uppercase;
-      color: rgba(196,149,106,0.45);
-      margin-top: 4px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2.5rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(247,240,230,0.65);
-      position: relative;
-      padding-bottom: 4px;
-      transition: var(--transition);
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: linear-gradient(to right, var(--bordeaux-clair), var(--or));
-      transition: width 0.4s ease;
-    }
-    .nav-links a:hover {
-      color: var(--cachemire-clair);
-    }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      padding: 0.6rem 1.5rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-    }
-
-    /* Mobile hamburger */
-    #nav-toggle { display: none; }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 5px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--or);
-      transition: var(--transition);
-    }
-
-    /* =========================================================
-       HERO — THÉÂTRAL BORDEAUX / ÉBÈNE
-    ========================================================= */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 130px 5% 90px;
-      background:
-        radial-gradient(ellipse at 20% 60%, rgba(107,18,41,0.55) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 25%, rgba(74,12,28,0.45) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 100%, rgba(184,150,46,0.06) 0%, transparent 50%),
-        linear-gradient(160deg, #1A1008 0%, #2D0710 35%, #6B1229 65%, #4A0C1C 80%, #1A1008 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Grille baroque de fond */
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 80px,
-          rgba(184,150,46,0.025) 80px,
-          rgba(184,150,46,0.025) 81px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 80px,
-          rgba(184,150,46,0.025) 80px,
-          rgba(184,150,46,0.025) 81px
-        );
-      pointer-events: none;
-    }
-
-    /* Colonne dorée décorative gauche */
-    #hero::after {
-      content: '';
-      position: absolute;
-      left: 6%;
-      top: 15%;
-      bottom: 15%;
-      width: 1px;
-      background: linear-gradient(to bottom,
-        transparent,
-        rgba(184,150,46,0.5) 25%,
-        rgba(107,18,41,0.7) 60%,
-        rgba(184,150,46,0.3) 80%,
-        transparent
-      );
-    }
-
-    /* Colonne décorative droite */
-    .hero-col-right {
-      position: absolute;
-      right: 6%;
-      top: 15%;
-      bottom: 15%;
-      width: 1px;
-      background: linear-gradient(to bottom,
-        transparent,
-        rgba(184,150,46,0.5) 25%,
-        rgba(107,18,41,0.7) 60%,
-        rgba(184,150,46,0.3) 80%,
-        transparent
-      );
-      pointer-events: none;
-    }
-
-    /* Halo central bordeaux */
-    .hero-halo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 500px;
-      background: radial-gradient(ellipse at center, rgba(107,18,41,0.25) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      max-width: 860px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge {
-      font-family: var(--font-corps);
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.6em;
-      text-transform: uppercase;
-      color: var(--cachemire);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 2.5rem;
-      animation: fadeInUp 0.6s ease both;
-      animation-delay: 0.2s;
-    }
-    .hero-badge::before,
-    .hero-badge::after {
-      content: '';
-      display: inline-block;
-      width: 35px;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--or));
-      opacity: 0.7;
-    }
-    .hero-badge::after {
-      background: linear-gradient(to left, transparent, var(--or));
-    }
-
-    .hero-brand {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-weight: 700;
-      font-size: clamp(3.2rem, 9vw, 7.5rem);
-      line-height: 0.95;
-      letter-spacing: -0.01em;
-      animation: fadeInUp 0.8s ease both, glow-text 4s ease-in-out 1.5s infinite;
-      animation-delay: 0.4s;
-      margin-bottom: 0.6rem;
-      background: linear-gradient(
-        135deg,
-        var(--creme) 0%,
-        var(--cachemire-clair) 30%,
-        var(--or-clair) 50%,
-        var(--cachemire) 70%,
-        var(--creme) 100%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-corps);
-      font-weight: 200;
-      font-size: clamp(0.75rem, 2vw, 1rem);
-      color: rgba(196,149,106,0.65);
-      letter-spacing: 0.6em;
-      text-transform: uppercase;
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.6s;
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-slogan {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(1.1rem, 2.5vw, 1.7rem);
-      color: var(--or-clair);
-      letter-spacing: 0.06em;
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.75s;
-      margin-bottom: 1rem;
-    }
-
-    .hero-tagline {
-      font-family: var(--font-corps);
-      font-weight: 200;
-      font-style: italic;
-      font-size: clamp(0.85rem, 1.8vw, 1rem);
-      color: rgba(247,240,230,0.45);
-      letter-spacing: 0.12em;
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.9s;
-      margin-bottom: 3rem;
-    }
-
-    .hero-ornament {
-      animation: fadeInUp 0.5s ease both;
-      animation-delay: 1s;
-      margin-bottom: 3.5rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 1.1s;
-    }
-
-    /* Indicateur de scroll */
-    .hero-scroll {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      animation: fadeInUp 0.6s ease both 1.5s, bounce 2.5s ease-in-out 2.5s infinite;
-    }
-    .hero-scroll-text {
-      font-family: var(--font-corps);
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(196,149,106,0.4);
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 42px;
-      background: linear-gradient(to bottom, var(--or), transparent);
-      opacity: 0.4;
-    }
-
-    /* =========================================================
-       SERVICES — Fond ébène foncé
-    ========================================================= */
-    #services {
-      background: var(--ebene-clair);
-      padding: 8rem 5%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Motif damassé discret */
-    #services::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(ellipse at 0% 50%, rgba(107,18,41,0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 100% 50%, rgba(107,18,41,0.12) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    #services .section-title { color: var(--creme); }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 4rem;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-      background: rgba(184,150,46,0.12);
-      border: 1px solid rgba(184,150,46,0.18);
-      position: relative;
-      z-index: 1;
-    }
-
-    .service-card {
-      background: var(--ebene-medium);
-      padding: 3rem 2.5rem;
-      border: none;
-      transition: var(--transition);
-      text-align: left;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Ligne bordeaux en haut de chaque card */
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--bordeaux), var(--or), var(--bordeaux), transparent);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .service-card:hover::before { opacity: 1; }
-
-    /* Halo hover */
-    .service-card::after {
-      content: '';
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 180px;
-      height: 180px;
-      background: radial-gradient(circle, rgba(107,18,41,0.18) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .service-card:hover::after { opacity: 1; }
-
-    .service-card:hover {
-      background: linear-gradient(160deg, #261408 0%, #1E0E06 100%);
-      transform: translateY(-4px);
-    }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      margin-bottom: 2rem;
-      color: var(--cachemire);
-    }
-
-    .service-card h3 {
-      font-family: var(--font-titre);
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--creme);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .service-card p {
-      font-size: 0.88rem;
-      line-height: 1.9;
-      color: rgba(247,240,230,0.5);
-      font-weight: 300;
-    }
-
-    .service-card .airports {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.4rem;
-    }
-    .service-card .airport-badge {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      font-weight: 700;
-      color: var(--or);
-      background: rgba(184,150,46,0.1);
-      padding: 0.35rem 0.9rem;
-      border: 1px solid rgba(184,150,46,0.25);
-      text-transform: uppercase;
-    }
-
-    /* =========================================================
-       À PROPOS — Fond bordeaux profond
-    ========================================================= */
-    #apropos {
-      background:
-        radial-gradient(ellipse at 80% 50%, rgba(184,150,46,0.05) 0%, transparent 55%),
-        linear-gradient(150deg, var(--bordeaux-sombre) 0%, var(--bordeaux-fonce) 45%, var(--bordeaux) 80%, var(--bordeaux-sombre) 100%);
-      padding: 8rem 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Motif arabesque fond */
-    #apropos::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      left: -5%;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,16,8,0.4) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    /* Ligne verticale décorative droite */
-    #apropos::after {
-      content: '';
-      position: absolute;
-      right: 8%;
-      top: 10%;
-      bottom: 10%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(184,150,46,0.3) 30%, rgba(184,150,46,0.3) 70%, transparent);
-    }
-
-    .apropos-inner {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 5rem;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .apropos-text .section-badge { color: var(--cachemire-clair); }
-    .apropos-text .section-title { color: var(--creme); }
-
-    .apropos-text p {
-      font-size: 0.93rem;
-      line-height: 2.1;
-      color: rgba(247,240,230,0.62);
-      margin-bottom: 1.3rem;
-      font-weight: 300;
-    }
-
-    .apropos-text .signature {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 1.7rem;
-      color: var(--or-clair);
-      margin-top: 2.2rem;
-      margin-bottom: 0.3rem;
-    }
-    .apropos-text .signature-titre {
-      font-size: 0.62rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(247,240,230,0.35);
-      font-weight: 300;
-    }
-
-    .apropos-aside {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    /* Grille statistiques */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(184,150,46,0.2);
-      border: 1px solid rgba(184,150,46,0.2);
-      animation: glow-pulse 4s ease-in-out infinite;
-    }
-    .stat-item {
-      background: rgba(74,12,28,0.7);
-      padding: 2rem 1rem;
-      text-align: center;
-      transition: var(--transition);
-    }
-    .stat-item:hover { background: rgba(107,18,41,0.8); }
-
-    .stat-value {
-      font-family: var(--font-titre);
-      font-weight: 700;
-      font-size: 1.9rem;
-      color: var(--or-clair);
-      display: block;
-    }
-    .stat-label {
-      font-family: var(--font-corps);
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(247,240,230,0.4);
-      margin-top: 0.5rem;
-      font-weight: 300;
-    }
-
-    /* Carte de contact */
-    .contact-card {
-      background: rgba(74,12,28,0.5);
-      border: 1px solid rgba(184,150,46,0.2);
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--or), transparent);
-      opacity: 0.5;
-    }
-    .contact-card-title {
-      font-family: var(--font-corps);
-      font-size: 0.6rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: rgba(184,150,46,0.55);
-      margin-bottom: 1.5rem;
-      font-weight: 300;
-    }
-    .contact-line {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(184,150,46,0.1);
-    }
-    .contact-line:last-child { border-bottom: none; }
-    .contact-line svg { color: var(--cachemire); flex-shrink: 0; }
-    .contact-line a,
-    .contact-line span {
-      font-size: 0.85rem;
-      color: rgba(247,240,230,0.75);
-      font-weight: 300;
-      transition: var(--transition);
-    }
-    .contact-line a:hover { color: var(--cachemire-clair); }
-
-    /* =========================================================
-       FLOTTE — Fond ébène dramatique
-    ========================================================= */
-    #flotte {
-      background: var(--ebene);
-      padding: 8rem 5%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    #flotte::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 100%, rgba(107,18,41,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse at 50% 0%, rgba(184,150,46,0.04) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    #flotte .section-title { color: var(--creme); }
-
-    .flotte-card {
-      max-width: 880px;
-      margin: 4rem auto 0;
-      background: linear-gradient(145deg, #1E1008 0%, #160C06 100%);
-      border: 1px solid rgba(184,150,46,0.15);
-      overflow: hidden;
-      transition: var(--transition);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Bordure animée */
-    .flotte-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--bordeaux-clair), var(--or), var(--bordeaux-clair), transparent);
-      animation: border-shimmer 3s ease-in-out infinite;
-    }
-
-    .flotte-card:hover {
-      border-color: rgba(184,150,46,0.4);
-      box-shadow: 0 0 80px rgba(107,18,41,0.25), 0 0 40px rgba(184,150,46,0.08);
-    }
-
-    .flotte-card-visual {
-      padding: 4rem 5% 2rem;
-      position: relative;
-      background: linear-gradient(180deg, rgba(107,18,41,0.08) 0%, transparent 100%);
-    }
-
-    .car-svg {
-      width: 100%;
-      max-width: 620px;
-      margin: 0 auto;
-      display: block;
-      filter: drop-shadow(0 25px 50px rgba(184,150,46,0.12)) drop-shadow(0 5px 15px rgba(107,18,41,0.3));
-    }
-
-    .flotte-card-info {
-      padding: 2.5rem 3rem 3rem;
-      text-align: left;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
-      align-items: end;
-    }
-
-    .flotte-model {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 2.3rem;
-      font-weight: 700;
-      color: var(--creme);
-      margin-bottom: 0.4rem;
-    }
-    .flotte-class {
-      font-size: 0.65rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: rgba(184,150,46,0.55);
-      font-weight: 300;
-    }
-
-    .flotte-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .flotte-badge {
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem;
-      border: 1px solid rgba(184,150,46,0.25);
-      color: rgba(196,149,106,0.75);
-      transition: var(--transition);
-    }
-    .flotte-badge:hover {
-      background: rgba(184,150,46,0.08);
-      border-color: var(--or);
-      color: var(--or);
-    }
-
-    .flotte-cta-area { text-align: right; }
-
-    .flotte-note {
-      font-size: 0.78rem;
-      font-style: italic;
-      color: rgba(247,240,230,0.3);
-      margin-top: 3rem;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      font-weight: 300;
-    }
-
-    /* =========================================================
-       RÉSERVATION — Fond bordeaux sombre
-    ========================================================= */
-    #reservation {
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(184,150,46,0.05) 0%, transparent 50%),
-        linear-gradient(180deg, var(--bordeaux-fonce) 0%, var(--bordeaux-sombre) 60%, var(--ebene-clair) 100%);
-      padding: 8rem 5%;
-      text-align: center;
-    }
-
-    #reservation .section-title { color: var(--creme); }
-
-    .resa-form-wrap {
-      max-width: 720px;
-      margin: 4rem auto 0;
-      background: rgba(26,16,8,0.85);
-      padding: 3.5rem;
-      border: 1px solid rgba(184,150,46,0.18);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Accent bordeaux en haut du formulaire */
-    .resa-form-wrap::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--bordeaux-clair), var(--or), var(--bordeaux-clair), transparent);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 2rem;
-    }
-
-    .form-field {
-      position: relative;
-      margin-bottom: 2.2rem;
-    }
-    .form-field.full { grid-column: 1 / -1; }
-
-    .form-field label {
-      display: block;
-      font-family: var(--font-corps);
-      font-size: 0.6rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(196,149,106,0.6);
-      margin-bottom: 0.7rem;
-      font-weight: 400;
-    }
-
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid rgba(184,150,46,0.2);
-      padding: 0.8rem 0;
-      font-family: var(--font-corps);
-      font-size: 0.92rem;
-      font-weight: 300;
-      color: var(--creme);
-      background: transparent;
-      outline: none;
-      transition: border-color 0.35s ease;
-      border-radius: 0;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .form-field input::placeholder,
-    .form-field textarea::placeholder {
-      color: rgba(247,240,230,0.2);
-      font-style: italic;
-    }
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus {
-      border-bottom-color: var(--cachemire);
-    }
-    .form-field textarea {
-      resize: none;
-      min-height: 80px;
-    }
-    .form-field select {
-      cursor: pointer;
-      color: rgba(247,240,230,0.7);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B8962E'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0 center;
-      padding-right: 20px;
-    }
-    .form-field select option {
-      background: var(--ebene-clair);
-      color: var(--creme);
-    }
-
-    /* Date et time inputs */
-    .form-field input[type="date"],
-    .form-field input[type="time"] {
-      color-scheme: dark;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: linear-gradient(135deg, var(--bordeaux-fonce) 0%, var(--bordeaux) 35%, var(--or-sombre) 70%, var(--or) 100%);
-      color: var(--creme);
-      border: 1px solid rgba(184,150,46,0.3);
-      height: 60px;
-      font-family: var(--font-corps);
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: var(--transition);
-      margin-top: 1rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-submit::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-    }
-    .btn-submit:hover {
-      background: linear-gradient(135deg, var(--bordeaux) 0%, var(--bordeaux-clair) 35%, var(--or) 70%, var(--or-clair) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(107,18,41,0.5), 0 5px 20px rgba(184,150,46,0.2);
-    }
-
-    /* =========================================================
-       CONTACT — Fond ébène avec accents bordeaux
-    ========================================================= */
-    #contact {
-      background:
-        radial-gradient(ellipse at 50% 50%, rgba(107,18,41,0.1) 0%, transparent 60%),
-        var(--ebene-clair);
-      padding: 7rem 5%;
-      text-align: center;
-    }
-    #contact .section-title { color: var(--creme); }
-
-    .contact-blocs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      max-width: 920px;
-      margin: 4rem auto 0;
-      background: rgba(184,150,46,0.1);
-      border: 1px solid rgba(184,150,46,0.15);
-    }
-
-    .contact-bloc {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      padding: 2.8rem 2rem;
-      background: var(--ebene-medium);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-    .contact-bloc::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--bordeaux-clair), transparent);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-    .contact-bloc:hover::before { opacity: 1; }
-    .contact-bloc:hover {
-      background: linear-gradient(160deg, #261408 0%, #200E06 100%);
-    }
-
-    .contact-bloc-icon {
-      width: 46px;
-      height: 46px;
-      color: var(--cachemire);
-    }
-    .contact-bloc-label {
-      font-family: var(--font-corps);
-      font-size: 0.58rem;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: rgba(184,150,46,0.5);
-      font-weight: 300;
-    }
-    .contact-bloc-value {
-      font-family: var(--font-titre);
-      font-size: 1.05rem;
-      color: var(--creme);
-      text-align: center;
-    }
-    .contact-bloc-value a {
-      color: inherit;
-      transition: color 0.3s;
-    }
-    .contact-bloc-value a:hover { color: var(--cachemire-clair); }
-
-    /* =========================================================
-       FOOTER
-    ========================================================= */
-    footer {
-      background: var(--bordeaux-sombre);
-      padding: 3.5rem 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Motif de fond subtil */
-    footer::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(184,150,46,0.06) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .footer-divider {
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--or), var(--bordeaux-clair), var(--or), transparent);
-      opacity: 0.3;
-      margin-bottom: 3rem;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-    .footer-brand {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 1.25rem;
-      background: linear-gradient(135deg, var(--cachemire) 0%, var(--or-clair) 50%, var(--cachemire) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      opacity: 0.8;
-    }
-    .footer-copy {
-      font-family: var(--font-corps);
-      font-size: 0.68rem;
-      color: rgba(247,240,230,0.25);
-      letter-spacing: 0.06em;
-      text-align: center;
-      font-weight: 300;
-      line-height: 1.8;
-    }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-family: var(--font-corps);
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(247,240,230,0.25);
-      font-weight: 300;
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--cachemire); }
-
-    /* =========================================================
-       RESPONSIVE — TABLET
-    ========================================================= */
-    @media (max-width: 900px) {
-      .services-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-      }
-      .apropos-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-      .flotte-card-info {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .flotte-cta-area { text-align: center; }
-      .flotte-badges { justify-content: center; }
-      .contact-blocs {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-      }
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    /* =========================================================
-       RESPONSIVE — MOBILE
-    ========================================================= */
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta-wrap { display: none; }
-      .hamburger { display: flex; }
-
-      #nav-toggle:checked ~ .nav-menu {
-        display: flex !important;
-      }
-
-      .nav-menu {
-        display: none;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(26,16,8,0.99);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 3rem;
-        list-style: none;
-        border-top: 1px solid rgba(184,150,46,0.15);
-      }
-      .nav-menu a {
-        font-family: var(--font-titre);
-        font-style: italic;
-        font-size: 1.9rem;
-        color: var(--creme);
-        letter-spacing: 0.05em;
-      }
-      .nav-menu a:hover { color: var(--cachemire-clair); }
-      .nav-menu .nav-menu-cta { margin-top: 1rem; }
-
-      .form-grid { grid-template-columns: 1fr; }
-      .form-field.full { grid-column: auto; }
-      .resa-form-wrap { padding: 2rem 1.5rem; }
-      #hero::after, .hero-col-right { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-brand { font-size: 2.8rem; }
-      .hero-ctas { flex-direction: column; align-items: stretch; text-align: center; }
-      .btn { text-align: center; }
-      #services, #apropos, #flotte, #reservation, #contact { padding: 5rem 5%; }
-      .stats-grid { grid-template-columns: repeat(3, 1fr); }
-      .flotte-card-info { padding: 2rem 1.5rem; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moove & Dream — Le Voyage d'Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bx:#6B1229;--bx-deep:#3D0A18;--bx-mid:#8A1933;
+  --cashmere:#C4956A;--ebony:#1A1008;--ebony-soft:#231710;
+  --gold:#B8962E;--gold-light:#D4AF50;
+  --ivory:#F7F0E6;--ivory-dim:rgba(247,240,230,0.7);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Raleway',sans-serif;font-weight:300;
+  background:var(--ebony);color:var(--ivory);
+  overflow-x:hidden;line-height:1.75;
+}
+/* ── GRAIN + TEXTURE ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  opacity:0.042;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* ── FLOATING NAV ── */
+.nav{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:1000;width:calc(100% - 2.5rem);max-width:820px;
+  background:rgba(26,16,8,0.82);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(184,150,46,0.28);
+  border-radius:6px;
+  padding:0 1.75rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:54px;
+}
+.nav-brand{
+  font-family:'Libre Baskerville',serif;
+  font-style:italic;font-size:1.1rem;font-weight:400;
+  color:var(--cashmere);letter-spacing:0.02em;white-space:nowrap;
+}
+.nav-links{display:flex;gap:1.8rem;align-items:center}
+.nav-links a{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:rgba(247,240,230,0.55);text-decoration:none;transition:color 0.25s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{
+  font-family:'Raleway',sans-serif;font-weight:500;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--bx),var(--cashmere));
+  color:var(--ivory);border:none;
+  border-radius:3px;padding:0.6rem 1.3rem;
+  cursor:pointer;transition:opacity 0.25s;
+}
+.nav-cta:hover{opacity:0.85}
+.nav-toggle{
+  display:none;background:none;border:none;
+  cursor:pointer;padding:6px;
+  flex-direction:column;gap:5px;align-items:center;
+}
+.nav-toggle span{display:block;width:20px;height:1px;background:var(--ivory);transition:0.3s}
+.nav-mobile{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:var(--ebony);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:1rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--ivory-dim);text-decoration:none;
+}
+.nav-mobile a:hover{color:var(--gold)}
+.nav-mobile .close-btn{
+  position:absolute;top:28px;right:28px;
+  background:none;border:none;color:var(--gold);
+  font-size:1.4rem;cursor:pointer;
+}
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  background:radial-gradient(ellipse 80% 70% at 40% 50%, var(--bx) 0%, var(--bx-deep) 45%, var(--ebony) 100%);
+  display:grid;grid-template-columns:1.15fr 0.85fr;
+  position:relative;overflow:hidden;
+}
+/* Gold diagonal texture */
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(
+    45deg,
+    rgba(184,150,46,0.025) 0px,
+    rgba(184,150,46,0.025) 1px,
+    transparent 1px, transparent 12px
+  );
+}
+.hero-col-left{
+  position:absolute;left:4rem;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom, transparent, rgba(184,150,46,0.3), transparent);
+}
+.hero-col-right{
+  position:absolute;right:4rem;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom, transparent, rgba(184,150,46,0.15), transparent);
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:9rem 3rem 5rem 5.5rem;
+  position:relative;z-index:2;
+}
+.hero-tag{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:0.56rem;letter-spacing:0.5em;text-transform:uppercase;
+  color:rgba(247,240,230,0.4);margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-tag::before{content:'—';color:var(--gold)}
+.hero-tag::after{content:'—';color:var(--gold)}
+.hero-h1{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(3rem,6.5vw,6rem);
+  font-weight:400;line-height:0.95;
+  color:var(--ivory);margin-bottom:0.3rem;
+}
+.hero-h1 .italic-line{
+  font-style:italic;
+  background:linear-gradient(135deg, var(--cashmere), var(--gold), var(--ivory));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:shimmer 4s ease-in-out infinite;
+  background-size:200% auto;
+}
+@keyframes shimmer{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.hero-driver{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:clamp(1rem,2.5vw,2rem);
+  letter-spacing:0.42em;text-transform:uppercase;
+  color:var(--cashmere);margin-bottom:1.5rem;
+}
+.hero-hr{
+  width:60px;height:1px;
+  background:linear-gradient(to right, var(--gold), transparent);
+  border:none;margin:1.5rem 0;
+}
+.hero-slogan{
+  font-family:'Libre Baskerville',serif;
+  font-style:italic;font-size:1.1rem;
+  color:rgba(247,240,230,0.65);margin-bottom:2.5rem;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Raleway',sans-serif;font-weight:500;
+  font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--bx),var(--cashmere));
+  color:var(--ivory);border:none;padding:1rem 2.2rem;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:opacity 0.25s,transform 0.2s;
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.1) 50%,transparent 60%);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn-primary:hover::after{transform:translateX(100%)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-outline{
+  font-family:'Raleway',sans-serif;font-weight:300;
+  font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;
+  background:transparent;color:var(--ivory);
+  border:1px solid rgba(247,240,230,0.3);padding:1rem 2.2rem;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:border-color 0.25s,transform 0.2s;
+}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:9rem 3rem 5rem;position:relative;z-index:2;gap:2rem;
+}
+.hero-ornament{
+  width:180px;height:180px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-ornament::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:1px solid rgba(184,150,46,0.3);
+}
+.hero-ornament::after{
+  content:'';position:absolute;inset:20px;border-radius:50%;
+  border:1px solid rgba(184,150,46,0.15);
+}
+.ornament-inner{
+  width:80px;height:80px;
+  background:linear-gradient(135deg, rgba(184,150,46,0.2), rgba(107,18,41,0.4));
+  clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:0.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero-right-stats{
+  display:flex;flex-direction:column;gap:1.5rem;
+  width:100%;max-width:200px;
+}
+.hero-stat{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid rgba(184,150,46,0.15);
+  padding-bottom:0.75rem;
+}
+.hero-stat-num{
+  font-family:'Libre Baskerville',serif;
+  font-size:2rem;font-weight:400;color:var(--gold);
+}
+.hero-stat-label{
+  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(247,240,230,0.35);font-weight:200;
+}
+/* ── SECTION UTILS ── */
+.section-eyebrow{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:0.56rem;letter-spacing:0.42em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:0.75rem;
+  margin-bottom:1.25rem;
+}
+.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
+/* ── SERVICES ── */
+.services{
+  padding:7rem 4rem;
+  background:var(--ebony-soft);
+  position:relative;
+}
+.services::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(45deg,rgba(184,150,46,0.015) 0px,rgba(184,150,46,0.015) 1px,transparent 1px,transparent 12px);
+}
+.services-header{margin-bottom:4rem;position:relative}
+.services-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;font-style:italic;
+  color:var(--ivory);line-height:1.2;margin-bottom:0.5rem;
+}
+.services-desc{
+  font-size:0.8rem;font-weight:200;color:var(--ivory-dim);
+  max-width:400px;line-height:1.9;
+}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(184,150,46,0.12);
+  position:relative;
+}
+.service-card{
+  background:var(--ebony-soft);
+  padding:3rem 2.5rem;cursor:pointer;
+  transition:background 0.35s;position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(to right, var(--bx), var(--gold));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.service-card:hover::before{transform:scaleX(1)}
+.service-card:hover{background:rgba(107,18,41,0.15)}
+.service-icon{
+  width:36px;height:36px;margin-bottom:2rem;
+  color:var(--cashmere);
+}
+.service-name{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.2rem;font-weight:400;
+  color:var(--ivory);margin-bottom:1rem;
+}
+.service-text{
+  font-size:0.78rem;font-weight:200;line-height:1.9;
+  color:var(--ivory-dim);
+}
+.service-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem}
+.tag{
+  font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;
+  border:1px solid rgba(184,150,46,0.3);color:var(--cashmere);
+  padding:0.25rem 0.65rem;font-weight:300;
+}
+/* ── ABOUT ── */
+.about{
+  padding:7rem 4rem;
+  background:linear-gradient(165deg, var(--bx-deep) 0%, var(--bx) 60%, var(--bx-deep) 100%);
+  position:relative;overflow:hidden;
+}
+.about::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:repeating-linear-gradient(45deg,rgba(184,150,46,0.02) 0px,rgba(184,150,46,0.02) 1px,transparent 1px,transparent 10px);
+}
+.about-monogram{
+  position:absolute;right:-3rem;top:50%;transform:translateY(-50%);
+  font-family:'Libre Baskerville',serif;
+  font-size:26rem;font-weight:700;font-style:italic;
+  color:rgba(247,240,230,0.04);line-height:1;
+  user-select:none;pointer-events:none;
+}
+.about-grid{
+  display:grid;grid-template-columns:1.2fr 0.8fr;
+  gap:5rem;align-items:start;position:relative;z-index:1;
+}
+.about-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;font-style:italic;
+  color:var(--ivory);line-height:1.25;margin-bottom:2rem;
+}
+.about-text{
+  font-size:0.83rem;font-weight:200;line-height:1.95;
+  color:rgba(247,240,230,0.72);margin-bottom:1.5rem;
+}
+.about-signature{
+  font-family:'Libre Baskerville',serif;
+  font-size:1.05rem;font-style:italic;color:var(--cashmere);margin-top:2rem;
+}
+.about-signature small{
+  display:block;font-family:'Raleway',sans-serif;
+  font-style:normal;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(247,240,230,0.35);font-weight:200;margin-top:0.25rem;
+}
+.about-cta-link{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  font-family:'Raleway',sans-serif;font-size:0.62rem;
+  letter-spacing:0.2em;text-transform:uppercase;font-weight:400;
+  color:var(--gold);text-decoration:none;margin-top:2rem;transition:gap 0.3s;
+}
+.about-cta-link:hover{gap:1.25rem}
+.about-cta-link::after{content:'→'}
+.stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:rgba(184,150,46,0.18);margin-bottom:2rem;
+}
+.stat-box{
+  background:rgba(107,18,41,0.4);
+  padding:2rem 1.25rem;text-align:center;
+}
+.stat-box-num{
+  font-family:'Libre Baskerville',serif;
+  font-size:2.5rem;font-weight:400;color:var(--gold);line-height:1;
+  animation:glow 3s ease-in-out infinite;
+}
+@keyframes glow{0%,100%{text-shadow:0 0 10px rgba(184,150,46,0.3)}50%{text-shadow:0 0 20px rgba(184,150,46,0.6)}}
+.stat-box-label{
+  font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(247,240,230,0.4);font-weight:200;margin-top:0.4rem;
+}
+.contact-card{
+  border:1px solid rgba(184,150,46,0.2);padding:1.75rem;
+}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;padding:0.7rem 0;
+  border-bottom:1px solid rgba(184,150,46,0.1);
+}
+.contact-item:last-child{border:none}
+.contact-item svg{flex-shrink:0;color:var(--gold)}
+.contact-item a{
+  font-size:0.78rem;font-weight:200;color:var(--ivory);
+  text-decoration:none;transition:color 0.2s;
+}
+.contact-item a:hover{color:var(--gold)}
+/* ── FLEET ── */
+.fleet{
+  padding:7rem 4rem;background:var(--ebony);position:relative;overflow:hidden;
+}
+.fleet-grain{
+  position:absolute;inset:0;pointer-events:none;opacity:0.08;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.fleet-inner{position:relative;z-index:1}
+.fleet-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(2rem,4vw,3.5rem);font-weight:400;font-style:italic;
+  color:var(--ivory);margin-bottom:0.5rem;
+}
+.fleet-title em{font-style:normal;color:var(--gold)}
+.fleet-hr{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);border:none;margin:1.25rem 0 3rem}
+.car-wrapper{max-width:700px;margin:0 auto}
+.car-svg{width:100%;height:auto}
+.fleet-specs{
+  display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-top:2.5rem;
+}
+.spec-pill{
+  display:flex;align-items:center;gap:0.6rem;
+  border:1px solid rgba(184,150,46,0.25);padding:0.5rem 1.1rem;
+}
+.spec-pill svg{color:var(--gold);flex-shrink:0}
+.spec-pill span{
+  font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+  font-weight:300;color:rgba(247,240,230,0.6);
+}
+/* ── RESERVATION ── */
+.reservation{padding:7rem 4rem;background:var(--ebony-soft)}
+.reservation-inner{
+  display:grid;grid-template-columns:1fr 1.6fr;
+  gap:6rem;align-items:start;max-width:1100px;margin:0 auto;
+}
+.res-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;font-style:italic;
+  color:var(--ivory);line-height:1.25;margin-bottom:1.5rem;
+}
+.res-title span{font-style:normal;color:var(--cashmere)}
+.res-info{font-size:0.8rem;font-weight:200;line-height:1.85;color:var(--ivory-dim)}
+.res-contact{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(184,150,46,0.15)}
+.res-contact a{
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.75rem;font-weight:300;color:var(--cashmere);
+  text-decoration:none;padding:0.5rem 0;transition:color 0.2s;
+}
+.res-contact a:hover{color:var(--gold)}
+.form-group{display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.75rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.form-row .form-group{margin-bottom:1.75rem}
+.form-label{
+  font-family:'Raleway',sans-serif;font-weight:200;
+  font-size:0.56rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--cashmere);
+}
+.form-input,.form-select,.form-textarea{
+  font-family:'Raleway',sans-serif;font-weight:200;font-size:0.85rem;
+  background:transparent;border:none;border-bottom:1px solid rgba(184,150,46,0.25);
+  padding:0.7rem 0;color:var(--ivory);outline:none;width:100%;
+  transition:border-color 0.25s;-webkit-appearance:none;appearance:none;
+}
+.form-input:focus,.form-select:focus{border-bottom-color:var(--gold)}
+.form-select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8962E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 0 center;padding-right:1.2rem;
+}
+.form-textarea{
+  resize:vertical;min-height:80px;
+  border:1px solid rgba(184,150,46,0.18);padding:0.75rem;
+  background:rgba(255,255,255,0.02);
+}
+.form-textarea:focus{border-color:var(--gold);outline:none}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(247,240,230,0.2)}
+.form-submit{
+  width:100%;
+  font-family:'Raleway',sans-serif;font-weight:600;
+  font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--bx),var(--cashmere));
+  color:var(--ivory);border:none;padding:1.2rem;
+  cursor:pointer;margin-top:0.5rem;
+  transition:opacity 0.25s;position:relative;overflow:hidden;
+}
+.form-submit:hover{opacity:0.9}
+/* ── CONTACT ── */
+.contact{padding:5rem 4rem;background:var(--bx-deep)}
+.contact-header{text-align:center;margin-bottom:3.5rem}
+.contact-title{
+  font-family:'Libre Baskerville',serif;
+  font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:400;font-style:italic;
+  color:var(--ivory);
+}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid rgba(184,150,46,0.18);max-width:800px;margin:0 auto;
+}
+.contact-block{
+  padding:2.5rem 1.5rem;text-align:center;
+  border-right:1px solid rgba(184,150,46,0.18);
+  transition:background 0.3s;
+}
+.contact-block:last-child{border-right:none}
+.contact-block:hover{background:rgba(184,150,46,0.05)}
+.contact-block svg{color:var(--gold);margin-bottom:1.25rem}
+.contact-block-label{
+  font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;
+  font-weight:200;color:rgba(247,240,230,0.4);margin-bottom:0.6rem;
+}
+.contact-block-value{
+  font-family:'Libre Baskerville',serif;font-size:0.9rem;
+  font-weight:400;color:var(--ivory);
+}
+.contact-block-value a{color:inherit;text-decoration:none;transition:color 0.2s}
+.contact-block-value a:hover{color:var(--gold)}
+/* ── FOOTER ── */
+footer{
+  background:var(--ebony);padding:1.75rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(184,150,46,0.15);flex-wrap:wrap;gap:1rem;
+}
+.footer-brand{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--cashmere);font-size:1rem}
+.footer-copy{font-size:0.58rem;letter-spacing:0.12em;color:rgba(247,240,230,0.2);font-weight:200}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{
+  font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(247,240,230,0.2);text-decoration:none;font-weight:200;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold)}
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in{opacity:1;transform:none}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:8rem 2.5rem 5rem}
+  .hero-col-left,.hero-col-right{display:none}
+  .services{padding:5rem 2rem}
+  .services-grid{grid-template-columns:1fr}
+  .about{padding:5rem 2rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .fleet{padding:5rem 2rem}
+  .reservation{padding:5rem 2rem}
+  .reservation-inner{grid-template-columns:1fr;gap:3rem}
+  .contact{padding:4rem 2rem}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-block{border-right:none;border-bottom:1px solid rgba(184,150,46,0.18)}
+  .contact-block:last-child{border-bottom:none}
+  footer{padding:1.5rem 2rem;flex-direction:column;text-align:center}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:flex}
+  .nav{padding:0 1.25rem}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:2.8rem}
+  .hero-driver{font-size:0.9rem}
+  .hero-left{padding:7rem 1.5rem 4rem}
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-outline{text-align:center}
+  .services,.about,.fleet,.reservation,.contact{padding:4rem 1.5rem}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-
 <body>
+<nav class="nav" id="nav">
+  <div class="nav-brand">Moove &amp; Dream</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">À Propos</a>
+    <a href="#fleet">Flotte</a>
+    <a href="#reservation">Réservation</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="tel:0769385715" class="nav-cta">Réserver</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <button class="close-btn" id="navClose">✕</button>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#about" onclick="closeNav()">À Propos</a>
+  <a href="#fleet" onclick="closeNav()">Flotte</a>
+  <a href="#reservation" onclick="closeNav()">Réservation</a>
+  <a href="#contact" onclick="closeNav()">Contact</a>
+  <a href="tel:0769385715" style="color:var(--gold)">07 69 38 57 15</a>
+</div>
 
-  <!-- ===================== NAVIGATION ===================== -->
-  <nav id="nav" role="navigation" aria-label="Navigation principale">
-    <a href="#hero" class="nav-logo" aria-label="Moove & Dream - Accueil">
-      <span class="nav-logo-main">Moove &amp; Dream</span>
-      <span class="nav-logo-sub">Private Driver</span>
-    </a>
-
-    <!-- Toggle mobile -->
-    <input type="checkbox" id="nav-toggle" aria-label="Ouvrir le menu" />
-    <label for="nav-toggle" class="hamburger" aria-hidden="true">
-      <span></span><span></span><span></span>
-    </label>
-
-    <!-- Menu desktop -->
-    <ul class="nav-links" role="list">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#apropos">À Propos</a></li>
-      <li><a href="#flotte">Flotte</a></li>
-      <li><a href="#reservation">Réservation</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-cta-wrap">
-      <a href="tel:+33769385715" class="btn btn-or nav-cta">Réserver</a>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-col-left"></div>
+  <div class="hero-col-right"></div>
+  <div class="hero-left">
+    <p class="hero-tag">Paris · 2024</p>
+    <h1 class="hero-h1">
+      MOOVE &amp;<br>
+      <span class="italic-line">Dream</span>
+    </h1>
+    <p class="hero-driver">Private Driver</p>
+    <hr class="hero-hr"/>
+    <p class="hero-slogan">Le Voyage d'Excellence</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-primary">Réserver un trajet</a>
+      <a href="tel:0769385715" class="btn-outline">07 69 38 57 15</a>
     </div>
-
-    <!-- Menu mobile overlay -->
-    <ul class="nav-menu" role="list">
-      <li><a href="#services" onclick="document.getElementById('nav-toggle').checked=false">Services</a></li>
-      <li><a href="#apropos" onclick="document.getElementById('nav-toggle').checked=false">À Propos</a></li>
-      <li><a href="#flotte" onclick="document.getElementById('nav-toggle').checked=false">Flotte</a></li>
-      <li><a href="#reservation" onclick="document.getElementById('nav-toggle').checked=false">Réservation</a></li>
-      <li><a href="#contact" onclick="document.getElementById('nav-toggle').checked=false">Contact</a></li>
-      <li class="nav-menu-cta"><a href="tel:+33769385715" class="btn btn-or">Appeler Toufik</a></li>
-    </ul>
-  </nav>
-
-
-  <!-- ===================== HERO ===================== -->
-  <section id="hero" aria-label="Accueil">
-    <div class="hero-col-right" aria-hidden="true"></div>
-    <div class="hero-halo" aria-hidden="true"></div>
-
-    <div class="hero-content">
-
-      <div class="hero-badge">Chauffeur Privé Paris</div>
-
-      <h1 class="hero-brand">Moove &amp; Dream</h1>
-      <p class="hero-subtitle">Private Driver &mdash; Toufik</p>
-      <p class="hero-slogan">Le Voyage d'Excellence</p>
-      <p class="hero-tagline">Discrétion absolue &bull; Ponctualité rigoureuse &bull; Confort inégalé</p>
-
-      <div class="hero-ornament ornament" aria-hidden="true">
-        <span class="ornament-line"></span>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="7" y="0.5" width="9.192" height="9.192" transform="rotate(45 7 0.5)" fill="none" stroke="#B8962E" stroke-width="1"/>
-          <rect x="7" y="3" width="5.657" height="5.657" transform="rotate(45 7 3)" fill="rgba(184,150,46,0.15)" stroke="#B8962E" stroke-width="0.5"/>
-        </svg>
-        <span class="ornament-line"></span>
+  </div>
+  <div class="hero-right">
+    <div class="hero-ornament">
+      <div class="ornament-inner"></div>
+    </div>
+    <div class="hero-right-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">7</span>
+        <span class="hero-stat-label">Places</span>
       </div>
-
-      <div class="hero-ctas">
-        <a href="#reservation" class="btn btn-or">Réserver un trajet</a>
-        <a href="tel:+33769385715" class="btn btn-outline">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-right:8px">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-          </svg>
-          07 69 38 57 15
-        </a>
+      <div class="hero-stat">
+        <span class="hero-stat-num">24/7</span>
+        <span class="hero-stat-label">Disponible</span>
       </div>
-
-    </div>
-
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="hero-scroll-text">Découvrir</span>
-      <span class="hero-scroll-line"></span>
-    </div>
-  </section>
-
-
-  <!-- ===================== SERVICES ===================== -->
-  <section id="services" aria-label="Nos services">
-    <span class="section-badge">Ce que nous proposons</span>
-
-    <div class="ornament" aria-hidden="true">
-      <span class="ornament-line"></span>
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect x="7" y="0.5" width="9.192" height="9.192" transform="rotate(45 7 0.5)" fill="none" stroke="#B8962E" stroke-width="1"/>
-        <rect x="7" y="3" width="5.657" height="5.657" transform="rotate(45 7 3)" fill="rgba(184,150,46,0.15)" stroke="#B8962E" stroke-width="0.5"/>
-      </svg>
-      <span class="ornament-line"></span>
-    </div>
-
-    <h2 class="section-title">Nos Prestations</h2>
-    <p style="max-width:520px;margin:0 auto;color:rgba(247,240,230,0.45);font-size:0.92rem;line-height:2;font-weight:300;position:relative;z-index:1">
-      Un service personnalisé, ponctuel et discret pour tous vos déplacements en Île-de-France et au-delà.
-    </p>
-
-    <div class="services-grid">
-
-      <!-- Service 1 : Transferts Aéroports -->
-      <article class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M44 32H4l8-14h24l8 14z"/>
-          <path d="M24 18V6M18 10l6-4 6 4"/>
-          <line x1="4" y1="36" x2="44" y2="36"/>
-          <path d="M8 32l2 4M40 32l-2 4"/>
-        </svg>
-        <h3>Transferts Aéroports</h3>
-        <p>Prise en charge à domicile ou en entreprise, suivi de vol en temps réel, attente incluse. Ponctualité garantie pour chaque envol ou atterrissage.</p>
-        <div class="airports">
-          <span class="airport-badge">CDG</span>
-          <span class="airport-badge">Orly</span>
-          <span class="airport-badge">Beauvais</span>
-        </div>
-      </article>
-
-      <!-- Service 2 : Transferts Paris -->
-      <article class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M24 4C15.16 4 8 11.16 8 20c0 13 16 28 16 28s16-15 16-28c0-8.84-7.16-16-16-16z"/>
-          <circle cx="24" cy="20" r="5"/>
-          <path d="M12 38h24"/>
-          <path d="M6 44h36"/>
-        </svg>
-        <h3>Transferts Paris</h3>
-        <p>Gares parisiennes (Gare du Nord, Gare de Lyon, Montparnasse…), hôtels, salles d'événements, restaurants — votre chauffeur vous attend où vous en avez besoin.</p>
-      </article>
-
-      <!-- Service 3 : Mise à Disposition -->
-      <article class="service-card">
-        <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <circle cx="24" cy="24" r="18"/>
-          <polyline points="24,12 24,24 32,28"/>
-          <path d="M16 6l-4-4M32 6l4-4M8 14L4 10M40 14l4-4"/>
-        </svg>
-        <h3>Mise à Disposition</h3>
-        <p>Réservez votre chauffeur à l'heure pour une journée entière, un événement d'entreprise, un mariage ou tout déplacement prolongé nécessitant discrétion et flexibilité.</p>
-      </article>
-
-    </div>
-  </section>
-
-
-  <!-- ===================== À PROPOS ===================== -->
-  <section id="apropos" aria-label="À propos de Toufik">
-    <div class="apropos-inner">
-
-      <div class="apropos-text">
-        <span class="section-badge">L'Excellence au service de votre mobilité</span>
-        <h2 class="section-title">Votre Chauffeur Toufik</h2>
-
-        <p>Professionnel du transport privé à Paris, Toufik met son expertise et son sens aigu du service au cœur de chaque trajet. Discrétion absolue, ponctualité rigoureuse et confort optimal sont les piliers de sa promesse.</p>
-
-        <p>Formé aux standards des services de transport haut de gamme, il anticipe vos besoins et adapte son attitude pour que chaque déplacement devienne une expérience apaisante — que vous soyez en déplacement d'affaires, en transit aéroportuaire ou pour une occasion spéciale.</p>
-
-        <p>À bord de son Mercedes Classe V, profitez d'un espace conçu pour votre bien-être : climatisation, espace bagages généreux, connexion et intimité préservée.</p>
-
-        <div class="signature">Toufik</div>
-        <div class="signature-titre">Chauffeur Privé VTC — Paris &amp; Île-de-France</div>
-
-        <div style="margin-top:2.8rem">
-          <a href="#reservation" class="btn btn-or">Réserver avec Toufik</a>
-        </div>
-      </div>
-
-      <div class="apropos-aside">
-        <div class="stats-grid" role="list">
-          <div class="stat-item" role="listitem">
-            <span class="stat-value">7</span>
-            <span class="stat-label">Places</span>
-          </div>
-          <div class="stat-item" role="listitem">
-            <span class="stat-value">24/7</span>
-            <span class="stat-label">Disponible</span>
-          </div>
-          <div class="stat-item" role="listitem">
-            <span class="stat-value">IDF</span>
-            <span class="stat-label">Zone</span>
-          </div>
-        </div>
-
-        <div class="contact-card">
-          <div class="contact-card-title">Contact Direct</div>
-          <div class="contact-line">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-            </svg>
-            <a href="tel:+33769385715">07 69 38 57 15</a>
-          </div>
-          <div class="contact-line">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
-          </div>
-          <div class="contact-line">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            <span>Paris &amp; Île-de-France</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ===================== FLOTTE ===================== -->
-  <section id="flotte" aria-label="Notre flotte">
-    <span class="section-badge">Véhicule d'exception</span>
-
-    <div class="ornament" aria-hidden="true">
-      <span class="ornament-line"></span>
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect x="7" y="0.5" width="9.192" height="9.192" transform="rotate(45 7 0.5)" fill="none" stroke="#B8962E" stroke-width="1"/>
-        <rect x="7" y="3" width="5.657" height="5.657" transform="rotate(45 7 3)" fill="rgba(184,150,46,0.15)" stroke="#B8962E" stroke-width="0.5"/>
-      </svg>
-      <span class="ornament-line"></span>
-    </div>
-
-    <h2 class="section-title">Notre Flotte</h2>
-
-    <div class="flotte-card">
-      <div class="flotte-card-visual">
-
-        <!-- SVG Silhouette Mercedes Classe V — palette bordeaux/or -->
-        <svg class="car-svg" viewBox="0 0 700 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mercedes Classe V — Van de luxe 7 places" role="img">
-          <defs>
-            <linearGradient id="carGradB" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#3a1520"/>
-              <stop offset="40%" stop-color="#2a0e16"/>
-              <stop offset="100%" stop-color="#1A0810"/>
-            </linearGradient>
-            <linearGradient id="toitGradB" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#4a1828"/>
-              <stop offset="100%" stop-color="#2a0e16"/>
-            </linearGradient>
-            <linearGradient id="vitreGradB" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#6B1229" stop-opacity="0.5"/>
-              <stop offset="100%" stop-color="#2D0710" stop-opacity="0.85"/>
-            </linearGradient>
-            <linearGradient id="jantGradB" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#D4B050"/>
-              <stop offset="50%" stop-color="#B8962E"/>
-              <stop offset="100%" stop-color="#8A6E20"/>
-            </linearGradient>
-            <linearGradient id="phareGradB" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#fff0cc" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#ffdd88" stop-opacity="0.75"/>
-            </linearGradient>
-            <linearGradient id="phareArrGradB" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="#8B1229" stop-opacity="0.7"/>
-              <stop offset="100%" stop-color="#6B1229" stop-opacity="0.9"/>
-            </linearGradient>
-            <filter id="carGlow">
-              <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
-              <feColorMatrix in="blur" type="matrix"
-                values="1 0.5 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.4 0" result="colored"/>
-              <feMerge>
-                <feMergeNode in="colored"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          <!-- Ombre portée au sol -->
-          <ellipse cx="355" cy="235" rx="295" ry="10" fill="black" opacity="0.5"/>
-
-          <!-- Carrosserie principale -->
-          <path d="M60 190 Q55 190 50 185 L35 165 Q30 155 35 148 L50 140 L90 130 L130 100 Q140 85 160 80 L520 75 Q540 75 555 85 L590 120 L640 130 L660 140 Q670 148 668 158 L655 175 Q650 185 640 190 Z"
-            fill="url(#carGradB)" stroke="#B8962E" stroke-width="1.2"/>
-
-          <!-- Toit légèrement bombé -->
-          <path d="M130 100 Q140 85 160 80 L520 75 Q540 75 555 85 L590 120 L130 120 Z"
-            fill="url(#toitGradB)" opacity="0.7"/>
-
-          <!-- Pare-brise avant -->
-          <path d="M555 85 L590 120 L535 120 L530 82 Z"
-            fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-
-          <!-- Vitres latérales (6 vitres) -->
-          <rect x="150" y="88" width="55" height="32" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-          <rect x="215" y="86" width="60" height="34" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-          <rect x="285" y="84" width="65" height="36" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-          <rect x="360" y="83" width="65" height="36" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-          <rect x="435" y="82" width="60" height="37" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-          <rect x="505" y="83" width="35" height="36" rx="1" fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.9"/>
-
-          <!-- Reflets subtils sur vitres -->
-          <line x1="160" y1="90" x2="175" y2="118" stroke="white" stroke-width="1" opacity="0.04"/>
-          <line x1="225" y1="88" x2="240" y2="118" stroke="white" stroke-width="1" opacity="0.04"/>
-
-          <!-- Pare-brise arrière -->
-          <path d="M90 130 L130 100 L130 130 Z"
-            fill="url(#vitreGradB)" stroke="#B8962E" stroke-width="0.8" opacity="0.7"/>
-
-          <!-- Bas de caisse — bande or -->
-          <rect x="50" y="176" width="610" height="14" rx="0" fill="#1A0810" stroke="#B8962E" stroke-width="0.5"/>
-          <!-- Ligne dorée décorative sur bas de caisse -->
-          <line x1="55" y1="183" x2="645" y2="183" stroke="#B8962E" stroke-width="0.5" opacity="0.4"/>
-
-          <!-- Roue avant -->
-          <circle cx="155" cy="196" r="36" fill="#0D0608" stroke="#B8962E" stroke-width="1.5"/>
-          <circle cx="155" cy="196" r="26" fill="none" stroke="#B8962E" stroke-width="0.6" opacity="0.35"/>
-          <circle cx="155" cy="196" r="15" fill="url(#jantGradB)"/>
-          <circle cx="155" cy="196" r="5" fill="#1A0810"/>
-          <!-- Rayons roue avant -->
-          <line x1="155" y1="181" x2="155" y2="169" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="155" y1="211" x2="155" y2="223" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="140" y1="196" x2="128" y2="196" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="170" y1="196" x2="182" y2="196" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="144" y1="185" x2="136" y2="177" stroke="#B8962E" stroke-width="0.8" opacity="0.45"/>
-          <line x1="166" y1="207" x2="174" y2="215" stroke="#B8962E" stroke-width="0.8" opacity="0.45"/>
-
-          <!-- Roue arrière -->
-          <circle cx="555" cy="196" r="36" fill="#0D0608" stroke="#B8962E" stroke-width="1.5"/>
-          <circle cx="555" cy="196" r="26" fill="none" stroke="#B8962E" stroke-width="0.6" opacity="0.35"/>
-          <circle cx="555" cy="196" r="15" fill="url(#jantGradB)"/>
-          <circle cx="555" cy="196" r="5" fill="#1A0810"/>
-          <!-- Rayons roue arrière -->
-          <line x1="555" y1="181" x2="555" y2="169" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="555" y1="211" x2="555" y2="223" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="540" y1="196" x2="528" y2="196" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="570" y1="196" x2="582" y2="196" stroke="#B8962E" stroke-width="0.8" opacity="0.55"/>
-          <line x1="544" y1="185" x2="536" y2="177" stroke="#B8962E" stroke-width="0.8" opacity="0.45"/>
-          <line x1="566" y1="207" x2="574" y2="215" stroke="#B8962E" stroke-width="0.8" opacity="0.45"/>
-
-          <!-- Phares avant -->
-          <path d="M618 140 L650 148 L648 158 L616 158 Z" fill="url(#phareGradB)" opacity="0.9"/>
-
-          <!-- Phares arrière (bordeaux) -->
-          <rect x="38" y="147" width="22" height="22" rx="0" fill="url(#phareArrGradB)" opacity="0.85"/>
-          <rect x="41" y="150" width="16" height="16" rx="0" fill="#6B1229" opacity="0.6"/>
-
-          <!-- Poignée porte coulissante dorée -->
-          <rect x="373" y="148" width="32" height="4" rx="2" fill="#B8962E" opacity="0.7"/>
-
-          <!-- Étoile Mercedes (avant) -->
-          <circle cx="645" cy="153" r="9" fill="none" stroke="#B8962E" stroke-width="1" opacity="0.85"/>
-          <line x1="645" y1="144" x2="645" y2="162" stroke="#B8962E" stroke-width="0.9" opacity="0.7"/>
-          <line x1="637" y1="148.4" x2="653" y2="157.6" stroke="#B8962E" stroke-width="0.9" opacity="0.7"/>
-          <line x1="653" y1="148.4" x2="637" y2="157.6" stroke="#B8962E" stroke-width="0.9" opacity="0.7"/>
-
-          <!-- Reflet sur le toit (or subtil) -->
-          <path d="M200 80 Q350 67 500 78" stroke="#B8962E" stroke-width="1" opacity="0.08" fill="none"/>
-          <path d="M220 82 Q360 71 490 80" stroke="white" stroke-width="1.2" opacity="0.04" fill="none"/>
-
-          <!-- Liseré or sur le bas de caisse -->
-          <line x1="55" y1="190" x2="640" y2="190" stroke="#B8962E" stroke-width="0.6" opacity="0.25"/>
-        </svg>
-
-      </div>
-
-      <div class="flotte-card-info">
-        <div>
-          <div class="flotte-class">Mercedes-Benz</div>
-          <div class="flotte-model">Classe V</div>
-          <div class="flotte-badges">
-            <span class="flotte-badge">7 Passagers</span>
-            <span class="flotte-badge">Climatisation</span>
-            <span class="flotte-badge">Wi-Fi</span>
-            <span class="flotte-badge">Cuir</span>
-            <span class="flotte-badge">Vitres Teintées</span>
-            <span class="flotte-badge">Chargeurs USB</span>
-            <span class="flotte-badge">Eau Minérale</span>
-          </div>
-        </div>
-        <div class="flotte-cta-area">
-          <a href="#reservation" class="btn btn-or">Réserver ce véhicule</a>
-        </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">IDF</span>
+        <span class="hero-stat-label">Zone</span>
       </div>
     </div>
+  </div>
+</section>
 
-    <p class="flotte-note">Confort, espace et élégance pour chaque trajet — groupes, familles et déplacements d'affaires</p>
-  </section>
-
-
-  <!-- ===================== RÉSERVATION ===================== -->
-  <section id="reservation" aria-label="Formulaire de réservation">
-    <span class="section-badge">Planifiez votre trajet</span>
-
-    <div class="ornament" aria-hidden="true">
-      <span class="ornament-line"></span>
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect x="7" y="0.5" width="9.192" height="9.192" transform="rotate(45 7 0.5)" fill="none" stroke="#B8962E" stroke-width="1"/>
-        <rect x="7" y="3" width="5.657" height="5.657" transform="rotate(45 7 3)" fill="rgba(184,150,46,0.15)" stroke="#B8962E" stroke-width="0.5"/>
-      </svg>
-      <span class="ornament-line"></span>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-eyebrow">Nos Prestations</div>
+    <h2 class="services-title">L'art du déplacement<br>sur mesure</h2>
+    <p class="services-desc">Chaque trajet est une promesse d'excellence, orchestrée avec l'attention portée aux moindres détails.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <h3 class="service-name">Transferts Aéroports</h3>
+      <p class="service-text">Prise en charge à domicile, suivi de vol en temps réel, attente incluse. CDG, Orly, Beauvais — une ponctualité absolue.</p>
+      <div class="service-tags"><span class="tag">CDG</span><span class="tag">Orly</span><span class="tag">Beauvais</span></div>
     </div>
-
-    <h2 class="section-title">Réserver votre Trajet</h2>
-    <p style="max-width:480px;margin:0 auto;color:rgba(247,240,230,0.4);font-size:0.88rem;line-height:2;font-weight:300">
-      Remplissez le formulaire ci-dessous et Toufik vous confirmera votre réservation dans les meilleurs délais.
-    </p>
-
-    <div class="resa-form-wrap">
-      <form action="mailto:adouditoufik@gmail.com" method="POST" enctype="text/plain" novalidate>
-
-        <div class="form-grid">
-
-          <div class="form-field">
-            <label for="nom">Nom complet *</label>
-            <input type="text" id="nom" name="nom" placeholder="Jean Dupont" required />
-          </div>
-
-          <div class="form-field">
-            <label for="telephone">Téléphone *</label>
-            <input type="tel" id="telephone" name="telephone" placeholder="+33 6 XX XX XX XX" required />
-          </div>
-
-          <div class="form-field full">
-            <label for="email">Adresse email *</label>
-            <input type="email" id="email" name="email" placeholder="votre@email.com" required />
-          </div>
-
-          <div class="form-field">
-            <label for="service">Type de service *</label>
-            <select id="service" name="service" required>
-              <option value="" disabled selected>Choisir un service</option>
-              <option value="transfert-paris">Transfert Paris</option>
-              <option value="aeroport-cdg">Aéroport CDG</option>
-              <option value="aeroport-orly">Aéroport Orly</option>
-              <option value="aeroport-beauvais">Aéroport Beauvais</option>
-              <option value="mise-a-dispo">Mise à Disposition</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="passagers">Nombre de passagers</label>
-            <select id="passagers" name="passagers">
-              <option value="1">1 passager</option>
-              <option value="2">2 passagers</option>
-              <option value="3">3 passagers</option>
-              <option value="4">4 passagers</option>
-              <option value="5">5 passagers</option>
-              <option value="6">6 passagers</option>
-              <option value="7">7 passagers</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="date">Date souhaitée *</label>
-            <input type="date" id="date" name="date" required />
-          </div>
-
-          <div class="form-field">
-            <label for="heure">Heure de prise en charge *</label>
-            <input type="time" id="heure" name="heure" required />
-          </div>
-
-          <div class="form-field full">
-            <label for="depart">Lieu de prise en charge *</label>
-            <input type="text" id="depart" name="depart" placeholder="Adresse complète ou nom du lieu" required />
-          </div>
-
-          <div class="form-field full">
-            <label for="destination">Destination *</label>
-            <input type="text" id="destination" name="destination" placeholder="Adresse complète ou terminal aéroport" required />
-          </div>
-
-          <div class="form-field full">
-            <label for="message">Informations complémentaires</label>
-            <textarea id="message" name="message" placeholder="Vol, nombre de bagages, besoin particulier…"></textarea>
-          </div>
-
-        </div>
-
-        <button type="submit" class="btn-submit">Envoyer ma demande de réservation</button>
-      </form>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <h3 class="service-name">Transferts Paris</h3>
+      <p class="service-text">Gares, palaces, restaurants gastronomiques, événements privés — votre chauffeur, partout où vous l'attendez.</p>
     </div>
-  </section>
-
-
-  <!-- ===================== CONTACT ===================== -->
-  <section id="contact" aria-label="Contact">
-    <span class="section-badge">Nous sommes disponibles</span>
-
-    <div class="ornament" aria-hidden="true">
-      <span class="ornament-line"></span>
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-        <rect x="7" y="0.5" width="9.192" height="9.192" transform="rotate(45 7 0.5)" fill="none" stroke="#B8962E" stroke-width="1"/>
-        <rect x="7" y="3" width="5.657" height="5.657" transform="rotate(45 7 3)" fill="rgba(184,150,46,0.15)" stroke="#B8962E" stroke-width="0.5"/>
-      </svg>
-      <span class="ornament-line"></span>
+    <div class="service-card reveal">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <h3 class="service-name">Mise à Disposition</h3>
+      <p class="service-text">Un chauffeur dédié à l'heure, la journée ou pour tout événement. Flexibilité et exclusivité garanties.</p>
     </div>
+  </div>
+</section>
 
-    <h2 class="section-title">Contactez Toufik</h2>
-
-    <div class="contact-blocs">
-
-      <div class="contact-bloc">
-        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M44 32.84v6a4 4 0 01-4.36 4 39.58 39.58 0 01-17.26-6.14A39 39 0 016.5 20.62 39.58 39.58 0 01.44 3.52 4 4 0 014.36 0h6a4 4 0 014 3.44 25.66 25.66 0 001.4 5.62A4 4 0 0114.86 13L13.82 14a32 32 0 0012.58 12.58l1-.9a4 4 0 014.22-.9 25.66 25.66 0 005.62 1.4A4 4 0 0144 32.84z"/>
-        </svg>
-        <div class="contact-bloc-label">Téléphone</div>
-        <div class="contact-bloc-value">
-          <a href="tel:+33769385715">07 69 38 57 15</a>
-        </div>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-monogram">T</div>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="section-eyebrow">Votre Chauffeur</div>
+      <h2 class="about-title">L'excellence au service<br>de votre mobilité</h2>
+      <p class="about-text">Professionnel du transport privé à Paris, Toufik incarne les valeurs du service haut de gamme : discrétion absolue, ponctualité irréprochable et confort optimal.</p>
+      <p class="about-text">Formé aux standards des maisons de prestige, il anticipe vos besoins et transforme chaque trajet en une expérience mémorable.</p>
+      <div class="about-signature">Toufik<small>Chauffeur Privé VTC · Paris</small></div>
+      <a href="#reservation" class="about-cta-link">Réserver</a>
+    </div>
+    <div class="about-right reveal">
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-box-num">7</div><div class="stat-box-label">Places</div></div>
+        <div class="stat-box"><div class="stat-box-num">24/7</div><div class="stat-box-label">Disponible</div></div>
+        <div class="stat-box"><div class="stat-box-num">IDF</div><div class="stat-box-label">Zone</div></div>
+        <div class="stat-box"><div class="stat-box-num">100%</div><div class="stat-box-label">Satisfaction</div></div>
       </div>
-
-      <div class="contact-bloc">
-        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M8 8h32c2.2 0 4 1.8 4 4v24c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V12c0-2.2 1.8-4 4-4z"/>
-          <polyline points="44,12 24,26 4,12"/>
-        </svg>
-        <div class="contact-bloc-label">Email</div>
-        <div class="contact-bloc-value" style="font-size:0.88rem">
+      <div class="contact-card">
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <a href="tel:0769385715">07 69 38 57 15</a>
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
         </div>
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="#">Paris &amp; Île-de-France</a>
+        </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="contact-bloc">
-        <svg class="contact-bloc-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M42 20c0 14-18 26-18 26S6 34 6 20a18 18 0 0136 0z"/>
-          <circle cx="24" cy="20" r="6"/>
-        </svg>
-        <div class="contact-bloc-label">Zone de service</div>
-        <div class="contact-bloc-value">Paris &amp;<br/>Île-de-France</div>
+<!-- FLEET -->
+<section class="fleet" id="fleet">
+  <div class="fleet-grain"></div>
+  <div class="fleet-inner">
+    <div class="section-eyebrow">Notre Flotte</div>
+    <h2 class="fleet-title">Mercedes <em>Classe V</em></h2>
+    <hr class="fleet-hr"/>
+    <div class="car-wrapper reveal">
+      <svg class="car-svg" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bodyBx" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#8A1933"/>
+            <stop offset="50%" stop-color="#6B1229"/>
+            <stop offset="100%" stop-color="#3D0A18"/>
+          </linearGradient>
+          <linearGradient id="glassBx" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#B8962E" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#6B1229" stop-opacity="0.75"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="400" cy="262" rx="315" ry="13" fill="rgba(107,18,41,0.35)"/>
+        <rect x="80" y="140" width="640" height="100" rx="7" fill="url(#bodyBx)"/>
+        <path d="M200 140 Q220 71 300 69 L520 69 Q590 71 610 140Z" fill="url(#bodyBx)"/>
+        <path d="M217 138 Q229 83 301 81 L479 81 Q547 83 557 138Z" fill="url(#glassBx)" opacity="0.95"/>
+        <line x1="341" y1="81" x2="331" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="421" y1="81" x2="431" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="489" y1="83" x2="497" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <path d="M82 167 L718 167" stroke="#B8962E" stroke-width="1.2" opacity="0.45"/>
+        <rect x="82" y="161" width="22" height="17" rx="3" fill="#B8962E" opacity="0.65"/>
+        <ellipse cx="717" cy="173" rx="17" ry="10" fill="#B8962E" opacity="0.7"/>
+        <circle cx="210" cy="242" r="38" fill="#1A1008" stroke="#B8962E" stroke-width="1.5"/>
+        <circle cx="210" cy="242" r="26" fill="#231710" stroke="#B8962E" stroke-width="1"/>
+        <circle cx="210" cy="242" r="10" fill="#B8962E"/>
+        <line x1="210" y1="216" x2="210" y2="268" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="184" y1="242" x2="236" y2="242" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="192" y1="223" x2="228" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
+        <line x1="228" y1="223" x2="192" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
+        <circle cx="590" cy="242" r="38" fill="#1A1008" stroke="#B8962E" stroke-width="1.5"/>
+        <circle cx="590" cy="242" r="26" fill="#231710" stroke="#B8962E" stroke-width="1"/>
+        <circle cx="590" cy="242" r="10" fill="#B8962E"/>
+        <line x1="590" y1="216" x2="590" y2="268" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="564" y1="242" x2="616" y2="242" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
+        <line x1="572" y1="223" x2="608" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
+        <line x1="608" y1="223" x2="572" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
+        <circle cx="400" cy="140" r="12" fill="none" stroke="#B8962E" stroke-width="1.5"/>
+        <line x1="400" y1="130" x2="400" y2="128" stroke="#B8962E" stroke-width="2"/>
+        <line x1="390.5" y1="145.5" x2="389" y2="147" stroke="#B8962E" stroke-width="2"/>
+        <line x1="409.5" y1="145.5" x2="411" y2="147" stroke="#B8962E" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="fleet-specs">
+      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><span>7 Passagers</span></div>
+      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg><span>Climatisation</span></div>
+      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Wi-Fi</span></div>
+      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg><span>Cuir</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="reservation-inner">
+    <div class="res-left reveal">
+      <div class="section-eyebrow">Réservation</div>
+      <h2 class="res-title">Votre <span>voyage</span><br>commence ici</h2>
+      <p class="res-info">Planifiez votre déplacement d'exception. Nous vous répondons dans les meilleurs délais.</p>
+      <div class="res-contact">
+        <a href="tel:0769385715"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 69 38 57 15</a>
+        <a href="mailto:adouditoufik@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>adouditoufik@gmail.com</a>
       </div>
-
     </div>
-  </section>
-
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer role="contentinfo">
-    <div class="footer-divider" aria-hidden="true"></div>
-    <div class="footer-inner">
-      <div class="footer-brand">Moove &amp; Dream</div>
-      <p class="footer-copy">
-        &copy; 2025 Moove &amp; Dream — Private Driver Toufik. Tous droits réservés.<br/>
-        <span style="font-size:0.6rem;opacity:0.6">Chauffeur Privé VTC Paris &mdash; Le Voyage d'Excellence</span>
-      </p>
-      <ul class="footer-links" role="list">
-        <li><a href="#">Mentions légales</a></li>
-        <li><a href="#">CGV</a></li>
-        <li><a href="#reservation">Réserver</a></li>
-      </ul>
+    <div class="res-form reveal">
+      <form action="mailto:adouditoufik@gmail.com" method="post" enctype="text/plain">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" type="text" name="nom" required/></div>
+          <div class="form-group"><label class="form-label">Téléphone *</label><input class="form-input" type="tel" name="tel" required/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" name="email" required/></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Service *</label>
+            <select class="form-select" name="service" required>
+              <option value="">Choisir...</option>
+              <option>Aéroport CDG</option><option>Aéroport Orly</option>
+              <option>Aéroport Beauvais</option><option>Transfert Paris</option>
+              <option>Mise à Disposition</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Passagers</label>
+            <select class="form-select" name="passagers">
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option><option>7</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date *</label><input class="form-input" type="date" name="date" required/></div>
+          <div class="form-group"><label class="form-label">Heure *</label><input class="form-input" type="time" name="heure" required/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Départ *</label><input class="form-input" type="text" name="depart" required/></div>
+        <div class="form-group"><label class="form-label">Destination *</label><input class="form-input" type="text" name="destination" required/></div>
+        <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" name="notes" rows="3"></textarea></div>
+        <button type="submit" class="form-submit">Envoyer la demande</button>
+      </form>
     </div>
-  </footer>
+  </div>
+</section>
 
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-header">
+    <div class="section-eyebrow" style="justify-content:center">Contact</div>
+    <h2 class="contact-title">Contacter Toufik</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><div class="contact-block-label">Téléphone</div><div class="contact-block-value"><a href="tel:0769385715">07 69 38 57 15</a></div></div>
+    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div class="contact-block-label">Email</div><div class="contact-block-value"><a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a></div></div>
+    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="contact-block-label">Zone</div><div class="contact-block-value">Paris &amp; Île-de-France</div></div>
+  </div>
+</section>
+<footer>
+  <div class="footer-brand">Moove &amp; Dream</div>
+  <div class="footer-copy">© 2024 Moove &amp; Dream Private Driver</div>
+  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGU</a></div>
+</footer>
+<script>
+var t=document.getElementById('navToggle'),m=document.getElementById('navMobile'),c=document.getElementById('navClose');
+t.addEventListener('click',function(){m.classList.add('open')});
+c.addEventListener('click',function(){m.classList.remove('open')});
+function closeNav(){m.classList.remove('open')}
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(r){io.observe(r)});
+</script>
 </body>
 </html>

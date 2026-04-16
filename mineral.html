@@ -1,1643 +1,768 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Moove & Dream - Private Driver Toufik. Chauffeur privé VTC de luxe à Paris. Transferts aéroports CDG, Orly, Beauvais. Mercedes Classe V 7 places. Pureté & Précision." />
-  <meta name="keywords" content="VTC Paris, chauffeur privé, transfert aéroport CDG, Orly, Beauvais, Mercedes Classe V, Toufik" />
-  <title>Moove & Dream — Private Driver Toufik | VTC Paris</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ============================================================
-       DESIGN MINÉRAL — Moove & Dream
-       Palette : Taupe chaud #8B7355 · Moka #4A3728 · Blanc #FFFFFF
-                 Gris perle #E8E4E0 · Or sable #C4A882
-    ============================================================ */
-
-    :root {
-      --taupe:       #8B7355;
-      --moka:        #4A3728;
-      --moka-clair:  #6B5040;
-      --blanc:       #FFFFFF;
-      --perle:       #E8E4E0;
-      --perle-sombre:#D8D2CB;
-      --accent:      #C4A882;
-      --accent-clair:#D9C4A8;
-      --text-dark:   #2C2118;
-      --text-mid:    #6B5F52;
-      --text-light:  #9E9188;
-      --font-titre:  'Cormorant Garamond', Georgia, serif;
-      --font-corps:  'Inter', system-ui, sans-serif;
-      --transition:  all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --ombre-douce: 0 8px 32px rgba(74,55,40,0.08);
-      --ombre-forte: 0 20px 60px rgba(74,55,40,0.14);
-      --radius:      0px;
-    }
-
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      color: var(--text-mid);
-      background-color: var(--blanc);
-      overflow-x: hidden;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    img { display: block; }
-
-    /* ============================================================
-       UTILITAIRES
-    ============================================================ */
-    .section-badge {
-      display: inline-block;
-      font-family: var(--font-corps);
-      font-weight: 400;
-      font-size: 0.6rem;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-    }
-
-    .section-title {
-      font-family: var(--font-titre);
-      font-weight: 400;
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
-      line-height: 1.15;
-      color: var(--moka);
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-    }
-
-    .section-title em {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--taupe);
-    }
-
-    .rule {
-      display: flex;
-      align-items: center;
-      gap: 1.2rem;
-      margin: 1.6rem 0;
-    }
-    .rule-line {
-      flex: 1;
-      height: 1px;
-      background: var(--perle-sombre);
-    }
-    .rule-diamond {
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-
-    .rule-center {
-      justify-content: center;
-    }
-    .rule-center .rule-line {
-      flex: 0 0 60px;
-    }
-
-    .btn {
-      display: inline-block;
-      font-family: var(--font-corps);
-      font-weight: 500;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      padding: 1rem 2.8rem;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-solid {
-      background: var(--moka);
-      color: var(--blanc);
-      border-color: var(--moka);
-    }
-    .btn-solid:hover {
-      background: var(--moka-clair);
-      border-color: var(--moka-clair);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(74,55,40,0.25);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--moka);
-      border-color: var(--taupe);
-    }
-    .btn-outline:hover {
-      background: var(--moka);
-      color: var(--blanc);
-      border-color: var(--moka);
-      transform: translateY(-2px);
-    }
-
-    .btn-accent {
-      background: var(--accent);
-      color: var(--blanc);
-      border-color: var(--accent);
-    }
-    .btn-accent:hover {
-      background: var(--accent-clair);
-      border-color: var(--accent-clair);
-      color: var(--moka);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(196,168,130,0.3);
-    }
-
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    #nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 0 5%;
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--perle);
-      transition: var(--transition);
-    }
-
-    .nav-logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .nav-logo-main {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-weight: 600;
-      font-size: 1.45rem;
-      color: var(--moka);
-      letter-spacing: 0.02em;
-    }
-    .nav-logo-sub {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      font-size: 0.5rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-top: 3px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2.8rem;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      position: relative;
-      padding-bottom: 3px;
-      transition: color 0.3s ease;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--accent);
-      transition: width 0.3s ease;
-    }
-    .nav-links a:hover { color: var(--moka); }
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav-cta {
-      padding: 0.55rem 1.4rem;
-      font-size: 0.6rem;
-    }
-
-    #nav-toggle { display: none; }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      cursor: pointer;
-      padding: 5px;
-    }
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 1px;
-      background: var(--moka);
-      transition: var(--transition);
-    }
-
-    /* ============================================================
-       HERO — minéral, fond blanc / gris perle, géométrique
-    ============================================================ */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 5% 100px;
-      background: var(--perle);
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Grille de fond géométrique ultra-légère */
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 60px,
-          rgba(139,115,85,0.06) 60px,
-          rgba(139,115,85,0.06) 61px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 60px,
-          rgba(139,115,85,0.06) 60px,
-          rgba(139,115,85,0.06) 61px
-        );
-      pointer-events: none;
-    }
-
-    /* Cadre décoratif coin haut-gauche */
-    #hero::after {
-      content: '';
-      position: absolute;
-      top: 100px;
-      left: 5%;
-      width: 80px;
-      height: 80px;
-      border-top: 1px solid rgba(196,168,130,0.4);
-      border-left: 1px solid rgba(196,168,130,0.4);
-      pointer-events: none;
-    }
-
-    /* Cadre décoratif coin bas-droit */
-    .hero-frame-br {
-      position: absolute;
-      bottom: 80px;
-      right: 5%;
-      width: 80px;
-      height: 80px;
-      border-bottom: 1px solid rgba(196,168,130,0.4);
-      border-right: 1px solid rgba(196,168,130,0.4);
-      pointer-events: none;
-    }
-
-    /* Ligne verticale gauche */
-    .hero-vline {
-      position: absolute;
-      left: 5%;
-      top: 20%;
-      bottom: 20%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(196,168,130,0.3) 30%, rgba(196,168,130,0.3) 70%, transparent);
-      pointer-events: none;
-    }
-
-    /* Cercle géométrique décoratif */
-    .hero-circle {
-      position: absolute;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 300px;
-      height: 300px;
-      border: 1px solid rgba(139,115,85,0.08);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero-circle::after {
-      content: '';
-      position: absolute;
-      inset: 20px;
-      border: 1px solid rgba(139,115,85,0.05);
-      border-radius: 50%;
-    }
-
-    .hero-content {
-      max-width: 760px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-corps);
-      font-weight: 400;
-      font-size: 0.6rem;
-      letter-spacing: 0.55em;
-      text-transform: uppercase;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-bottom: 2.4rem;
-      animation: fadeInUp 0.6s ease both;
-      animation-delay: 0.2s;
-    }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.7;
-    }
-
-    .hero-title {
-      font-family: var(--font-titre);
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      color: var(--moka);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      animation: fadeInUp 0.7s ease both;
-      animation-delay: 0.35s;
-      margin-bottom: 0.4rem;
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-corps);
-      font-weight: 300;
-      font-size: clamp(0.6rem, 1.2vw, 0.75rem);
-      letter-spacing: 0.55em;
-      text-transform: uppercase;
-      color: var(--taupe);
-      animation: fadeInUp 0.6s ease both;
-      animation-delay: 0.5s;
-      margin-bottom: 2.4rem;
-    }
-
-    .hero-rule {
-      animation: fadeInUp 0.5s ease both;
-      animation-delay: 0.65s;
-      margin-bottom: 2.4rem;
-    }
-
-    .hero-slogan {
-      font-family: var(--font-titre);
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(1.1rem, 2.2vw, 1.5rem);
-      color: var(--text-mid);
-      letter-spacing: 0.06em;
-      animation: fadeInUp 0.6s ease both;
-      animation-delay: 0.75s;
-      margin-bottom: 3.5rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.4rem;
-      flex-wrap: wrap;
-      animation: fadeInUp 0.6s ease both;
-      animation-delay: 0.9s;
-    }
-
-    .hero-scroll-indicator {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      animation: fadeInUp 0.6s ease both 1.2s, scrollPulse 2.5s ease-in-out 2s infinite;
-    }
-    .hero-scroll-text {
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--text-light);
-    }
-    .hero-scroll-line {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-    }
-
-    /* ============================================================
-       BANDE DE CHIFFRES (stats rapides)
-    ============================================================ */
-    #stats-band {
-      background: var(--moka);
-      padding: 3rem 5%;
-    }
-    .stats-band-inner {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      max-width: 900px;
-      margin: 0 auto;
-      background: rgba(196,168,130,0.2);
-    }
-    .stat-bloc {
-      background: var(--moka);
-      padding: 2rem 1.5rem;
-      text-align: center;
-    }
-    .stat-val {
-      font-family: var(--font-titre);
-      font-weight: 300;
-      font-size: 2.4rem;
-      color: var(--accent);
-      display: block;
-      line-height: 1;
-    }
-    .stat-lbl {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(232,228,224,0.5);
-      margin-top: 0.5rem;
-      display: block;
-    }
-
-    /* ============================================================
-       SERVICES
-    ============================================================ */
-    #services {
-      background: var(--blanc);
-      padding: 8rem 5%;
-      text-align: center;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      margin-top: 4rem;
-      max-width: 1080px;
-      margin-left: auto;
-      margin-right: auto;
-      background: var(--perle-sombre);
-    }
-
-    .service-card {
-      background: var(--blanc);
-      padding: 3rem 2.5rem;
-      text-align: left;
-      transition: var(--transition);
-      position: relative;
-    }
-    .service-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.4s ease;
-    }
-    .service-card:hover {
-      background: var(--perle);
-    }
-    .service-card:hover::after {
-      width: 100%;
-    }
-
-    .service-num {
-      font-family: var(--font-titre);
-      font-weight: 300;
-      font-size: 3rem;
-      color: var(--perle-sombre);
-      line-height: 1;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .service-card h3 {
-      font-family: var(--font-titre);
-      font-weight: 600;
-      font-size: 1.4rem;
-      color: var(--moka);
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .service-card p {
-      font-size: 0.88rem;
-      line-height: 1.9;
-      color: var(--text-light);
-    }
-
-    .service-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-top: 1.2rem;
-    }
-    .service-tag {
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-      color: var(--taupe);
-      border: 1px solid var(--perle-sombre);
-      padding: 0.3rem 0.8rem;
-      text-transform: uppercase;
-      transition: var(--transition);
-    }
-    .service-tag:hover {
-      border-color: var(--accent);
-      color: var(--moka);
-    }
-
-    /* ============================================================
-       À PROPOS
-    ============================================================ */
-    #apropos {
-      background: var(--perle);
-      padding: 8rem 5%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Motif de fond */
-    #apropos::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 40px,
-          rgba(139,115,85,0.03) 40px,
-          rgba(139,115,85,0.03) 41px
-        );
-      pointer-events: none;
-    }
-
-    .apropos-inner {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 6rem;
-      align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .apropos-text .section-title { color: var(--moka); }
-
-    .apropos-text p {
-      font-size: 0.92rem;
-      line-height: 2.1;
-      color: var(--text-mid);
-      margin-bottom: 1.2rem;
-    }
-
-    .apropos-signature {
-      margin-top: 2.5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--perle-sombre);
-    }
-    .apropos-signature .sig-name {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 1.8rem;
-      font-weight: 400;
-      color: var(--moka);
-      display: block;
-    }
-    .apropos-signature .sig-role {
-      font-size: 0.58rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-top: 0.3rem;
-      display: block;
-    }
-
-    .apropos-aside {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--perle-sombre);
-    }
-
-    .aside-item {
-      background: var(--blanc);
-      padding: 2rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 1.5rem;
-      transition: background 0.3s ease;
-    }
-    .aside-item:hover { background: var(--perle); }
-
-    .aside-icon {
-      width: 40px;
-      height: 40px;
-      color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .aside-body {}
-    .aside-title {
-      font-family: var(--font-corps);
-      font-weight: 500;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      color: var(--moka);
-      margin-bottom: 0.4rem;
-    }
-    .aside-desc {
-      font-size: 0.82rem;
-      line-height: 1.7;
-      color: var(--text-light);
-    }
-
-    /* ============================================================
-       FLOTTE
-    ============================================================ */
-    #flotte {
-      background: var(--blanc);
-      padding: 8rem 5%;
-      text-align: center;
-    }
-
-    .flotte-card {
-      max-width: 900px;
-      margin: 4rem auto 0;
-      border: 1px solid var(--perle-sombre);
-      transition: var(--transition);
-      overflow: hidden;
-      position: relative;
-    }
-    .flotte-card:hover {
-      border-color: var(--accent);
-      box-shadow: var(--ombre-forte);
-    }
-
-    .flotte-header {
-      background: var(--perle);
-      padding: 4rem 5% 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .flotte-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          0deg, transparent, transparent 30px,
-          rgba(139,115,85,0.04) 30px, rgba(139,115,85,0.04) 31px
-        ),
-        repeating-linear-gradient(
-          90deg, transparent, transparent 30px,
-          rgba(139,115,85,0.04) 30px, rgba(139,115,85,0.04) 31px
-        );
-    }
-
-    /* SVG Mercedes Van stylisé */
-    .car-svg {
-      width: 100%;
-      max-width: 560px;
-      margin: 0 auto;
-      display: block;
-      position: relative;
-      z-index: 1;
-      filter: drop-shadow(0 16px 32px rgba(74,55,40,0.12));
-    }
-
-    .flotte-body {
-      padding: 2.5rem 3rem 3rem;
-      text-align: left;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 2rem;
-      align-items: end;
-      background: var(--blanc);
-    }
-
-    .flotte-model {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 2.4rem;
-      font-weight: 400;
-      color: var(--moka);
-      margin-bottom: 0.3rem;
-      line-height: 1;
-    }
-    .flotte-class {
-      font-size: 0.6rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--text-light);
-    }
-
-    .flotte-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .flotte-feature {
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-      text-transform: uppercase;
-      padding: 0.4rem 1rem;
-      border: 1px solid var(--perle-sombre);
-      color: var(--taupe);
-      transition: var(--transition);
-    }
-    .flotte-feature:hover {
-      border-color: var(--accent);
-      color: var(--moka);
-    }
-
-    .flotte-cta-area { text-align: right; }
-
-    .flotte-note {
-      font-size: 0.78rem;
-      font-style: italic;
-      color: var(--text-light);
-      margin-top: 3rem;
-      text-align: center;
-    }
-
-    /* ============================================================
-       RÉSERVATION
-    ============================================================ */
-    #reservation {
-      background: var(--perle);
-      padding: 8rem 5%;
-      text-align: center;
-      position: relative;
-    }
-
-    #reservation::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          90deg, transparent, transparent 80px,
-          rgba(139,115,85,0.04) 80px, rgba(139,115,85,0.04) 81px
-        );
-      pointer-events: none;
-    }
-
-    .resa-form-wrap {
-      max-width: 680px;
-      margin: 4rem auto 0;
-      background: var(--blanc);
-      padding: 3.5rem;
-      border: 1px solid var(--perle-sombre);
-      position: relative;
-      z-index: 1;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 2rem;
-    }
-
-    .form-field {
-      position: relative;
-      margin-bottom: 2rem;
-    }
-    .form-field.full { grid-column: 1 / -1; }
-
-    .form-field label {
-      display: block;
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 0.6rem;
-      font-weight: 400;
-    }
-
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid var(--perle-sombre);
-      padding: 0.8rem 0;
-      font-family: var(--font-corps);
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: var(--text-dark);
-      background: transparent;
-      outline: none;
-      transition: border-color 0.3s ease;
-      border-radius: 0;
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus {
-      border-bottom-color: var(--accent);
-    }
-    .form-field textarea {
-      resize: none;
-      min-height: 80px;
-    }
-    .form-field select {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C4A882'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 0 center;
-      padding-right: 20px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      background: var(--moka);
-      color: var(--blanc);
-      border: none;
-      height: 56px;
-      font-family: var(--font-corps);
-      font-weight: 500;
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: var(--transition);
-      margin-top: 1rem;
-    }
-    .btn-submit:hover {
-      background: var(--moka-clair);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(74,55,40,0.25);
-    }
-
-    .resa-alt {
-      margin-top: 2rem;
-      font-size: 0.78rem;
-      color: var(--text-light);
-      position: relative;
-      z-index: 1;
-    }
-    .resa-alt a {
-      color: var(--moka);
-      font-weight: 500;
-      border-bottom: 1px solid var(--perle-sombre);
-      padding-bottom: 1px;
-      transition: border-color 0.3s;
-    }
-    .resa-alt a:hover { border-color: var(--accent); }
-
-    /* ============================================================
-       CONTACT
-    ============================================================ */
-    #contact {
-      background: var(--moka);
-      padding: 7rem 5%;
-      text-align: center;
-    }
-
-    #contact .section-title { color: var(--perle); }
-    #contact .section-badge { color: var(--accent); }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      max-width: 860px;
-      margin: 4rem auto 0;
-      background: rgba(196,168,130,0.2);
-    }
-
-    .contact-item {
-      background: var(--moka);
-      padding: 2.5rem 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      transition: background 0.3s ease;
-    }
-    .contact-item:hover {
-      background: var(--moka-clair);
-    }
-
-    .contact-item-icon {
-      width: 44px;
-      height: 44px;
-      color: var(--accent);
-    }
-    .contact-item-label {
-      font-size: 0.55rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: rgba(232,228,224,0.45);
-    }
-    .contact-item-value {
-      font-family: var(--font-titre);
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: var(--perle);
-      text-align: center;
-      line-height: 1.4;
-    }
-    .contact-item-value a {
-      color: inherit;
-      transition: color 0.3s;
-    }
-    .contact-item-value a:hover { color: var(--accent); }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      background: var(--text-dark);
-      padding: 3rem 5%;
-    }
-    .footer-rule {
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(196,168,130,0.25), transparent);
-      margin-bottom: 3rem;
-    }
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
-    .footer-brand {
-      font-family: var(--font-titre);
-      font-style: italic;
-      font-size: 1.2rem;
-      color: rgba(196,168,130,0.6);
-    }
-    .footer-copy {
-      font-size: 0.62rem;
-      color: rgba(232,228,224,0.25);
-      letter-spacing: 0.06em;
-      text-align: center;
-    }
-    .footer-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    .footer-links a {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(232,228,224,0.25);
-      transition: color 0.3s;
-    }
-    .footer-links a:hover { color: var(--accent); }
-
-    /* ============================================================
-       ANIMATIONS CSS
-    ============================================================ */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(-8px); }
-    }
-
-    /* Scroll reveal — classes ajoutées par CSS seul via :has / animation */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.7s ease both;
-    }
-    /* Délais de révélation en cascade */
-    .reveal:nth-child(1) { animation-delay: 0.1s; }
-    .reveal:nth-child(2) { animation-delay: 0.2s; }
-    .reveal:nth-child(3) { animation-delay: 0.3s; }
-    .reveal:nth-child(4) { animation-delay: 0.4s; }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 960px) {
-      .services-grid {
-        grid-template-columns: 1fr;
-        background: none;
-        gap: 1px;
-        background: var(--perle-sombre);
-      }
-      .apropos-inner {
-        grid-template-columns: 1fr;
-        gap: 3.5rem;
-      }
-      .apropos-aside {
-        max-width: 500px;
-        margin: 0 auto;
-        width: 100%;
-      }
-      .flotte-body {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .flotte-cta-area { text-align: center; }
-      .flotte-features { justify-content: center; }
-      .contact-grid {
-        grid-template-columns: 1fr;
-        max-width: 380px;
-      }
-      .stats-band-inner {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .footer-inner {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta-wrap { display: none; }
-      .hamburger { display: flex; }
-
-      #nav-toggle:checked ~ .nav-menu {
-        display: flex !important;
-      }
-      .nav-menu {
-        display: none;
-        position: fixed;
-        top: 76px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255,255,255,0.98);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 3rem;
-        list-style: none;
-      }
-      .nav-menu a {
-        font-family: var(--font-titre);
-        font-style: italic;
-        font-size: 2.2rem;
-        color: var(--moka);
-        letter-spacing: 0.03em;
-      }
-      .nav-menu a:hover { color: var(--accent); }
-      .nav-menu .nav-menu-cta { margin-top: 1rem; }
-
-      .form-grid { grid-template-columns: 1fr; }
-      .form-field.full { grid-column: auto; }
-      .resa-form-wrap { padding: 2.5rem 1.5rem; }
-
-      .hero-circle { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      .hero-title { font-size: 3rem; }
-      .hero-ctas { flex-direction: column; align-items: stretch; text-align: center; }
-      .btn { text-align: center; }
-      #services, #apropos, #flotte, #reservation, #contact { padding: 5rem 5%; }
-      .stats-band-inner { grid-template-columns: repeat(2, 1fr); }
-      .flotte-body { padding: 2rem 1.5rem; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moove & Dream — Pureté &amp; Précision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@100;200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --taupe:#8B7355;--moka:#4A3728;--moka-light:#6B5040;
+  --white:#FFFFFF;--pearl:#E8E4E0;--pearl-dark:#D4CEC8;
+  --sand:#C4A882;--sand-dim:rgba(196,168,130,0.2);
+  --ink:#2A2218;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Josefin Sans',sans-serif;
+  font-weight:200;background:var(--white);
+  color:var(--ink);overflow-x:hidden;line-height:1.7;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
+  opacity:0.028;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* ── FLOATING NAV ── */
+.nav{
+  position:fixed;top:20px;left:50%;transform:translateX(-50%);
+  z-index:1000;width:calc(100% - 2.5rem);max-width:820px;
+  background:rgba(255,255,255,0.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(139,115,85,0.15);
+  border-radius:4px;
+  padding:0 1.75rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:52px;
+  box-shadow:0 4px 30px rgba(74,55,40,0.07);
+}
+.nav-brand{
+  font-family:'Cinzel',serif;
+  font-size:0.85rem;font-weight:500;
+  color:var(--moka);letter-spacing:0.18em;
+}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{
+  font-family:'Josefin Sans',sans-serif;font-weight:100;
+  font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--taupe);text-decoration:none;transition:color 0.25s;
+}
+.nav-links a:hover{color:var(--moka)}
+.nav-cta{
+  font-family:'Josefin Sans',sans-serif;font-weight:400;
+  font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;
+  background:var(--moka);color:var(--white);
+  border:none;padding:0.55rem 1.25rem;
+  cursor:pointer;transition:background 0.25s;
+  border-radius:2px;
+}
+.nav-cta:hover{background:var(--moka-light)}
+.nav-toggle{
+  display:none;background:none;border:none;
+  cursor:pointer;padding:6px;
+  flex-direction:column;gap:5px;align-items:center;
+}
+.nav-toggle span{display:block;width:20px;height:1px;background:var(--moka);transition:0.3s}
+.nav-mobile{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:var(--moka);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{
+  font-family:'Josefin Sans',sans-serif;font-weight:200;
+  font-size:1rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--pearl);text-decoration:none;
+}
+.nav-mobile a:hover{color:var(--sand)}
+.nav-mobile .close-btn{
+  position:absolute;top:28px;right:28px;
+  background:none;border:none;color:var(--sand);
+  font-size:1.4rem;cursor:pointer;font-family:'Cinzel',serif;
+}
+/* ── HERO ── */
+.hero{
+  min-height:100vh;background:var(--white);
+  display:grid;grid-template-columns:1fr 1fr;
+  position:relative;overflow:hidden;
+}
+/* Grid texture on hero */
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--pearl-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pearl-dark) 1px, transparent 1px);
+  background-size:50px 50px;
+  opacity:0.35;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 3.5rem 5rem 4.5rem;
+  position:relative;z-index:1;
+}
+.hero-bg-num{
+  position:absolute;left:-1.5rem;top:50%;transform:translateY(-50%);
+  font-family:'Cinzel',serif;
+  font-size:22rem;font-weight:400;
+  color:rgba(74,55,40,0.04);line-height:1;
+  user-select:none;pointer-events:none;
+  white-space:nowrap;
+}
+.hero-tag{
+  font-family:'Josefin Sans',sans-serif;font-weight:100;
+  font-size:0.58rem;letter-spacing:0.42em;text-transform:uppercase;
+  color:var(--taupe);margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-tag::before{content:'';display:block;width:35px;height:1px;background:var(--sand)}
+.hero-h1{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2.5rem,5.5vw,4.5rem);
+  font-weight:400;letter-spacing:0.06em;
+  color:var(--moka);line-height:1.05;
+  margin-bottom:0.5rem;
+}
+.hero-sub{
+  font-family:'Josefin Sans',sans-serif;font-weight:100;
+  font-size:clamp(1.2rem,2.5vw,1.8rem);
+  letter-spacing:0.42em;color:var(--taupe);
+  text-transform:uppercase;margin-bottom:0.75rem;
+}
+.hero-divider{
+  width:50px;height:1px;
+  background:linear-gradient(to right, var(--sand), transparent);
+  margin:1.5rem 0;
+}
+.hero-slogan{
+  font-family:'Cinzel',serif;font-style:italic;
+  font-size:1.1rem;font-weight:400;color:var(--taupe);
+  margin-bottom:2.5rem;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  font-family:'Josefin Sans',sans-serif;font-weight:400;
+  font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  background:var(--moka);color:var(--white);
+  border:none;padding:1rem 2.5rem;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:background 0.25s,transform 0.2s;
+}
+.btn-primary:hover{background:var(--moka-light);transform:translateY(-2px)}
+.btn-outline{
+  font-family:'Josefin Sans',sans-serif;font-weight:300;
+  font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  background:transparent;color:var(--moka);
+  border:1px solid rgba(74,55,40,0.3);padding:1rem 2.5rem;border-radius:2px;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:border-color 0.25s,transform 0.2s;
+}
+.btn-outline:hover{border-color:var(--moka);transform:translateY(-2px)}
+.hero-right{
+  background:var(--pearl);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-right::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--pearl-dark) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pearl-dark) 1px, transparent 1px);
+  background-size:30px 30px;opacity:0.5;
+}
+.hero-circle{
+  width:340px;height:340px;border-radius:50%;
+  border:1px solid rgba(139,115,85,0.25);
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:1.5rem;
+}
+.hero-circle::before{
+  content:'';position:absolute;inset:-15px;border-radius:50%;
+  border:1px solid rgba(139,115,85,0.1);
+}
+.circle-stat{text-align:center}
+.circle-num{
+  font-family:'Cinzel',serif;font-size:2.5rem;font-weight:400;
+  color:var(--moka);line-height:1;
+}
+.circle-label{
+  font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;
+  font-weight:200;color:var(--taupe);margin-top:0.3rem;
+}
+.hero-vertical-text{
+  position:absolute;left:1.5rem;top:50%;transform:translateY(-50%) rotate(-90deg);
+  transform-origin:center;
+  font-size:0.55rem;letter-spacing:0.35em;text-transform:uppercase;
+  font-weight:100;color:var(--taupe);
+  white-space:nowrap;z-index:2;
+}
+/* ── SECTION UTILS ── */
+.section-marker{
+  font-family:'Josefin Sans',sans-serif;font-weight:200;
+  font-size:0.56rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--sand);display:flex;align-items:center;gap:0.75rem;
+  margin-bottom:1.25rem;
+}
+.section-marker::before{content:'';width:24px;height:1px;background:var(--sand)}
+/* ── SERVICES ── */
+.services{padding:7rem 4rem;background:var(--white)}
+.services-header{margin-bottom:4rem}
+.services-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;
+  color:var(--moka);letter-spacing:0.04em;margin-bottom:0.75rem;
+}
+.services-desc{
+  font-size:0.8rem;font-weight:200;color:var(--taupe);
+  max-width:420px;line-height:1.85;
+}
+.services-grid{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  border:1px solid var(--pearl-dark);
+}
+.service-card{
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--pearl-dark);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:background 0.3s;
+}
+.service-card:last-child{border-right:none}
+.service-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:2px;background:var(--sand);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.service-card:hover::after{transform:scaleX(1)}
+.service-card:hover{background:var(--pearl)}
+.service-roman{
+  font-family:'Cinzel',serif;font-size:3rem;font-weight:400;
+  color:rgba(139,115,85,0.18);line-height:1;margin-bottom:1.5rem;
+}
+.service-name{
+  font-family:'Cinzel',serif;font-size:1.1rem;font-weight:400;
+  color:var(--moka);margin-bottom:1rem;letter-spacing:0.04em;
+}
+.service-text{
+  font-size:0.78rem;font-weight:200;line-height:1.9;color:var(--taupe);
+}
+.service-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:1.5rem}
+.tag{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:0.55rem;letter-spacing:0.22em;text-transform:uppercase;
+  font-weight:300;border:1px solid rgba(139,115,85,0.3);
+  color:var(--taupe);padding:0.25rem 0.65rem;
+}
+/* ── ABOUT ── */
+.about{padding:7rem 4rem;background:var(--moka);position:relative;overflow:hidden}
+.about-bg-letter{
+  position:absolute;right:-3rem;bottom:-4rem;
+  font-family:'Cinzel',serif;font-size:24rem;font-weight:700;
+  color:rgba(255,255,255,0.03);user-select:none;pointer-events:none;line-height:1;
+}
+.about-grid{
+  display:grid;grid-template-columns:1.3fr 0.7fr;
+  gap:5rem;align-items:start;position:relative;
+}
+.about-eyebrow{
+  font-family:'Josefin Sans',sans-serif;font-weight:100;
+  font-size:0.56rem;letter-spacing:0.4em;text-transform:uppercase;
+  color:var(--sand);display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;
+}
+.about-eyebrow::before{content:'';width:24px;height:1px;background:var(--sand)}
+.about-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;
+  color:var(--pearl);letter-spacing:0.04em;line-height:1.3;margin-bottom:2rem;
+}
+.about-text{
+  font-size:0.82rem;font-weight:200;line-height:1.95;
+  color:rgba(232,228,224,0.72);margin-bottom:1.5rem;
+}
+.about-quote{
+  font-family:'Cinzel',serif;font-size:1.05rem;font-style:italic;
+  color:var(--sand);border-left:2px solid var(--sand);
+  padding-left:1.25rem;margin:2rem 0;line-height:1.6;
+}
+.about-signature{
+  font-family:'Cinzel',serif;font-size:1rem;font-weight:400;
+  color:var(--pearl);margin-top:2rem;
+}
+.about-signature small{
+  display:block;font-family:'Josefin Sans',sans-serif;
+  font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:rgba(232,228,224,0.4);font-weight:100;margin-top:0.25rem;
+}
+.about-cta-link{
+  display:inline-flex;align-items:center;gap:0.75rem;
+  font-family:'Josefin Sans',sans-serif;font-size:0.62rem;
+  letter-spacing:0.25em;text-transform:uppercase;font-weight:300;
+  color:var(--sand);text-decoration:none;margin-top:2rem;
+  transition:gap 0.3s;
+}
+.about-cta-link:hover{gap:1.25rem}
+.about-cta-link::after{content:'→'}
+.stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;background:rgba(196,168,130,0.2);
+  margin-bottom:2rem;
+}
+.stat-box{
+  background:var(--moka);padding:2rem 1.25rem;text-align:center;
+}
+.stat-box-num{
+  font-family:'Cinzel',serif;
+  font-size:2.5rem;font-weight:400;color:var(--sand);line-height:1;
+}
+.stat-box-label{
+  font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(232,228,224,0.4);font-weight:100;margin-top:0.4rem;
+}
+.contact-card{
+  border:1px solid rgba(196,168,130,0.2);padding:1.75rem;
+}
+.contact-item{
+  display:flex;align-items:center;gap:1rem;padding:0.7rem 0;
+  border-bottom:1px solid rgba(196,168,130,0.1);
+}
+.contact-item:last-child{border:none}
+.contact-item svg{flex-shrink:0;color:var(--sand)}
+.contact-item a{font-size:0.78rem;font-weight:200;color:var(--pearl);text-decoration:none;transition:color 0.2s}
+.contact-item a:hover{color:var(--sand)}
+/* ── FLEET ── */
+.fleet{padding:7rem 4rem;background:var(--pearl)}
+.fleet-header{margin-bottom:3.5rem}
+.fleet-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;
+  color:var(--moka);letter-spacing:0.04em;margin-bottom:0.5rem;
+}
+.fleet-divider{
+  width:50px;height:1px;
+  background:linear-gradient(to right, var(--sand), transparent);
+  margin:1.25rem 0 2.5rem;
+}
+.car-wrapper{max-width:680px;margin:0 auto}
+.car-svg{width:100%;height:auto}
+.fleet-specs{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border:1px solid var(--pearl-dark);
+  max-width:680px;margin:2.5rem auto 0;
+}
+.spec-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;border-bottom:1px solid var(--pearl-dark);
+  border-right:1px solid var(--pearl-dark);
+}
+.spec-row:nth-child(even){border-right:none}
+.spec-row:last-child,.spec-row:nth-last-child(2):nth-child(odd){border-bottom:none}
+.spec-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:100;color:var(--taupe)}
+.spec-value{font-family:'Cinzel',serif;font-size:0.85rem;font-weight:500;color:var(--moka)}
+/* ── RESERVATION ── */
+.reservation{padding:7rem 4rem;background:var(--white)}
+.reservation-inner{
+  display:grid;grid-template-columns:1fr 1.6fr;
+  gap:6rem;align-items:start;max-width:1100px;margin:0 auto;
+}
+.res-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;
+  color:var(--moka);letter-spacing:0.04em;line-height:1.3;margin-bottom:1.5rem;
+}
+.res-info{font-size:0.8rem;font-weight:200;line-height:1.85;color:var(--taupe)}
+.res-contact{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--pearl-dark)}
+.res-contact a{
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.75rem;font-weight:300;color:var(--moka);
+  text-decoration:none;padding:0.5rem 0;transition:color 0.2s;
+}
+.res-contact a:hover{color:var(--sand)}
+.form-group{display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.75rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:0}
+.form-row .form-group{margin-bottom:1.75rem}
+.form-label{
+  font-family:'Josefin Sans',sans-serif;font-weight:200;
+  font-size:0.56rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--taupe);
+}
+.form-input,.form-select,.form-textarea{
+  font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:0.85rem;
+  background:transparent;border:none;border-bottom:1px solid rgba(74,55,40,0.2);
+  padding:0.7rem 0;color:var(--ink);outline:none;width:100%;
+  transition:border-color 0.25s;-webkit-appearance:none;appearance:none;
+}
+.form-input:focus,.form-select:focus{border-bottom-color:var(--sand)}
+.form-select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B7355' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 0 center;padding-right:1.2rem;
+}
+.form-textarea{
+  resize:vertical;min-height:80px;
+  border:1px solid rgba(74,55,40,0.15);
+  padding:0.75rem;margin-top:0;
+}
+.form-textarea:focus{border-color:var(--sand);outline:none}
+.form-submit{
+  width:100%;
+  font-family:'Josefin Sans',sans-serif;font-weight:400;
+  font-size:0.62rem;letter-spacing:0.32em;text-transform:uppercase;
+  background:var(--moka);color:var(--pearl);
+  border:none;padding:1.2rem;
+  cursor:pointer;margin-top:0.5rem;
+  transition:background 0.25s;
+}
+.form-submit:hover{background:var(--moka-light)}
+/* ── CONTACT ── */
+.contact{padding:5rem 4rem;background:var(--moka)}
+.contact-header{text-align:center;margin-bottom:3.5rem}
+.contact-title{
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:400;
+  color:var(--pearl);letter-spacing:0.05em;
+}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border:1px solid rgba(196,168,130,0.2);
+  max-width:800px;margin:0 auto;
+}
+.contact-block{
+  padding:2.5rem 1.5rem;text-align:center;
+  border-right:1px solid rgba(196,168,130,0.2);
+  transition:background 0.3s;
+}
+.contact-block:last-child{border-right:none}
+.contact-block:hover{background:rgba(196,168,130,0.06)}
+.contact-block svg{color:var(--sand);margin-bottom:1.25rem}
+.contact-block-label{
+  font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;
+  font-weight:100;color:rgba(232,228,224,0.45);margin-bottom:0.6rem;
+}
+.contact-block-value{
+  font-family:'Cinzel',serif;font-size:0.9rem;font-weight:400;color:var(--pearl);
+}
+.contact-block-value a{color:inherit;text-decoration:none;transition:color 0.2s}
+.contact-block-value a:hover{color:var(--sand)}
+/* ── FOOTER ── */
+footer{
+  background:var(--moka-light);padding:1.75rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-top:1px solid rgba(196,168,130,0.15);flex-wrap:wrap;gap:1rem;
+}
+.footer-brand{font-family:'Cinzel',serif;color:var(--sand);font-size:0.9rem;letter-spacing:0.12em}
+.footer-copy{font-size:0.58rem;letter-spacing:0.12em;color:rgba(232,228,224,0.3);font-weight:100}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{
+  font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(232,228,224,0.3);text-decoration:none;font-weight:100;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--sand)}
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.in{opacity:1;transform:none}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:8rem 2.5rem 5rem}
+  .services{padding:5rem 2rem}
+  .services-grid{grid-template-columns:1fr}
+  .service-card{border-right:none;border-bottom:1px solid var(--pearl-dark)}
+  .service-card:last-child{border-bottom:none}
+  .about{padding:5rem 2rem}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .fleet{padding:5rem 2rem}
+  .fleet-specs{grid-template-columns:1fr}
+  .spec-row{border-right:none}
+  .reservation{padding:5rem 2rem}
+  .reservation-inner{grid-template-columns:1fr;gap:3rem}
+  .contact{padding:4rem 2rem}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-block{border-right:none;border-bottom:1px solid rgba(196,168,130,0.2)}
+  .contact-block:last-child{border-bottom:none}
+  footer{padding:1.5rem 2rem;flex-direction:column;text-align:center}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .nav-toggle{display:flex}
+  .nav{padding:0 1.25rem}
+  .form-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hero-h1{font-size:2.2rem}
+  .hero-sub{font-size:1rem}
+  .hero-left{padding:7rem 1.5rem 4rem}
+  .hero-actions{flex-direction:column}
+  .btn-primary,.btn-outline{text-align:center}
+  .services,.about,.fleet,.reservation,.contact{padding:4rem 1.5rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-
 <body>
+<nav class="nav" id="nav">
+  <div class="nav-brand">M &amp; D</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#about">À Propos</a>
+    <a href="#fleet">Flotte</a>
+    <a href="#reservation">Réservation</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="tel:0769385715" class="nav-cta">Réserver</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <button class="close-btn" id="navClose">✕</button>
+  <a href="#services" onclick="closeNav()">Services</a>
+  <a href="#about" onclick="closeNav()">À Propos</a>
+  <a href="#fleet" onclick="closeNav()">Flotte</a>
+  <a href="#reservation" onclick="closeNav()">Réservation</a>
+  <a href="#contact" onclick="closeNav()">Contact</a>
+  <a href="tel:0769385715" style="color:var(--sand)">07 69 38 57 15</a>
+</div>
 
-  <!-- ===================== NAVIGATION ===================== -->
-  <nav id="nav" role="navigation" aria-label="Navigation principale">
-    <a href="#hero" class="nav-logo" aria-label="Moove & Dream - Accueil">
-      <span class="nav-logo-main">Moove &amp; Dream</span>
-      <span class="nav-logo-sub">Private Driver</span>
-    </a>
-
-    <input type="checkbox" id="nav-toggle" aria-label="Ouvrir le menu" />
-    <label for="nav-toggle" class="hamburger" aria-hidden="true">
-      <span></span><span></span><span></span>
-    </label>
-
-    <ul class="nav-links" role="list">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#apropos">À Propos</a></li>
-      <li><a href="#flotte">Flotte</a></li>
-      <li><a href="#reservation">Réservation</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-cta-wrap">
-      <a href="tel:+33769385715" class="btn btn-solid nav-cta">Réserver</a>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-bg-num">01</div>
+    <p class="hero-tag">Paris · VTC · Prestige</p>
+    <h1 class="hero-h1">MOOVE &amp;<br>DREAM</h1>
+    <p class="hero-sub">Private Driver</p>
+    <div class="hero-divider"></div>
+    <p class="hero-slogan">Pureté &amp; Précision</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-primary">Réserver un trajet</a>
+      <a href="tel:0769385715" class="btn-outline">07 69 38 57 15</a>
     </div>
-
-    <ul class="nav-menu" role="list">
-      <li><a href="#services" onclick="document.getElementById('nav-toggle').checked=false">Services</a></li>
-      <li><a href="#apropos" onclick="document.getElementById('nav-toggle').checked=false">À Propos</a></li>
-      <li><a href="#flotte" onclick="document.getElementById('nav-toggle').checked=false">Flotte</a></li>
-      <li><a href="#reservation" onclick="document.getElementById('nav-toggle').checked=false">Réservation</a></li>
-      <li><a href="#contact" onclick="document.getElementById('nav-toggle').checked=false">Contact</a></li>
-      <li class="nav-menu-cta"><a href="tel:+33769385715" class="btn btn-solid">Appeler Toufik</a></li>
-    </ul>
-  </nav>
-
-
-  <!-- ===================== HERO ===================== -->
-  <section id="hero" aria-label="Accueil">
-
-    <span class="hero-vline" aria-hidden="true"></span>
-    <span class="hero-frame-br" aria-hidden="true"></span>
-    <span class="hero-circle" aria-hidden="true"></span>
-
-    <div class="hero-content">
-
-      <div class="hero-eyebrow">Chauffeur Privé Paris</div>
-
-      <h1 class="hero-title">Moove &amp; Dream</h1>
-      <p class="hero-subtitle">Private Driver &nbsp;·&nbsp; Toufik</p>
-
-      <div class="hero-rule rule rule-center" aria-hidden="true">
-        <span class="rule-line"></span>
-        <span class="rule-diamond"></span>
-        <span class="rule-line"></span>
-      </div>
-
-      <p class="hero-slogan">Pureté &amp; Précision</p>
-
-      <div class="hero-ctas">
-        <a href="#reservation" class="btn btn-solid">Réserver un trajet</a>
-        <a href="tel:+33769385715" class="btn btn-outline">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="display:inline;vertical-align:middle;margin-right:8px" aria-hidden="true">
-            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.25 8.81 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.29 6.29l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-          </svg>
-          07 69 38 57 15
-        </a>
-      </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-vertical-text">Chauffeur Privé · Excellence</div>
+    <div class="hero-circle">
+      <div class="circle-stat"><div class="circle-num">7</div><div class="circle-label">Places</div></div>
+      <div class="circle-stat"><div class="circle-num">24/7</div><div class="circle-label">Disponible</div></div>
+      <div class="circle-stat"><div class="circle-num">IDF</div><div class="circle-label">Zone</div></div>
     </div>
+  </div>
+</section>
 
-    <div class="hero-scroll-indicator" aria-hidden="true">
-      <span class="hero-scroll-text">Découvrir</span>
-      <span class="hero-scroll-line"></span>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div class="section-marker">02 — Prestations</div>
+    <h2 class="services-title">NOS SERVICES</h2>
+    <p class="services-desc">Une gamme de services sur mesure, pensés pour s'adapter à chaque situation avec la même exigence.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-roman">I</div>
+      <h3 class="service-name">Transferts Aéroports</h3>
+      <p class="service-text">Prise en charge à domicile, suivi de vol en temps réel, attente incluse. Ponctualité absolue pour chaque envol.</p>
+      <div class="service-tags"><span class="tag">CDG</span><span class="tag">Orly</span><span class="tag">Beauvais</span></div>
     </div>
-  </section>
+    <div class="service-card reveal">
+      <div class="service-roman">II</div>
+      <h3 class="service-name">Transferts Paris</h3>
+      <p class="service-text">Gares, hôtels, restaurants, événements — votre chauffeur vous attend partout en Île-de-France.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-roman">III</div>
+      <h3 class="service-name">Mise à Disposition</h3>
+      <p class="service-text">Réservez votre chauffeur à l'heure pour une journée entière ou tout déplacement prolongé.</p>
+    </div>
+  </div>
+</section>
 
-
-  <!-- ===================== BANDE STATS ===================== -->
-  <div id="stats-band" aria-label="Chiffres clés">
-    <div class="stats-band-inner">
-      <div class="stat-bloc">
-        <span class="stat-val">7</span>
-        <span class="stat-lbl">Places confort</span>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-bg-letter">T</div>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <div class="about-eyebrow">Votre Chauffeur</div>
+      <h2 class="about-title">L'excellence comme<br>standard</h2>
+      <p class="about-text">Professionnel du transport privé à Paris, Toufik met son expertise et son sens aigu du service au cœur de chaque trajet. Discrétion, ponctualité et confort sont les piliers de sa promesse.</p>
+      <blockquote class="about-quote">Chaque déplacement mérite une attention particulière. C'est ma vision du service haut de gamme.</blockquote>
+      <div class="about-signature">Toufik<small>Chauffeur Privé VTC — Paris</small></div>
+      <a href="#reservation" class="about-cta-link">Réserver</a>
+    </div>
+    <div class="about-right reveal">
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-box-num">7</div><div class="stat-box-label">Places</div></div>
+        <div class="stat-box"><div class="stat-box-num">24/7</div><div class="stat-box-label">Disponible</div></div>
+        <div class="stat-box"><div class="stat-box-num">IDF</div><div class="stat-box-label">Zone</div></div>
+        <div class="stat-box"><div class="stat-box-num">100%</div><div class="stat-box-label">Satisfaction</div></div>
       </div>
-      <div class="stat-bloc">
-        <span class="stat-val">3</span>
-        <span class="stat-lbl">Aéroports couverts</span>
-      </div>
-      <div class="stat-bloc">
-        <span class="stat-val">24/7</span>
-        <span class="stat-lbl">Disponibilité</span>
-      </div>
-      <div class="stat-bloc">
-        <span class="stat-val">100%</span>
-        <span class="stat-lbl">Satisfaction clients</span>
+      <div class="contact-card">
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <a href="tel:0769385715">07 69 38 57 15</a>
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="#">Paris &amp; Île-de-France</a>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
+<!-- FLEET -->
+<section class="fleet" id="fleet">
+  <div class="fleet-header">
+    <div class="section-marker">04 — Véhicule</div>
+    <h2 class="fleet-title">MERCEDES CLASSE V</h2>
+    <div class="fleet-divider"></div>
+  </div>
+  <div class="car-wrapper reveal">
+    <svg class="car-svg" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bodyMin" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#8B7355"/>
+          <stop offset="60%" stop-color="#6B5040"/>
+          <stop offset="100%" stop-color="#4A3728"/>
+        </linearGradient>
+        <linearGradient id="glassMin" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#C4A882" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#4A3728" stop-opacity="0.7"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="400" cy="262" rx="310" ry="12" fill="rgba(74,55,40,0.2)"/>
+      <rect x="80" y="140" width="640" height="100" rx="6" fill="url(#bodyMin)"/>
+      <path d="M200 140 Q220 72 300 70 L520 70 Q590 72 610 140Z" fill="url(#bodyMin)"/>
+      <path d="M218 138 Q230 84 302 82 L478 82 Q546 84 556 138Z" fill="url(#glassMin)" opacity="0.95"/>
+      <line x1="342" y1="82" x2="332" y2="138" stroke="#C4A882" stroke-width="1.2" opacity="0.5"/>
+      <line x1="422" y1="82" x2="432" y2="138" stroke="#C4A882" stroke-width="1.2" opacity="0.5"/>
+      <line x1="490" y1="84" x2="498" y2="138" stroke="#C4A882" stroke-width="1.2" opacity="0.5"/>
+      <path d="M82 166 L718 166" stroke="#C4A882" stroke-width="1" opacity="0.4"/>
+      <rect x="82" y="160" width="20" height="16" rx="2" fill="#C4A882" opacity="0.6"/>
+      <ellipse cx="716" cy="172" rx="16" ry="9" fill="#C4A882" opacity="0.7"/>
+      <circle cx="210" cy="242" r="37" fill="#E8E4E0" stroke="#8B7355" stroke-width="1.5"/>
+      <circle cx="210" cy="242" r="25" fill="#D4CEC8" stroke="#8B7355" stroke-width="1"/>
+      <circle cx="210" cy="242" r="9" fill="#8B7355"/>
+      <line x1="210" y1="217" x2="210" y2="267" stroke="#8B7355" stroke-width="1.5" opacity="0.5"/>
+      <line x1="185" y1="242" x2="235" y2="242" stroke="#8B7355" stroke-width="1.5" opacity="0.5"/>
+      <line x1="193" y1="224" x2="227" y2="260" stroke="#8B7355" stroke-width="1" opacity="0.3"/>
+      <line x1="227" y1="224" x2="193" y2="260" stroke="#8B7355" stroke-width="1" opacity="0.3"/>
+      <circle cx="590" cy="242" r="37" fill="#E8E4E0" stroke="#8B7355" stroke-width="1.5"/>
+      <circle cx="590" cy="242" r="25" fill="#D4CEC8" stroke="#8B7355" stroke-width="1"/>
+      <circle cx="590" cy="242" r="9" fill="#8B7355"/>
+      <line x1="590" y1="217" x2="590" y2="267" stroke="#8B7355" stroke-width="1.5" opacity="0.5"/>
+      <line x1="565" y1="242" x2="615" y2="242" stroke="#8B7355" stroke-width="1.5" opacity="0.5"/>
+      <line x1="573" y1="224" x2="607" y2="260" stroke="#8B7355" stroke-width="1" opacity="0.3"/>
+      <line x1="607" y1="224" x2="573" y2="260" stroke="#8B7355" stroke-width="1" opacity="0.3"/>
+      <circle cx="400" cy="140" r="11" fill="none" stroke="#C4A882" stroke-width="1.2"/>
+      <line x1="400" y1="130" x2="400" y2="129" stroke="#C4A882" stroke-width="2"/>
+      <line x1="390.5" y1="145" x2="389.5" y2="146" stroke="#C4A882" stroke-width="2"/>
+      <line x1="409.5" y1="145" x2="410.5" y2="146" stroke="#C4A882" stroke-width="2"/>
+    </svg>
+  </div>
+  <div class="fleet-specs reveal">
+    <div class="spec-row"><span class="spec-label">Passagers</span><span class="spec-value">7 Places</span></div>
+    <div class="spec-row"><span class="spec-label">Climatisation</span><span class="spec-value">Oui</span></div>
+    <div class="spec-row"><span class="spec-label">Revêtement</span><span class="spec-value">Cuir</span></div>
+    <div class="spec-row"><span class="spec-label">Connectivité</span><span class="spec-value">Wi-Fi</span></div>
+  </div>
+</section>
 
-  <!-- ===================== SERVICES ===================== -->
-  <section id="services" aria-label="Nos services">
-
-    <span class="section-badge">Prestations</span>
-    <div class="rule rule-center" aria-hidden="true">
-      <span class="rule-line"></span>
-      <span class="rule-diamond"></span>
-      <span class="rule-line"></span>
-    </div>
-    <h2 class="section-title">Nos <em>Services</em></h2>
-    <p style="max-width:500px;margin:0 auto;color:var(--text-light);font-size:0.88rem;line-height:1.9">
-      Un service personnalisé, ponctuel et discret pour tous vos déplacements en Île-de-France et au-delà.
-    </p>
-
-    <div class="services-grid">
-
-      <article class="service-card reveal">
-        <div class="service-num" aria-hidden="true">01</div>
-        <h3>Transferts Aéroports</h3>
-        <p>Prise en charge à domicile, suivi de vol en temps réel, attente incluse. Ponctualité garantie à chaque envol et atterrissage.</p>
-        <div class="service-tags">
-          <span class="service-tag">CDG</span>
-          <span class="service-tag">Orly</span>
-          <span class="service-tag">Beauvais</span>
-        </div>
-      </article>
-
-      <article class="service-card reveal">
-        <div class="service-num" aria-hidden="true">02</div>
-        <h3>Transferts Paris</h3>
-        <p>Gares, hôtels, restaurants, salles d'événements — votre chauffeur vous attend où vous en avez besoin, avec discrétion et élégance.</p>
-        <div class="service-tags">
-          <span class="service-tag">Gare du Nord</span>
-          <span class="service-tag">Lyon</span>
-          <span class="service-tag">Montparnasse</span>
-        </div>
-      </article>
-
-      <article class="service-card reveal">
-        <div class="service-num" aria-hidden="true">03</div>
-        <h3>Mise à Disposition</h3>
-        <p>Votre chauffeur dédié pour la journée ou la demi-journée. Idéal pour les événements d'entreprise, voyages d'affaires ou occasions spéciales.</p>
-        <div class="service-tags">
-          <span class="service-tag">Demi-journée</span>
-          <span class="service-tag">Journée</span>
-          <span class="service-tag">Événements</span>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-
-  <!-- ===================== À PROPOS ===================== -->
-  <section id="apropos" aria-label="À propos de Toufik">
-    <div class="apropos-inner">
-
-      <div class="apropos-text">
-        <span class="section-badge">Le Chauffeur</span>
-        <div class="rule" aria-hidden="true">
-          <span class="rule-line" style="flex:0 0 40px"></span>
-          <span class="rule-diamond"></span>
-        </div>
-        <h2 class="section-title">L'Excellence <em>comme standard</em></h2>
-        <p>
-          Toufik est chauffeur privé VTC certifié, fort d'une expérience reconnue dans le transport haut de gamme à Paris et en Île-de-France. Sa mission : vous offrir un trajet fluide, confortable et sans surprise.
-        </p>
-        <p>
-          Chaque détail compte — de la ponctualité à la présentation du véhicule, en passant par la discrétion et la courtoisie. Vous montez, vous vous détendez. Le reste, c'est son affaire.
-        </p>
-
-        <div class="apropos-signature">
-          <span class="sig-name">Toufik</span>
-          <span class="sig-role">Chauffeur Privé Certifié · Paris</span>
-        </div>
-      </div>
-
-      <div class="apropos-aside">
-
-        <div class="aside-item">
-          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <circle cx="24" cy="24" r="20"/>
-            <path d="M24 14v10l6 4"/>
-          </svg>
-          <div class="aside-body">
-            <p class="aside-title">Ponctualité Garantie</p>
-            <p class="aside-desc">Suivi en temps réel des vols et anticipation du trafic pour une présence sans faille.</p>
-          </div>
-        </div>
-
-        <div class="aside-item">
-          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <path d="M24 4l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z"/>
-          </svg>
-          <div class="aside-body">
-            <p class="aside-title">Service Premium</p>
-            <p class="aside-desc">Eau fraîche, chargeurs, ambiance soignée — chaque trajet est une expérience à part entière.</p>
-          </div>
-        </div>
-
-        <div class="aside-item">
-          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <rect x="8" y="8" width="32" height="32" rx="2"/>
-            <path d="M16 24h16M16 18h10M16 30h12"/>
-          </svg>
-          <div class="aside-body">
-            <p class="aside-title">Discrétion Absolue</p>
-            <p class="aside-desc">Confidentialité totale, pour vos déplacements professionnels comme personnels.</p>
-          </div>
-        </div>
-
-        <div class="aside-item">
-          <svg class="aside-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <path d="M6 24 C6 13 13 6 24 6 C35 6 42 13 42 24"/>
-            <path d="M6 24 C6 35 13 42 24 42 C35 42 42 35 42 24"/>
-            <path d="M14 14 L34 34M34 14 L14 34"/>
-          </svg>
-          <div class="aside-body">
-            <p class="aside-title">Disponible 24h/24</p>
-            <p class="aside-desc">Early morning, late night — Toufik s'adapte à vos horaires, sans exception.</p>
-          </div>
-        </div>
-
+<!-- RESERVATION -->
+<section class="reservation" id="reservation">
+  <div class="reservation-inner">
+    <div class="res-left reveal">
+      <div class="section-marker">05 — Réservation</div>
+      <h2 class="res-title">VOTRE<br>TRAJET</h2>
+      <p class="res-info">Planifiez votre déplacement. Nous vous confirmons dans les plus brefs délais.</p>
+      <div class="res-contact">
+        <a href="tel:0769385715">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          07 69 38 57 15
+        </a>
+        <a href="mailto:adouditoufik@gmail.com">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          adouditoufik@gmail.com
+        </a>
       </div>
     </div>
-  </section>
-
-
-  <!-- ===================== FLOTTE ===================== -->
-  <section id="flotte" aria-label="Notre flotte">
-
-    <span class="section-badge">Véhicule</span>
-    <div class="rule rule-center" aria-hidden="true">
-      <span class="rule-line"></span>
-      <span class="rule-diamond"></span>
-      <span class="rule-line"></span>
-    </div>
-    <h2 class="section-title">Notre <em>Flotte</em></h2>
-    <p style="max-width:480px;margin:0 auto;color:var(--text-light);font-size:0.88rem;line-height:1.9">
-      Un véhicule grand luxe soigneusement entretenu, adapté à vos déplacements de groupe ou en famille.
-    </p>
-
-    <div class="flotte-card">
-
-      <div class="flotte-header">
-        <!-- Mercedes Van SVG stylisé -->
-        <svg class="car-svg" viewBox="0 0 620 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Mercedes Classe V">
-          <!-- Carrosserie principale -->
-          <path d="M60 140 L60 100 C60 78 75 65 110 60 L160 52 C185 48 240 44 310 44 C380 44 435 48 470 55 L520 65 C545 72 560 85 562 105 L562 140 Z"
-            fill="#E8E4E0" stroke="#C4A882" stroke-width="1.5"/>
-          <!-- Toit arrière légèrement incliné -->
-          <path d="M310 44 C360 44 430 46 470 55 L520 65 C545 72 558 82 562 100"
-            fill="none" stroke="#8B7355" stroke-width="1"/>
-          <!-- Vitres latérales avant -->
-          <rect x="110" y="68" width="90" height="50" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
-          <!-- Vitres latérales milieu -->
-          <rect x="208" y="62" width="90" height="56" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
-          <!-- Vitres latérales arrière -->
-          <rect x="306" y="58" width="90" height="56" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
-          <!-- Vitres latérales arrière 2 -->
-          <rect x="404" y="58" width="80" height="54" rx="2" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
-          <!-- Pare-brise -->
-          <path d="M60 100 L108 68 L110 118 L60 118 Z" fill="#D0CBC4" stroke="#8B7355" stroke-width="1"/>
-          <!-- Feux avant -->
-          <ellipse cx="68" cy="110" rx="8" ry="12" fill="#C4A882" opacity="0.5"/>
-          <!-- Feux arrière -->
-          <rect x="554" y="95" width="10" height="30" rx="1" fill="#C4A882" opacity="0.5"/>
-          <!-- Bas de caisse -->
-          <path d="M60 140 L562 140" stroke="#8B7355" stroke-width="1.5"/>
-          <!-- Jantes avant -->
-          <circle cx="140" cy="155" r="24" fill="#D8D2CB" stroke="#8B7355" stroke-width="1.5"/>
-          <circle cx="140" cy="155" r="14" fill="#E8E4E0" stroke="#C4A882" stroke-width="1"/>
-          <circle cx="140" cy="155" r="5" fill="#C4A882"/>
-          <!-- Jantes arrière -->
-          <circle cx="460" cy="155" r="24" fill="#D8D2CB" stroke="#8B7355" stroke-width="1.5"/>
-          <circle cx="460" cy="155" r="14" fill="#E8E4E0" stroke="#C4A882" stroke-width="1"/>
-          <circle cx="460" cy="155" r="5" fill="#C4A882"/>
-          <!-- Détails jantes : rayons -->
-          <line x1="140" y1="141" x2="140" y2="169" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="126" y1="155" x2="154" y2="155" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="130" y1="145" x2="150" y2="165" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="150" y1="145" x2="130" y2="165" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="460" y1="141" x2="460" y2="169" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="446" y1="155" x2="474" y2="155" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="450" y1="145" x2="470" y2="165" stroke="#8B7355" stroke-width="0.8"/>
-          <line x1="470" y1="145" x2="450" y2="165" stroke="#8B7355" stroke-width="0.8"/>
-          <!-- Bas de caisse relief -->
-          <path d="M60 138 L562 138 L562 144 L60 144 Z" fill="#D8D2CB"/>
-          <!-- Étoile Mercedes sobre -->
-          <circle cx="310" cy="44" r="8" fill="none" stroke="#C4A882" stroke-width="1"/>
-          <line x1="310" y1="36" x2="310" y2="44" stroke="#C4A882" stroke-width="0.8"/>
-          <line x1="310" y1="44" x2="303" y2="50" stroke="#C4A882" stroke-width="0.8"/>
-          <line x1="310" y1="44" x2="317" y2="50" stroke="#C4A882" stroke-width="0.8"/>
-        </svg>
-      </div>
-
-      <div class="flotte-body">
-        <div>
-          <p class="flotte-model">Mercedes Classe V</p>
-          <p class="flotte-class">Van Premium · 7 Places</p>
-          <div class="flotte-features">
-            <span class="flotte-feature">7 Passagers</span>
-            <span class="flotte-feature">Grand Coffre</span>
-            <span class="flotte-feature">Climatisation</span>
-            <span class="flotte-feature">Wifi</span>
-            <span class="flotte-feature">Eau fraîche</span>
-            <span class="flotte-feature">Chargeurs USB</span>
-            <span class="flotte-feature">Sièges cuir</span>
-          </div>
-        </div>
-        <div class="flotte-cta-area">
-          <a href="#reservation" class="btn btn-solid">Réserver ce véhicule</a>
-        </div>
-      </div>
-    </div>
-
-    <p class="flotte-note">
-      Véhicule régulièrement entretenu &amp; désinfecté — votre confort est notre priorité.
-    </p>
-
-  </section>
-
-
-  <!-- ===================== RÉSERVATION ===================== -->
-  <section id="reservation" aria-label="Formulaire de réservation">
-
-    <span class="section-badge">Réserver</span>
-    <div class="rule rule-center" aria-hidden="true">
-      <span class="rule-line"></span>
-      <span class="rule-diamond"></span>
-      <span class="rule-line"></span>
-    </div>
-    <h2 class="section-title">Votre <em>Trajet</em></h2>
-    <p style="max-width:480px;margin:0 auto;color:var(--text-mid);font-size:0.88rem;line-height:1.9;position:relative;z-index:1">
-      Remplissez le formulaire ci-dessous et recevez une confirmation sous 30 minutes.
-    </p>
-
-    <div class="resa-form-wrap">
+    <div class="res-form reveal">
       <form action="mailto:adouditoufik@gmail.com" method="post" enctype="text/plain">
-        <div class="form-grid">
-
-          <div class="form-field">
-            <label for="prenom">Prénom</label>
-            <input type="text" id="prenom" name="Prénom" placeholder="Votre prénom" required />
-          </div>
-
-          <div class="form-field">
-            <label for="nom">Nom</label>
-            <input type="text" id="nom" name="Nom" placeholder="Votre nom" required />
-          </div>
-
-          <div class="form-field">
-            <label for="tel">Téléphone</label>
-            <input type="tel" id="tel" name="Téléphone" placeholder="06 XX XX XX XX" required />
-          </div>
-
-          <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="Email" placeholder="votre@email.com" />
-          </div>
-
-          <div class="form-field">
-            <label for="service">Type de service</label>
-            <select id="service" name="Service">
-              <option value="">Choisir...</option>
-              <option value="Transfert aéroport CDG">Transfert aéroport CDG</option>
-              <option value="Transfert aéroport Orly">Transfert aéroport Orly</option>
-              <option value="Transfert aéroport Beauvais">Transfert aéroport Beauvais</option>
-              <option value="Transfert Paris">Transfert Paris</option>
-              <option value="Mise à disposition">Mise à disposition</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="passagers">Nombre de passagers</label>
-            <select id="passagers" name="Passagers">
-              <option value="1">1 passager</option>
-              <option value="2">2 passagers</option>
-              <option value="3">3 passagers</option>
-              <option value="4">4 passagers</option>
-              <option value="5">5 passagers</option>
-              <option value="6">6 passagers</option>
-              <option value="7">7 passagers</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="Date" required />
-          </div>
-
-          <div class="form-field">
-            <label for="heure">Heure de prise en charge</label>
-            <input type="time" id="heure" name="Heure" required />
-          </div>
-
-          <div class="form-field full">
-            <label for="depart">Adresse de départ</label>
-            <input type="text" id="depart" name="Départ" placeholder="Rue, ville..." required />
-          </div>
-
-          <div class="form-field full">
-            <label for="arrivee">Adresse d'arrivée</label>
-            <input type="text" id="arrivee" name="Arrivée" placeholder="Rue, ville, aéroport..." required />
-          </div>
-
-          <div class="form-field full">
-            <label for="message">Informations complémentaires</label>
-            <textarea id="message" name="Message" placeholder="Vol, bagages, demandes particulières..."></textarea>
-          </div>
-
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" type="text" name="nom" required/></div>
+          <div class="form-group"><label class="form-label">Téléphone *</label><input class="form-input" type="tel" name="tel" required/></div>
         </div>
-        <button type="submit" class="btn-submit">Envoyer la demande</button>
+        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" name="email" required/></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Service *</label>
+            <select class="form-select" name="service" required>
+              <option value="">Choisir...</option>
+              <option>Aéroport CDG</option><option>Aéroport Orly</option>
+              <option>Aéroport Beauvais</option><option>Transfert Paris</option>
+              <option>Mise à Disposition</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Passagers</label>
+            <select class="form-select" name="passagers">
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option><option>7</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Date *</label><input class="form-input" type="date" name="date" required/></div>
+          <div class="form-group"><label class="form-label">Heure *</label><input class="form-input" type="time" name="heure" required/></div>
+        </div>
+        <div class="form-group"><label class="form-label">Départ *</label><input class="form-input" type="text" name="depart" required/></div>
+        <div class="form-group"><label class="form-label">Destination *</label><input class="form-input" type="text" name="destination" required/></div>
+        <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" name="notes" rows="3"></textarea></div>
+        <button type="submit" class="form-submit">Envoyer la demande</button>
       </form>
     </div>
+  </div>
+</section>
 
-    <p class="resa-alt">
-      Préférez un contact direct ?
-      <a href="tel:+33769385715">07 69 38 57 15</a>
-      &nbsp;—&nbsp;
-      <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
-    </p>
-
-  </section>
-
-
-  <!-- ===================== CONTACT ===================== -->
-  <section id="contact" aria-label="Contact">
-
-    <span class="section-badge">Nous Joindre</span>
-    <div class="rule rule-center" style="justify-content:center;margin-left:auto;margin-right:auto;width:fit-content;" aria-hidden="true">
-      <span class="rule-line" style="background:rgba(196,168,130,0.3)"></span>
-      <span class="rule-diamond"></span>
-      <span class="rule-line" style="background:rgba(196,168,130,0.3)"></span>
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-header">
+    <div class="section-marker" style="justify-content:center">Contact</div>
+    <h2 class="contact-title">NOUS CONTACTER</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-block">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <div class="contact-block-label">Téléphone</div>
+      <div class="contact-block-value"><a href="tel:0769385715">07 69 38 57 15</a></div>
     </div>
-    <h2 class="section-title" style="color:var(--perle)">Nous <em style="color:var(--accent)">Contacter</em></h2>
-
-    <div class="contact-grid">
-
-      <div class="contact-item">
-        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M40 31.68v5.5a3.67 3.67 0 01-4 3.67A36.3 36.3 0 017.15 25.17 35.79 35.79 0 011.5 9.33 3.67 3.67 0 015.14 5.33h5.5a3.67 3.67 0 013.66 3.15 23.55 23.55 0 001.29 5.15 3.67 3.67 0 01-.82 3.87l-2.33 2.33a29.32 29.32 0 0011.53 11.53l2.33-2.33a3.67 3.67 0 013.87-.82 23.55 23.55 0 005.15 1.29 3.67 3.67 0 013.18 3.68z"/>
-        </svg>
-        <span class="contact-item-label">Téléphone</span>
-        <div class="contact-item-value">
-          <a href="tel:+33769385715">07 69 38 57 15</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <rect x="6" y="10" width="36" height="28" rx="3"/>
-          <path d="M6 14l18 12 18-12"/>
-        </svg>
-        <span class="contact-item-label">Email</span>
-        <div class="contact-item-value" style="font-size:0.9rem">
-          <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <svg class="contact-item-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-          <path d="M24 6C17 6 11 12 11 19c0 10.5 13 25 13 25s13-14.5 13-25c0-7-6-13-13-13z"/>
-          <circle cx="24" cy="19" r="4"/>
-        </svg>
-        <span class="contact-item-label">Zone de service</span>
-        <div class="contact-item-value">Paris &amp; Île-de-France</div>
-      </div>
-
+    <div class="contact-block">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <div class="contact-block-label">Email</div>
+      <div class="contact-block-value"><a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a></div>
     </div>
-
-  </section>
-
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer>
-    <div class="footer-rule"></div>
-    <div class="footer-inner">
-      <span class="footer-brand">Moove &amp; Dream</span>
-      <p class="footer-copy">
-        &copy; 2025 Moove &amp; Dream — Private Driver Toufik<br>
-        VTC Paris &amp; Île-de-France
-      </p>
-      <ul class="footer-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#reservation">Réservation</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    <div class="contact-block">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <div class="contact-block-label">Zone</div>
+      <div class="contact-block-value">Paris &amp; IDF</div>
     </div>
-  </footer>
-
+  </div>
+</section>
+<footer>
+  <div class="footer-brand">MOOVE &amp; DREAM</div>
+  <div class="footer-copy">© 2024 Moove &amp; Dream Private Driver</div>
+  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGU</a></div>
+</footer>
+<script>
+var t=document.getElementById('navToggle'),m=document.getElementById('navMobile'),c=document.getElementById('navClose');
+t.addEventListener('click',function(){m.classList.add('open')});
+c.addEventListener('click',function(){m.classList.remove('open')});
+function closeNav(){m.classList.remove('open')}
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(r){io.observe(r)});
+</script>
 </body>
 </html>
