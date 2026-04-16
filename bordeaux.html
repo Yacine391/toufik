@@ -1,802 +1,851 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Moove & Dream — Le Voyage d'Excellence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bx:#6B1229;--bx-deep:#3D0A18;--bx-mid:#8A1933;
-  --cashmere:#C4956A;--ebony:#1A1008;--ebony-soft:#231710;
-  --gold:#B8962E;--gold-light:#D4AF50;
-  --ivory:#F7F0E6;--ivory-dim:rgba(247,240,230,0.7);
-}
-html{scroll-behavior:smooth;font-size:16px}
-body{
-  font-family:'Raleway',sans-serif;font-weight:300;
-  background:var(--ebony);color:var(--ivory);
-  overflow-x:hidden;line-height:1.75;
-}
-/* ── GRAIN + TEXTURE ── */
-body::before{
-  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
-  opacity:0.042;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-/* ── FLOATING NAV ── */
-.nav{
-  position:fixed;top:20px;left:50%;transform:translateX(-50%);
-  z-index:1000;width:calc(100% - 2.5rem);max-width:820px;
-  background:rgba(26,16,8,0.82);
-  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
-  border:1px solid rgba(184,150,46,0.28);
-  border-radius:6px;
-  padding:0 1.75rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:54px;
-}
-.nav-brand{
-  font-family:'Libre Baskerville',serif;
-  font-style:italic;font-size:1.1rem;font-weight:400;
-  color:var(--cashmere);letter-spacing:0.02em;white-space:nowrap;
-}
-.nav-links{display:flex;gap:1.8rem;align-items:center}
-.nav-links a{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
-  color:rgba(247,240,230,0.55);text-decoration:none;transition:color 0.25s;
-}
-.nav-links a:hover{color:var(--gold)}
-.nav-cta{
-  font-family:'Raleway',sans-serif;font-weight:500;
-  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--bx),var(--cashmere));
-  color:var(--ivory);border:none;
-  border-radius:3px;padding:0.6rem 1.3rem;
-  cursor:pointer;transition:opacity 0.25s;
-}
-.nav-cta:hover{opacity:0.85}
-.nav-toggle{
-  display:none;background:none;border:none;
-  cursor:pointer;padding:6px;
-  flex-direction:column;gap:5px;align-items:center;
-}
-.nav-toggle span{display:block;width:20px;height:1px;background:var(--ivory);transition:0.3s}
-.nav-mobile{
-  display:none;position:fixed;inset:0;z-index:999;
-  background:var(--ebony);
-  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
-}
-.nav-mobile.open{display:flex}
-.nav-mobile a{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:1rem;letter-spacing:0.3em;text-transform:uppercase;
-  color:var(--ivory-dim);text-decoration:none;
-}
-.nav-mobile a:hover{color:var(--gold)}
-.nav-mobile .close-btn{
-  position:absolute;top:28px;right:28px;
-  background:none;border:none;color:var(--gold);
-  font-size:1.4rem;cursor:pointer;
-}
-/* ── HERO ── */
-.hero{
-  min-height:100vh;
-  background:radial-gradient(ellipse 80% 70% at 40% 50%, var(--bx) 0%, var(--bx-deep) 45%, var(--ebony) 100%);
-  display:grid;grid-template-columns:1.15fr 0.85fr;
-  position:relative;overflow:hidden;
-}
-/* Gold diagonal texture */
-.hero::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(
-    45deg,
-    rgba(184,150,46,0.025) 0px,
-    rgba(184,150,46,0.025) 1px,
-    transparent 1px, transparent 12px
-  );
-}
-.hero-col-left{
-  position:absolute;left:4rem;top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom, transparent, rgba(184,150,46,0.3), transparent);
-}
-.hero-col-right{
-  position:absolute;right:4rem;top:0;bottom:0;width:1px;
-  background:linear-gradient(to bottom, transparent, rgba(184,150,46,0.15), transparent);
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:9rem 3rem 5rem 5.5rem;
-  position:relative;z-index:2;
-}
-.hero-tag{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:0.56rem;letter-spacing:0.5em;text-transform:uppercase;
-  color:rgba(247,240,230,0.4);margin-bottom:2.5rem;
-  display:flex;align-items:center;gap:1rem;
-}
-.hero-tag::before{content:'—';color:var(--gold)}
-.hero-tag::after{content:'—';color:var(--gold)}
-.hero-h1{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(3rem,6.5vw,6rem);
-  font-weight:400;line-height:0.95;
-  color:var(--ivory);margin-bottom:0.3rem;
-}
-.hero-h1 .italic-line{
-  font-style:italic;
-  background:linear-gradient(135deg, var(--cashmere), var(--gold), var(--ivory));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  animation:shimmer 4s ease-in-out infinite;
-  background-size:200% auto;
-}
-@keyframes shimmer{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-.hero-driver{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:clamp(1rem,2.5vw,2rem);
-  letter-spacing:0.42em;text-transform:uppercase;
-  color:var(--cashmere);margin-bottom:1.5rem;
-}
-.hero-hr{
-  width:60px;height:1px;
-  background:linear-gradient(to right, var(--gold), transparent);
-  border:none;margin:1.5rem 0;
-}
-.hero-slogan{
-  font-family:'Libre Baskerville',serif;
-  font-style:italic;font-size:1.1rem;
-  color:rgba(247,240,230,0.65);margin-bottom:2.5rem;
-}
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{
-  font-family:'Raleway',sans-serif;font-weight:500;
-  font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--bx),var(--cashmere));
-  color:var(--ivory);border:none;padding:1rem 2.2rem;
-  cursor:pointer;text-decoration:none;display:inline-block;
-  transition:opacity 0.25s,transform 0.2s;
-  position:relative;overflow:hidden;
-}
-.btn-primary::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.1) 50%,transparent 60%);
-  transform:translateX(-100%);transition:transform 0.5s;
-}
-.btn-primary:hover::after{transform:translateX(100%)}
-.btn-primary:hover{transform:translateY(-2px)}
-.btn-outline{
-  font-family:'Raleway',sans-serif;font-weight:300;
-  font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;
-  background:transparent;color:var(--ivory);
-  border:1px solid rgba(247,240,230,0.3);padding:1rem 2.2rem;
-  cursor:pointer;text-decoration:none;display:inline-block;
-  transition:border-color 0.25s,transform 0.2s;
-}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-.hero-right{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:9rem 3rem 5rem;position:relative;z-index:2;gap:2rem;
-}
-.hero-ornament{
-  width:180px;height:180px;position:relative;
-  display:flex;align-items:center;justify-content:center;
-}
-.hero-ornament::before{
-  content:'';position:absolute;inset:0;border-radius:50%;
-  border:1px solid rgba(184,150,46,0.3);
-}
-.hero-ornament::after{
-  content:'';position:absolute;inset:20px;border-radius:50%;
-  border:1px solid rgba(184,150,46,0.15);
-}
-.ornament-inner{
-  width:80px;height:80px;
-  background:linear-gradient(135deg, rgba(184,150,46,0.2), rgba(107,18,41,0.4));
-  clip-path:polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  animation:pulse 3s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:0.7;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
-.hero-right-stats{
-  display:flex;flex-direction:column;gap:1.5rem;
-  width:100%;max-width:200px;
-}
-.hero-stat{
-  display:flex;justify-content:space-between;align-items:baseline;
-  border-bottom:1px solid rgba(184,150,46,0.15);
-  padding-bottom:0.75rem;
-}
-.hero-stat-num{
-  font-family:'Libre Baskerville',serif;
-  font-size:2rem;font-weight:400;color:var(--gold);
-}
-.hero-stat-label{
-  font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
-  color:rgba(247,240,230,0.35);font-weight:200;
-}
-/* ── SECTION UTILS ── */
-.section-eyebrow{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:0.56rem;letter-spacing:0.42em;text-transform:uppercase;
-  color:var(--gold);display:flex;align-items:center;gap:0.75rem;
-  margin-bottom:1.25rem;
-}
-.section-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold)}
-/* ── SERVICES ── */
-.services{
-  padding:7rem 4rem;
-  background:var(--ebony-soft);
-  position:relative;
-}
-.services::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(45deg,rgba(184,150,46,0.015) 0px,rgba(184,150,46,0.015) 1px,transparent 1px,transparent 12px);
-}
-.services-header{margin-bottom:4rem;position:relative}
-.services-title{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(2rem,4vw,3.2rem);font-weight:400;font-style:italic;
-  color:var(--ivory);line-height:1.2;margin-bottom:0.5rem;
-}
-.services-desc{
-  font-size:0.8rem;font-weight:200;color:var(--ivory-dim);
-  max-width:400px;line-height:1.9;
-}
-.services-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1px;background:rgba(184,150,46,0.12);
-  position:relative;
-}
-.service-card{
-  background:var(--ebony-soft);
-  padding:3rem 2.5rem;cursor:pointer;
-  transition:background 0.35s;position:relative;overflow:hidden;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;
-  height:2px;
-  background:linear-gradient(to right, var(--bx), var(--gold));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s ease;
-}
-.service-card:hover::before{transform:scaleX(1)}
-.service-card:hover{background:rgba(107,18,41,0.15)}
-.service-icon{
-  width:36px;height:36px;margin-bottom:2rem;
-  color:var(--cashmere);
-}
-.service-name{
-  font-family:'Libre Baskerville',serif;
-  font-size:1.2rem;font-weight:400;
-  color:var(--ivory);margin-bottom:1rem;
-}
-.service-text{
-  font-size:0.78rem;font-weight:200;line-height:1.9;
-  color:var(--ivory-dim);
-}
-.service-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem}
-.tag{
-  font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;
-  border:1px solid rgba(184,150,46,0.3);color:var(--cashmere);
-  padding:0.25rem 0.65rem;font-weight:300;
-}
-/* ── ABOUT ── */
-.about{
-  padding:7rem 4rem;
-  background:linear-gradient(165deg, var(--bx-deep) 0%, var(--bx) 60%, var(--bx-deep) 100%);
-  position:relative;overflow:hidden;
-}
-.about::after{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:repeating-linear-gradient(45deg,rgba(184,150,46,0.02) 0px,rgba(184,150,46,0.02) 1px,transparent 1px,transparent 10px);
-}
-.about-monogram{
-  position:absolute;right:-3rem;top:50%;transform:translateY(-50%);
-  font-family:'Libre Baskerville',serif;
-  font-size:26rem;font-weight:700;font-style:italic;
-  color:rgba(247,240,230,0.04);line-height:1;
-  user-select:none;pointer-events:none;
-}
-.about-grid{
-  display:grid;grid-template-columns:1.2fr 0.8fr;
-  gap:5rem;align-items:start;position:relative;z-index:1;
-}
-.about-title{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;font-style:italic;
-  color:var(--ivory);line-height:1.25;margin-bottom:2rem;
-}
-.about-text{
-  font-size:0.83rem;font-weight:200;line-height:1.95;
-  color:rgba(247,240,230,0.72);margin-bottom:1.5rem;
-}
-.about-signature{
-  font-family:'Libre Baskerville',serif;
-  font-size:1.05rem;font-style:italic;color:var(--cashmere);margin-top:2rem;
-}
-.about-signature small{
-  display:block;font-family:'Raleway',sans-serif;
-  font-style:normal;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;
-  color:rgba(247,240,230,0.35);font-weight:200;margin-top:0.25rem;
-}
-.about-cta-link{
-  display:inline-flex;align-items:center;gap:0.75rem;
-  font-family:'Raleway',sans-serif;font-size:0.62rem;
-  letter-spacing:0.2em;text-transform:uppercase;font-weight:400;
-  color:var(--gold);text-decoration:none;margin-top:2rem;transition:gap 0.3s;
-}
-.about-cta-link:hover{gap:1.25rem}
-.about-cta-link::after{content:'→'}
-.stats-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:1px;background:rgba(184,150,46,0.18);margin-bottom:2rem;
-}
-.stat-box{
-  background:rgba(107,18,41,0.4);
-  padding:2rem 1.25rem;text-align:center;
-}
-.stat-box-num{
-  font-family:'Libre Baskerville',serif;
-  font-size:2.5rem;font-weight:400;color:var(--gold);line-height:1;
-  animation:glow 3s ease-in-out infinite;
-}
-@keyframes glow{0%,100%{text-shadow:0 0 10px rgba(184,150,46,0.3)}50%{text-shadow:0 0 20px rgba(184,150,46,0.6)}}
-.stat-box-label{
-  font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;
-  color:rgba(247,240,230,0.4);font-weight:200;margin-top:0.4rem;
-}
-.contact-card{
-  border:1px solid rgba(184,150,46,0.2);padding:1.75rem;
-}
-.contact-item{
-  display:flex;align-items:center;gap:1rem;padding:0.7rem 0;
-  border-bottom:1px solid rgba(184,150,46,0.1);
-}
-.contact-item:last-child{border:none}
-.contact-item svg{flex-shrink:0;color:var(--gold)}
-.contact-item a{
-  font-size:0.78rem;font-weight:200;color:var(--ivory);
-  text-decoration:none;transition:color 0.2s;
-}
-.contact-item a:hover{color:var(--gold)}
-/* ── FLEET ── */
-.fleet{
-  padding:7rem 4rem;background:var(--ebony);position:relative;overflow:hidden;
-}
-.fleet-grain{
-  position:absolute;inset:0;pointer-events:none;opacity:0.08;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.fleet-inner{position:relative;z-index:1}
-.fleet-title{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(2rem,4vw,3.5rem);font-weight:400;font-style:italic;
-  color:var(--ivory);margin-bottom:0.5rem;
-}
-.fleet-title em{font-style:normal;color:var(--gold)}
-.fleet-hr{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);border:none;margin:1.25rem 0 3rem}
-.car-wrapper{max-width:700px;margin:0 auto}
-.car-svg{width:100%;height:auto}
-.fleet-specs{
-  display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-top:2.5rem;
-}
-.spec-pill{
-  display:flex;align-items:center;gap:0.6rem;
-  border:1px solid rgba(184,150,46,0.25);padding:0.5rem 1.1rem;
-}
-.spec-pill svg{color:var(--gold);flex-shrink:0}
-.spec-pill span{
-  font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
-  font-weight:300;color:rgba(247,240,230,0.6);
-}
-/* ── RESERVATION ── */
-.reservation{padding:7rem 4rem;background:var(--ebony-soft)}
-.reservation-inner{
-  display:grid;grid-template-columns:1fr 1.6fr;
-  gap:6rem;align-items:start;max-width:1100px;margin:0 auto;
-}
-.res-title{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;font-style:italic;
-  color:var(--ivory);line-height:1.25;margin-bottom:1.5rem;
-}
-.res-title span{font-style:normal;color:var(--cashmere)}
-.res-info{font-size:0.8rem;font-weight:200;line-height:1.85;color:var(--ivory-dim)}
-.res-contact{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(184,150,46,0.15)}
-.res-contact a{
-  display:flex;align-items:center;gap:0.75rem;
-  font-size:0.75rem;font-weight:300;color:var(--cashmere);
-  text-decoration:none;padding:0.5rem 0;transition:color 0.2s;
-}
-.res-contact a:hover{color:var(--gold)}
-.form-group{display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.75rem}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.form-row .form-group{margin-bottom:1.75rem}
-.form-label{
-  font-family:'Raleway',sans-serif;font-weight:200;
-  font-size:0.56rem;letter-spacing:0.3em;text-transform:uppercase;
-  color:var(--cashmere);
-}
-.form-input,.form-select,.form-textarea{
-  font-family:'Raleway',sans-serif;font-weight:200;font-size:0.85rem;
-  background:transparent;border:none;border-bottom:1px solid rgba(184,150,46,0.25);
-  padding:0.7rem 0;color:var(--ivory);outline:none;width:100%;
-  transition:border-color 0.25s;-webkit-appearance:none;appearance:none;
-}
-.form-input:focus,.form-select:focus{border-bottom-color:var(--gold)}
-.form-select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23B8962E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 0 center;padding-right:1.2rem;
-}
-.form-textarea{
-  resize:vertical;min-height:80px;
-  border:1px solid rgba(184,150,46,0.18);padding:0.75rem;
-  background:rgba(255,255,255,0.02);
-}
-.form-textarea:focus{border-color:var(--gold);outline:none}
-.form-input::placeholder,.form-textarea::placeholder{color:rgba(247,240,230,0.2)}
-.form-submit{
-  width:100%;
-  font-family:'Raleway',sans-serif;font-weight:600;
-  font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;
-  background:linear-gradient(135deg,var(--bx),var(--cashmere));
-  color:var(--ivory);border:none;padding:1.2rem;
-  cursor:pointer;margin-top:0.5rem;
-  transition:opacity 0.25s;position:relative;overflow:hidden;
-}
-.form-submit:hover{opacity:0.9}
-/* ── CONTACT ── */
-.contact{padding:5rem 4rem;background:var(--bx-deep)}
-.contact-header{text-align:center;margin-bottom:3.5rem}
-.contact-title{
-  font-family:'Libre Baskerville',serif;
-  font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:400;font-style:italic;
-  color:var(--ivory);
-}
-.contact-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  border:1px solid rgba(184,150,46,0.18);max-width:800px;margin:0 auto;
-}
-.contact-block{
-  padding:2.5rem 1.5rem;text-align:center;
-  border-right:1px solid rgba(184,150,46,0.18);
-  transition:background 0.3s;
-}
-.contact-block:last-child{border-right:none}
-.contact-block:hover{background:rgba(184,150,46,0.05)}
-.contact-block svg{color:var(--gold);margin-bottom:1.25rem}
-.contact-block-label{
-  font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;
-  font-weight:200;color:rgba(247,240,230,0.4);margin-bottom:0.6rem;
-}
-.contact-block-value{
-  font-family:'Libre Baskerville',serif;font-size:0.9rem;
-  font-weight:400;color:var(--ivory);
-}
-.contact-block-value a{color:inherit;text-decoration:none;transition:color 0.2s}
-.contact-block-value a:hover{color:var(--gold)}
-/* ── FOOTER ── */
-footer{
-  background:var(--ebony);padding:1.75rem 4rem;
-  display:flex;align-items:center;justify-content:space-between;
-  border-top:1px solid rgba(184,150,46,0.15);flex-wrap:wrap;gap:1rem;
-}
-.footer-brand{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--cashmere);font-size:1rem}
-.footer-copy{font-size:0.58rem;letter-spacing:0.12em;color:rgba(247,240,230,0.2);font-weight:200}
-.footer-links{display:flex;gap:1.5rem}
-.footer-links a{
-  font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;
-  color:rgba(247,240,230,0.2);text-decoration:none;font-weight:200;transition:color 0.2s;
-}
-.footer-links a:hover{color:var(--gold)}
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.in{opacity:1;transform:none}
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr}
-  .hero-right{display:none}
-  .hero-left{padding:8rem 2.5rem 5rem}
-  .hero-col-left,.hero-col-right{display:none}
-  .services{padding:5rem 2rem}
-  .services-grid{grid-template-columns:1fr}
-  .about{padding:5rem 2rem}
-  .about-grid{grid-template-columns:1fr;gap:3rem}
-  .fleet{padding:5rem 2rem}
-  .reservation{padding:5rem 2rem}
-  .reservation-inner{grid-template-columns:1fr;gap:3rem}
-  .contact{padding:4rem 2rem}
-  .contact-grid{grid-template-columns:1fr}
-  .contact-block{border-right:none;border-bottom:1px solid rgba(184,150,46,0.18)}
-  .contact-block:last-child{border-bottom:none}
-  footer{padding:1.5rem 2rem;flex-direction:column;text-align:center}
-}
-@media(max-width:768px){
-  .nav-links,.nav-cta{display:none}
-  .nav-toggle{display:flex}
-  .nav{padding:0 1.25rem}
-  .form-row{grid-template-columns:1fr}
-}
-@media(max-width:480px){
-  .hero-h1{font-size:2.8rem}
-  .hero-driver{font-size:0.9rem}
-  .hero-left{padding:7rem 1.5rem 4rem}
-  .hero-actions{flex-direction:column}
-  .btn-primary,.btn-outline{text-align:center}
-  .services,.about,.fleet,.reservation,.contact{padding:4rem 1.5rem}
-  .stats-grid{grid-template-columns:1fr 1fr}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moove & Dream — Private Driver Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #0D0806;
+      --vdark:    #1A0E08;
+      --dbord:    #3D0A18;
+      --bord:     #6B1229;
+      --caramel:  #C4956A;
+      --gold:     #B8962E;
+      --ivory:    #F7F0E6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--black);
+      color: var(--ivory);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    .shimmer {
+      background: linear-gradient(90deg, #C4956A, #B8962E, #F7F0E6, #C4956A, #B8962E);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 5s linear infinite;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(13,8,6,0.82);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(196,149,106,0.2);
+      border-radius: 60px;
+      padding: 0 2.5rem;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      white-space: nowrap;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--caramel);
+      margin-right: 2.5rem;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247,240,230,0.45);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--caramel); }
+
+    /* ── HERO — 3-column grid ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 72px 1fr 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Radial glow */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 55% 50%, rgba(107,18,41,0.55) 0%, rgba(61,10,24,0.3) 40%, transparent 75%);
+      pointer-events: none;
+    }
+    /* Fine diagonal pattern */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(184,150,46,0.025) 0px, rgba(184,150,46,0.025) 1px, transparent 1px, transparent 14px);
+      pointer-events: none;
+    }
+
+    .hero-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      border-right: 1px solid rgba(196,149,106,0.08);
+    }
+    .hero-side-right {
+      border-right: none;
+      border-left: 1px solid rgba(196,149,106,0.08);
+      flex-direction: column;
+      gap: 2.5rem;
+      padding: 2rem 0;
+      padding-top: 8rem;
+    }
+    .vertical-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 0.58rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.35);
+    }
+
+    .hero-stat-v {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      border-top: 1px solid rgba(196,149,106,0.15);
+      padding-top: 1.5rem;
+    }
+    .hero-stat-v .num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--caramel);
+      line-height: 1;
+    }
+    .hero-stat-v .lbl {
+      font-size: 0.52rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(247,240,230,0.3);
+      text-align: center;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .hero-center {
+      padding: 9rem 4rem 5rem;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.7);
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--caramel);
+      opacity: 0.5;
+    }
+
+    h1.hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(4rem, 8.5vw, 8.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.08em;
+    }
+    h1.hero-h1 .line-ivory { color: var(--ivory); }
+    h1.hero-h1 .line-small {
+      font-size: 0.42em;
+      font-weight: 400;
+      color: rgba(247,240,230,0.45);
+      display: block;
+      margin-top: 0.6rem;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--caramel), transparent);
+      margin: 2.2rem 0;
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(247,240,230,0.5);
+      line-height: 1.9;
+      max-width: 40ch;
+      margin-bottom: 3rem;
+    }
+
+    .hero-ctas { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .cta-primary {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1px solid var(--caramel);
+      color: var(--caramel);
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta-primary:hover { background: var(--caramel); color: var(--black); }
+    .cta-secondary {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(247,240,230,0.4);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .cta-secondary:hover { color: var(--caramel); }
+
+    /* ── SERVICES ── */
+    .services {
+      background: #0A0605;
+      padding: 7rem 0;
+    }
+    .services-header {
+      padding: 0 5vw;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.5);
+    }
+    .services-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1;
+    }
+    .services-count {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: rgba(196,149,106,0.3);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(196,149,106,0.1);
+    }
+    .service-card {
+      background: #0A0605;
+      padding: 3.5rem 2.5rem;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(107,18,41,0.28) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover { background: #0f0a08; }
+    .service-card:hover::before { opacity: 1; }
+    .card-num {
+      position: absolute;
+      top: 2.2rem;
+      right: 2.2rem;
+      font-size: 0.64rem;
+      letter-spacing: 0.32em;
+      color: rgba(184,150,46,0.3);
+    }
+    .card-rule {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+    .card-icon { margin-bottom: 1.5rem; }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .card-desc {
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: rgba(247,240,230,0.45);
+      line-height: 1.85;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      text-decoration: none;
+      transition: letter-spacing 0.3s;
+    }
+    .card-link:hover { letter-spacing: 0.28em; }
+
+    /* ── FLEET ── */
+    .fleet {
+      padding: 7rem 5vw;
+      background: var(--black);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+    }
+    .fleet-heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(3rem, 5.5vw, 4.8rem);
+      color: var(--ivory);
+      line-height: 0.95;
+      margin: 1.5rem 0 2rem;
+    }
+    .fleet-heading em { color: var(--caramel); font-style: italic; }
+    .fleet-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(247,240,230,0.5);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      max-width: 42ch;
+    }
+    .fleet-specs { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .fleet-specs li {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(247,240,230,0.55);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .fleet-specs li::before {
+      content: '—';
+      color: var(--caramel);
+      font-size: 0.7rem;
+    }
+    .fleet-svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust {
+      padding: 5rem 5vw;
+      background: var(--vdark);
+      text-align: center;
+      border-top: 1px solid rgba(196,149,106,0.08);
+      border-bottom: 1px solid rgba(196,149,106,0.08);
+    }
+    .trust-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      color: var(--ivory);
+      max-width: 700px;
+      margin: 0 auto 1rem;
+      line-height: 1.4;
+    }
+    .trust-rule {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 1.5rem auto 2rem;
+    }
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.6);
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      padding: 7rem 5vw;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(61,10,24,0.55) 0%, var(--black) 70%);
+    }
+    .booking-inner { max-width: 760px; margin: 0 auto; }
+    .booking-title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(2.8rem, 5.5vw, 4rem);
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .booking-tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: rgba(196,149,106,0.45);
+      margin-bottom: 3.5rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 2.5rem;
+    }
+    .form-group { margin-bottom: 2.2rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.55);
+      margin-bottom: 0.7rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(196,149,106,0.18);
+      color: var(--ivory);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 1rem 0;
+      outline: none;
+      transition: border-color 0.3s;
+      letter-spacing: 0.04em;
+      -webkit-appearance: none;
+    }
+    .form-group select option { background: var(--vdark); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-bottom-color: var(--caramel); }
+    .form-group textarea { resize: none; height: 80px; }
+    .form-submit {
+      margin-top: 1rem;
+      padding: 1.1rem 3.5rem;
+      background: var(--caramel);
+      color: var(--black);
+      border: none;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .form-submit:hover { background: var(--bord); color: var(--ivory); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080504;
+      border-top: 1px solid rgba(196,149,106,0.08);
+      padding: 4rem 5vw 2rem;
+    }
+    .footer-brand-center {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .footer-brand-center span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2rem;
+    }
+    .footer-line {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-size: 0.58rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(196,149,106,0.5);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(247,240,230,0.35);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: color 0.25s;
+    }
+    .footer-col a:hover { color: var(--caramel); }
+    .footer-copy {
+      text-align: center;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(247,240,230,0.15);
+      border-top: 1px solid rgba(196,149,106,0.07);
+      padding-top: 1.5rem;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-side { display: none; }
+      .hero-center { padding: 7rem 5vw 4rem; }
+      h1.hero-h1 { font-size: clamp(3.5rem, 13vw, 6.5rem); }
+      .services-grid { grid-template-columns: 1fr; }
+      .fleet { grid-template-columns: 1fr; }
+      .fleet-svg { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .trust-items { gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      h1.hero-h1 { font-size: clamp(3rem, 16vw, 5.5rem); }
+    }
+  </style>
 </head>
 <body>
-<nav class="nav" id="nav">
-  <div class="nav-brand">Moove &amp; Dream</div>
-  <div class="nav-links">
-    <a href="#services">Services</a>
-    <a href="#about">À Propos</a>
-    <a href="#fleet">Flotte</a>
-    <a href="#reservation">Réservation</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <a href="tel:0769385715" class="nav-cta">Réserver</a>
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile" id="navMobile">
-  <button class="close-btn" id="navClose">✕</button>
-  <a href="#services" onclick="closeNav()">Services</a>
-  <a href="#about" onclick="closeNav()">À Propos</a>
-  <a href="#fleet" onclick="closeNav()">Flotte</a>
-  <a href="#reservation" onclick="closeNav()">Réservation</a>
-  <a href="#contact" onclick="closeNav()">Contact</a>
-  <a href="tel:0769385715" style="color:var(--gold)">07 69 38 57 15</a>
-</div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-col-left"></div>
-  <div class="hero-col-right"></div>
-  <div class="hero-left">
-    <p class="hero-tag">Paris · 2024</p>
-    <h1 class="hero-h1">
-      MOOVE &amp;<br>
-      <span class="italic-line">Dream</span>
-    </h1>
-    <p class="hero-driver">Private Driver</p>
-    <hr class="hero-hr"/>
-    <p class="hero-slogan">Le Voyage d'Excellence</p>
-    <div class="hero-actions">
-      <a href="#reservation" class="btn-primary">Réserver un trajet</a>
-      <a href="tel:0769385715" class="btn-outline">07 69 38 57 15</a>
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">M&amp;D</span>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#flotte">Flotte</a>
+      <a href="#reservation">Réservation</a>
+      <a href="#contact">Contact</a>
     </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-ornament">
-      <div class="ornament-inner"></div>
-    </div>
-    <div class="hero-right-stats">
-      <div class="hero-stat">
-        <span class="hero-stat-num">7</span>
-        <span class="hero-stat-label">Places</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">24/7</span>
-        <span class="hero-stat-label">Disponible</span>
-      </div>
-      <div class="hero-stat">
-        <span class="hero-stat-num">IDF</span>
-        <span class="hero-stat-label">Zone</span>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-header">
-    <div class="section-eyebrow">Nos Prestations</div>
-    <h2 class="services-title">L'art du déplacement<br>sur mesure</h2>
-    <p class="services-desc">Chaque trajet est une promesse d'excellence, orchestrée avec l'attention portée aux moindres détails.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-      <h3 class="service-name">Transferts Aéroports</h3>
-      <p class="service-text">Prise en charge à domicile, suivi de vol en temps réel, attente incluse. CDG, Orly, Beauvais — une ponctualité absolue.</p>
-      <div class="service-tags"><span class="tag">CDG</span><span class="tag">Orly</span><span class="tag">Beauvais</span></div>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Left side column -->
+    <div class="hero-side">
+      <span class="vertical-text">Private Driver — Paris</span>
     </div>
-    <div class="service-card reveal">
-      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <h3 class="service-name">Transferts Paris</h3>
-      <p class="service-text">Gares, palaces, restaurants gastronomiques, événements privés — votre chauffeur, partout où vous l'attendez.</p>
-    </div>
-    <div class="service-card reveal">
-      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <h3 class="service-name">Mise à Disposition</h3>
-      <p class="service-text">Un chauffeur dédié à l'heure, la journée ou pour tout événement. Flexibilité et exclusivité garanties.</p>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-monogram">T</div>
-  <div class="about-grid">
-    <div class="about-left reveal">
-      <div class="section-eyebrow">Votre Chauffeur</div>
-      <h2 class="about-title">L'excellence au service<br>de votre mobilité</h2>
-      <p class="about-text">Professionnel du transport privé à Paris, Toufik incarne les valeurs du service haut de gamme : discrétion absolue, ponctualité irréprochable et confort optimal.</p>
-      <p class="about-text">Formé aux standards des maisons de prestige, il anticipe vos besoins et transforme chaque trajet en une expérience mémorable.</p>
-      <div class="about-signature">Toufik<small>Chauffeur Privé VTC · Paris</small></div>
-      <a href="#reservation" class="about-cta-link">Réserver</a>
-    </div>
-    <div class="about-right reveal">
-      <div class="stats-grid">
-        <div class="stat-box"><div class="stat-box-num">7</div><div class="stat-box-label">Places</div></div>
-        <div class="stat-box"><div class="stat-box-num">24/7</div><div class="stat-box-label">Disponible</div></div>
-        <div class="stat-box"><div class="stat-box-num">IDF</div><div class="stat-box-label">Zone</div></div>
-        <div class="stat-box"><div class="stat-box-num">100%</div><div class="stat-box-label">Satisfaction</div></div>
+    <!-- Center content -->
+    <div class="hero-center">
+      <div class="hero-label">Paris · Aéroports · Île-de-France</div>
+      <h1 class="hero-h1">
+        <span class="line-ivory">Votre</span>
+        <span class="shimmer">Confort</span>
+        <span class="line-small">Notre Priorité</span>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Moove &amp; Dream — chauffeur privé d'exception pour vos déplacements à Paris et en Île-de-France.</p>
+      <div class="hero-ctas">
+        <a href="#reservation" class="cta-primary">Réserver maintenant</a>
+        <a href="#services" class="cta-secondary">En savoir plus →</a>
       </div>
-      <div class="contact-card">
-        <div class="contact-item">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          <a href="tel:0769385715">07 69 38 57 15</a>
+    </div>
+
+    <!-- Right side column -->
+    <div class="hero-side hero-side-right">
+      <div class="hero-stat-v">
+        <span class="num">7</span>
+        <span class="lbl">Places</span>
+      </div>
+      <div class="hero-stat-v">
+        <span class="num">24/7</span>
+        <span class="lbl">Dispo</span>
+      </div>
+      <div class="hero-stat-v">
+        <span class="num">IDF</span>
+        <span class="lbl">Zone</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:0.8rem;">01 — Prestations</div>
+        <h2 class="services-title">Nos Services</h2>
+      </div>
+      <span class="services-count">03 Prestations</span>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">( 001 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#C4956A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15 2L6 13h4v7h10v-7h4L15 2z"/>
+            <circle cx="15" cy="23" r="2"/>
+          </svg>
         </div>
-        <div class="contact-item">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        <h3 class="card-title">Transferts Aéroports</h3>
+        <p class="card-desc">CDG, Orly, Beauvais — ponctualité garantie, suivi des vols en temps réel. Accueil personnalisé à votre arrivée.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">( 002 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#C4956A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="15" cy="12" r="4"/>
+            <path d="M15 26C15 26 5 18.5 5 12a10 10 0 0120 0c0 6.5-10 14-10 14z"/>
+          </svg>
         </div>
-        <div class="contact-item">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <a href="#">Paris &amp; Île-de-France</a>
+        <h3 class="card-title">Courses Paris</h3>
+        <p class="card-desc">Déplacements dans toute l'Île-de-France. Confort premium, discrétion absolue pour chaque trajet.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">( 003 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" stroke="#C4956A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="15" cy="15" r="12"/>
+            <path d="M15 8v7l4.5 2.5"/>
+          </svg>
         </div>
+        <h3 class="card-title">Mise à Disposition</h3>
+        <p class="card-desc">Chauffeur dédié à l'heure ou à la journée. Idéal pour événements professionnels et séminaires d'entreprise.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FLEET -->
-<section class="fleet" id="fleet">
-  <div class="fleet-grain"></div>
-  <div class="fleet-inner">
-    <div class="section-eyebrow">Notre Flotte</div>
-    <h2 class="fleet-title">Mercedes <em>Classe V</em></h2>
-    <hr class="fleet-hr"/>
-    <div class="car-wrapper reveal">
-      <svg class="car-svg" viewBox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="bodyBx" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#8A1933"/>
-            <stop offset="50%" stop-color="#6B1229"/>
-            <stop offset="100%" stop-color="#3D0A18"/>
-          </linearGradient>
-          <linearGradient id="glassBx" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#B8962E" stop-opacity="0.45"/>
-            <stop offset="100%" stop-color="#6B1229" stop-opacity="0.75"/>
-          </linearGradient>
-        </defs>
-        <ellipse cx="400" cy="262" rx="315" ry="13" fill="rgba(107,18,41,0.35)"/>
-        <rect x="80" y="140" width="640" height="100" rx="7" fill="url(#bodyBx)"/>
-        <path d="M200 140 Q220 71 300 69 L520 69 Q590 71 610 140Z" fill="url(#bodyBx)"/>
-        <path d="M217 138 Q229 83 301 81 L479 81 Q547 83 557 138Z" fill="url(#glassBx)" opacity="0.95"/>
-        <line x1="341" y1="81" x2="331" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="421" y1="81" x2="431" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="489" y1="83" x2="497" y2="138" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <path d="M82 167 L718 167" stroke="#B8962E" stroke-width="1.2" opacity="0.45"/>
-        <rect x="82" y="161" width="22" height="17" rx="3" fill="#B8962E" opacity="0.65"/>
-        <ellipse cx="717" cy="173" rx="17" ry="10" fill="#B8962E" opacity="0.7"/>
-        <circle cx="210" cy="242" r="38" fill="#1A1008" stroke="#B8962E" stroke-width="1.5"/>
-        <circle cx="210" cy="242" r="26" fill="#231710" stroke="#B8962E" stroke-width="1"/>
-        <circle cx="210" cy="242" r="10" fill="#B8962E"/>
-        <line x1="210" y1="216" x2="210" y2="268" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="184" y1="242" x2="236" y2="242" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="192" y1="223" x2="228" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
-        <line x1="228" y1="223" x2="192" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
-        <circle cx="590" cy="242" r="38" fill="#1A1008" stroke="#B8962E" stroke-width="1.5"/>
-        <circle cx="590" cy="242" r="26" fill="#231710" stroke="#B8962E" stroke-width="1"/>
-        <circle cx="590" cy="242" r="10" fill="#B8962E"/>
-        <line x1="590" y1="216" x2="590" y2="268" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="564" y1="242" x2="616" y2="242" stroke="#B8962E" stroke-width="1.5" opacity="0.55"/>
-        <line x1="572" y1="223" x2="608" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
-        <line x1="608" y1="223" x2="572" y2="261" stroke="#B8962E" stroke-width="1" opacity="0.3"/>
-        <circle cx="400" cy="140" r="12" fill="none" stroke="#B8962E" stroke-width="1.5"/>
-        <line x1="400" y1="130" x2="400" y2="128" stroke="#B8962E" stroke-width="2"/>
-        <line x1="390.5" y1="145.5" x2="389" y2="147" stroke="#B8962E" stroke-width="2"/>
-        <line x1="409.5" y1="145.5" x2="411" y2="147" stroke="#B8962E" stroke-width="2"/>
+  <!-- FLEET -->
+  <section class="fleet" id="flotte">
+    <div class="fleet-text reveal">
+      <div class="section-label">02 — Véhicule</div>
+      <h2 class="fleet-heading">Notre<br><em>Flotte</em></h2>
+      <p class="fleet-desc">Un Mercedes Classe V haut de gamme, alliant élégance et espace pour 7 passagers dans un confort d'exception.</p>
+      <ul class="fleet-specs">
+        <li>Mercedes Classe V — 7 places</li>
+        <li>Climatisation bizone</li>
+        <li>WiFi à bord</li>
+        <li>Chargeurs USB &amp; prises 220V</li>
+        <li>Eau et friandises offertes</li>
+        <li>Tenue professionnelle chauffeur</li>
+      </ul>
+    </div>
+    <div class="fleet-svg reveal">
+      <svg viewBox="0 0 540 220" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 150 Q58 120 80 110 L130 88 L200 72 L340 68 L420 80 L470 98 L490 118 L494 150 Z" stroke="#C4956A" stroke-width="1.5" fill="rgba(61,10,24,0.25)"/>
+        <path d="M130 88 L145 72 L340 68 L360 80" stroke="#C4956A" stroke-width="1" opacity="0.4"/>
+        <rect x="152" y="78" width="42" height="30" rx="3" fill="rgba(26,14,8,0.85)" stroke="#C4956A" stroke-width="0.8"/>
+        <rect x="202" y="75" width="50" height="32" rx="3" fill="rgba(26,14,8,0.85)" stroke="#C4956A" stroke-width="0.8"/>
+        <rect x="260" y="73" width="50" height="32" rx="3" fill="rgba(26,14,8,0.85)" stroke="#C4956A" stroke-width="0.8"/>
+        <rect x="318" y="74" width="40" height="32" rx="3" fill="rgba(26,14,8,0.85)" stroke="#C4956A" stroke-width="0.8"/>
+        <path d="M130 88 L152 78 L152 108 L100 108" stroke="#C4956A" stroke-width="0.8" fill="rgba(26,14,8,0.6)"/>
+        <ellipse cx="84" cy="118" rx="10" ry="7" fill="none" stroke="#C4956A" stroke-width="1"/>
+        <ellipse cx="84" cy="118" rx="5" ry="3.5" fill="rgba(196,149,106,0.15)"/>
+        <line x1="50" y1="150" x2="510" y2="150" stroke="rgba(196,149,106,0.15)" stroke-width="1"/>
+        <line x1="200" y1="80" x2="200" y2="148" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <line x1="260" y1="78" x2="260" y2="148" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <line x1="320" y1="78" x2="320" y2="148" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <circle cx="150" cy="150" r="28" fill="#0a0605" stroke="#C4956A" stroke-width="1.5"/>
+        <circle cx="150" cy="150" r="18" fill="none" stroke="rgba(196,149,106,0.3)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="6" fill="rgba(196,149,106,0.5)"/>
+        <line x1="132" y1="150" x2="168" y2="150" stroke="rgba(196,149,106,0.3)" stroke-width="0.8"/>
+        <line x1="150" y1="132" x2="150" y2="168" stroke="rgba(196,149,106,0.3)" stroke-width="0.8"/>
+        <line x1="137" y1="137" x2="163" y2="163" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <line x1="163" y1="137" x2="137" y2="163" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <circle cx="400" cy="150" r="28" fill="#0a0605" stroke="#C4956A" stroke-width="1.5"/>
+        <circle cx="400" cy="150" r="18" fill="none" stroke="rgba(196,149,106,0.3)" stroke-width="1"/>
+        <circle cx="400" cy="150" r="6" fill="rgba(196,149,106,0.5)"/>
+        <line x1="382" y1="150" x2="418" y2="150" stroke="rgba(196,149,106,0.3)" stroke-width="0.8"/>
+        <line x1="400" y1="132" x2="400" y2="168" stroke="rgba(196,149,106,0.3)" stroke-width="0.8"/>
+        <line x1="387" y1="137" x2="413" y2="163" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
+        <line x1="413" y1="137" x2="387" y2="163" stroke="rgba(196,149,106,0.2)" stroke-width="0.8"/>
       </svg>
     </div>
-    <div class="fleet-specs">
-      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg><span>7 Passagers</span></div>
-      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg><span>Climatisation</span></div>
-      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span>Wi-Fi</span></div>
-      <div class="spec-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg><span>Cuir</span></div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- RESERVATION -->
-<section class="reservation" id="reservation">
-  <div class="reservation-inner">
-    <div class="res-left reveal">
-      <div class="section-eyebrow">Réservation</div>
-      <h2 class="res-title">Votre <span>voyage</span><br>commence ici</h2>
-      <p class="res-info">Planifiez votre déplacement d'exception. Nous vous répondons dans les meilleurs délais.</p>
-      <div class="res-contact">
-        <a href="tel:0769385715"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>07 69 38 57 15</a>
-        <a href="mailto:adouditoufik@gmail.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>adouditoufik@gmail.com</a>
-      </div>
+  <!-- TRUST -->
+  <section class="trust reveal">
+    <p class="trust-quote">"Votre satisfaction est notre priorité depuis chaque trajet."</p>
+    <div class="trust-rule"></div>
+    <div class="trust-items">
+      <span class="trust-item">★★★★★ Excellence</span>
+      <span class="trust-item">Ponctualité garantie</span>
+      <span class="trust-item">Discrétion absolue</span>
+      <span class="trust-item">Mercedes premium</span>
     </div>
-    <div class="res-form reveal">
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="reservation">
+    <div class="booking-inner">
+      <h2 class="booking-title reveal"><span class="shimmer">Réserver</span><br>votre trajet</h2>
+      <p class="booking-tagline reveal">Chaque détail compte — précisez votre demande, nous nous occupons du reste.</p>
       <form action="mailto:adouditoufik@gmail.com" method="post" enctype="text/plain">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Nom *</label><input class="form-input" type="text" name="nom" required/></div>
-          <div class="form-group"><label class="form-label">Téléphone *</label><input class="form-input" type="tel" name="tel" required/></div>
-        </div>
-        <div class="form-group"><label class="form-label">Email *</label><input class="form-input" type="email" name="email" required/></div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Service *</label>
-            <select class="form-select" name="service" required>
-              <option value="">Choisir...</option>
-              <option>Aéroport CDG</option><option>Aéroport Orly</option>
-              <option>Aéroport Beauvais</option><option>Transfert Paris</option>
-              <option>Mise à Disposition</option>
+        <div class="form-grid">
+          <div class="form-group reveal">
+            <label for="nom">Nom complet</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" />
+          </div>
+          <div class="form-group reveal">
+            <label for="tel">Téléphone</label>
+            <input type="tel" id="tel" name="tel" placeholder="+33 6 00 00 00 00" />
+          </div>
+          <div class="form-group reveal">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="votre@email.com" />
+          </div>
+          <div class="form-group reveal">
+            <label for="type">Type de prestation</label>
+            <select id="type" name="type">
+              <option value="">Sélectionner</option>
+              <option>Transfert aéroport</option>
+              <option>Course Paris / IDF</option>
+              <option>Mise à disposition</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Passagers</label>
-            <select class="form-select" name="passagers">
-              <option>1</option><option>2</option><option>3</option>
-              <option>4</option><option>5</option><option>6</option><option>7</option>
-            </select>
+          <div class="form-group reveal">
+            <label for="depart">Point de départ</label>
+            <input type="text" id="depart" name="depart" placeholder="Adresse de prise en charge" />
+          </div>
+          <div class="form-group reveal">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="Adresse d'arrivée" />
+          </div>
+          <div class="form-group reveal">
+            <label for="date">Date &amp; Heure</label>
+            <input type="datetime-local" id="date" name="date" />
+          </div>
+          <div class="form-group reveal">
+            <label for="passagers">Passagers</label>
+            <input type="number" id="passagers" name="passagers" min="1" max="7" placeholder="1 – 7" />
+          </div>
+          <div class="form-group full reveal">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Précisions, bagages, demandes particulières..."></textarea>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Date *</label><input class="form-input" type="date" name="date" required/></div>
-          <div class="form-group"><label class="form-label">Heure *</label><input class="form-input" type="time" name="heure" required/></div>
-        </div>
-        <div class="form-group"><label class="form-label">Départ *</label><input class="form-input" type="text" name="depart" required/></div>
-        <div class="form-group"><label class="form-label">Destination *</label><input class="form-input" type="text" name="destination" required/></div>
-        <div class="form-group"><label class="form-label">Notes</label><textarea class="form-textarea" name="notes" rows="3"></textarea></div>
         <button type="submit" class="form-submit">Envoyer la demande</button>
       </form>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-header">
-    <div class="section-eyebrow" style="justify-content:center">Contact</div>
-    <h2 class="contact-title">Contacter Toufik</h2>
-  </div>
-  <div class="contact-grid">
-    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.22 2.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.28-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg><div class="contact-block-label">Téléphone</div><div class="contact-block-value"><a href="tel:0769385715">07 69 38 57 15</a></div></div>
-    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><div class="contact-block-label">Email</div><div class="contact-block-value"><a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a></div></div>
-    <div class="contact-block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><div class="contact-block-label">Zone</div><div class="contact-block-value">Paris &amp; Île-de-France</div></div>
-  </div>
-</section>
-<footer>
-  <div class="footer-brand">Moove &amp; Dream</div>
-  <div class="footer-copy">© 2024 Moove &amp; Dream Private Driver</div>
-  <div class="footer-links"><a href="#">Mentions légales</a><a href="#">CGU</a></div>
-</footer>
-<script>
-var t=document.getElementById('navToggle'),m=document.getElementById('navMobile'),c=document.getElementById('navClose');
-t.addEventListener('click',function(){m.classList.add('open')});
-c.addEventListener('click',function(){m.classList.remove('open')});
-function closeNav(){m.classList.remove('open')}
-var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('in')})},{threshold:0.12});
-document.querySelectorAll('.reveal').forEach(function(r){io.observe(r)});
-</script>
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-brand-center">
+      <span class="shimmer">Moove &amp; Dream</span>
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#services">Services</a>
+        <a href="#flotte">Notre Flotte</a>
+        <a href="#reservation">Réservation</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>0769 385 715</p>
+        <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        <p>Paris &amp; Île-de-France</p>
+        <p>Disponible 24h/7j</p>
+      </div>
+      <div class="footer-col">
+        <h4>Notre Engagement</h4>
+        <p>Votre Confort, Notre priorité. Ponctualité, discrétion et excellence à chaque trajet.</p>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Moove &amp; Dream — Private Driver Paris. Tous droits réservés.</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
