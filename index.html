@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* Subtle grain */
     body::before {
       content: '';
       position: fixed;
@@ -37,6 +36,49 @@
       pointer-events: none;
       opacity: 0.022;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes ruleGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes pulseRing {
+      0%   { transform: scale(1); opacity: 0.45; }
+      100% { transform: scale(1.1); opacity: 0; }
+    }
+    @keyframes shimmerSweep {
+      from { left: -120%; }
+      to   { left: 130%; }
+    }
+    @keyframes navIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(-14px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes ghostDrift {
+      0%, 100% { transform: translateY(-50%); }
+      50%       { transform: translateY(calc(-50% + 9px)); }
+    }
+    @keyframes scrollLine {
+      0%   { left: -100%; }
+      50%  { left: 0; }
+      100% { left: 100%; }
     }
 
     /* ── NAV ── */
@@ -58,6 +100,12 @@
       gap: 0;
       white-space: nowrap;
       box-shadow: 0 4px 28px rgba(74,55,40,0.07);
+      animation: navIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 4px 36px rgba(74,55,40,0.13);
     }
     .nav-logo {
       font-family: 'DM Serif Display', serif;
@@ -74,6 +122,7 @@
       color: var(--moka);
       text-decoration: none;
       transition: color 0.25s;
+      cursor: pointer;
     }
     .nav-links a:hover { color: var(--dark); }
 
@@ -87,7 +136,6 @@
       position: relative;
       overflow: hidden;
     }
-    /* Grid line background */
     .hero::before {
       content: '';
       position: absolute;
@@ -104,7 +152,6 @@
       position: relative;
       z-index: 1;
     }
-    /* Accent vertical line */
     .hero-left::before {
       content: '';
       position: absolute;
@@ -124,6 +171,7 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      animation: fadeLeft 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both;
     }
     .hero-label::before {
       content: '';
@@ -143,11 +191,23 @@
     }
     h1.hero-h1 .accent { color: var(--taupe); }
 
+    /* Text line reveal */
+    .line-wrap { display: block; overflow: hidden; }
+    .line-wrap .inner {
+      display: block;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) both;
+      padding-top: 0.04em;
+    }
+    .line-wrap:nth-child(1) .inner { animation-delay: 0.45s; }
+    .line-wrap:nth-child(2) .inner { animation-delay: 0.62s; }
+
     .hero-rule {
       width: 60px;
       height: 2px;
       background: var(--taupe);
       margin: 2.2rem 0;
+      transform-origin: left center;
+      animation: ruleGrow 0.8s cubic-bezier(0.22,1,0.36,1) 0.85s both;
     }
     .hero-tagline {
       font-size: 0.92rem;
@@ -156,6 +216,7 @@
       line-height: 1.8;
       max-width: 38ch;
       margin-bottom: 2.8rem;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 1.0s both;
     }
     .hero-cta {
       display: inline-block;
@@ -167,10 +228,58 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       font-weight: 500;
-      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 1.15s both;
     }
-    .hero-cta:hover { background: var(--moka); }
+    .hero-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--taupe);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      z-index: 0;
+    }
+    .hero-cta:hover::after { transform: translateX(0); }
+    .hero-cta span { position: relative; z-index: 1; }
 
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 5vw;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 1.4s both;
+    }
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: rgba(139,115,85,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--taupe);
+      animation: scrollLine 2.2s ease-in-out 1.6s infinite;
+    }
+    .hero-scroll-text {
+      font-size: 0.56rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    /* Hero right */
     .hero-right {
       padding: 8rem 5vw 6rem 2rem;
       display: flex;
@@ -178,6 +287,17 @@
       justify-content: center;
       position: relative;
       z-index: 1;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.7s both;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      width: clamp(260px, 36vw, 440px);
+      height: clamp(260px, 36vw, 440px);
+      border-radius: 50%;
+      border: 1px solid var(--stone);
+      animation: pulseRing 3.2s ease-out 1s infinite;
+      pointer-events: none;
     }
     .hero-circle {
       width: clamp(260px, 36vw, 440px);
@@ -190,6 +310,9 @@
       align-items: center;
       justify-content: center;
       gap: 0;
+      animation: floatY 5s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
     }
     .stat-item {
       display: flex;
@@ -198,9 +321,7 @@
       padding: 1.4rem 0;
       width: 70%;
     }
-    .stat-item + .stat-item {
-      border-top: 1px solid var(--pearl);
-    }
+    .stat-item + .stat-item { border-top: 1px solid var(--pearl); }
     .stat-num {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
@@ -215,6 +336,27 @@
       color: var(--taupe);
       margin-top: 0.4rem;
     }
+
+    /* ── TICKER ── */
+    .ticker-band {
+      overflow: hidden;
+      background: var(--dark);
+      padding: 0.85rem 0;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      align-items: center;
+      animation: tickerMove 22s linear infinite;
+    }
+    .ticker-item {
+      font-size: 0.58rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(181,168,152,0.5);
+      padding: 0 2.5rem;
+    }
+    .ticker-sep { color: var(--taupe); opacity: 0.35; font-size: 0.58rem; }
 
     /* ── SERVICES ── */
     .services { background: var(--off); }
@@ -255,6 +397,7 @@
       line-height: 1;
       letter-spacing: -0.05em;
       user-select: none;
+      animation: ghostDrift 10s ease-in-out infinite;
     }
 
     .services-grid {
@@ -270,12 +413,33 @@
       position: relative;
       cursor: pointer;
       border-left: 2px solid transparent;
-      transition: border-color 0.35s, transform 0.3s;
+      overflow: hidden;
+      transition: border-color 0.35s, transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s;
     }
     .service-card:hover {
       border-left-color: var(--taupe);
-      transform: translateY(-3px);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 44px rgba(74,55,40,0.09);
     }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(139,115,85,0.07), transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+    }
+    .service-card:hover::after {
+      animation: shimmerSweep 0.65s ease-in-out forwards;
+    }
+    .card-icon {
+      margin-bottom: 1.8rem;
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .service-card:hover .card-icon { transform: translateY(-5px); }
     .card-num {
       position: absolute;
       top: 2rem;
@@ -283,8 +447,9 @@
       font-size: 0.66rem;
       letter-spacing: 0.3em;
       color: var(--taupe);
+      transition: opacity 0.3s;
     }
-    .card-icon { margin-bottom: 1.8rem; }
+    .service-card:hover .card-num { opacity: 0.35; }
     .card-title {
       font-family: 'DM Serif Display', serif;
       font-style: italic;
@@ -309,6 +474,7 @@
       text-decoration: none;
       font-weight: 500;
       transition: color 0.25s;
+      cursor: pointer;
     }
     .card-link:hover { color: var(--dark); }
 
@@ -338,10 +504,7 @@
       color: var(--dark);
       margin-bottom: 2rem;
     }
-    .fleet-heading em {
-      font-style: normal;
-      color: var(--taupe);
-    }
+    .fleet-heading em { font-style: normal; color: var(--taupe); }
     .fleet-desc {
       font-size: 0.88rem;
       font-weight: 300;
@@ -358,23 +521,30 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      opacity: 0;
+      transform: translateX(-14px);
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22,1,0.36,1);
     }
-    .fleet-specs li::before {
-      content: '—';
-      color: var(--taupe);
-      font-size: 0.7rem;
-    }
+    .fleet-specs li::before { content: '—'; color: var(--taupe); font-size: 0.7rem; }
+    .fleet-specs.animated li                   { opacity: 1; transform: none; }
+    .fleet-specs.animated li:nth-child(1)      { transition-delay: 0s; }
+    .fleet-specs.animated li:nth-child(2)      { transition-delay: 0.08s; }
+    .fleet-specs.animated li:nth-child(3)      { transition-delay: 0.16s; }
+    .fleet-specs.animated li:nth-child(4)      { transition-delay: 0.24s; }
+    .fleet-specs.animated li:nth-child(5)      { transition-delay: 0.32s; }
+    .fleet-specs.animated li:nth-child(6)      { transition-delay: 0.40s; }
+
     .fleet-svg {
       display: flex;
       align-items: center;
       justify-content: center;
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 1.3s cubic-bezier(0.22,1,0.36,1);
     }
+    .fleet-svg.drawn { clip-path: inset(0 0% 0 0); }
 
     /* ── BOOKING ── */
-    .booking {
-      padding: 7rem 5vw;
-      background: var(--dark);
-    }
+    .booking { padding: 7rem 5vw; background: var(--dark); }
     .booking-inner { max-width: 760px; margin: 0 auto; }
     .booking-title {
       font-family: 'DM Serif Display', serif;
@@ -391,11 +561,7 @@
       color: rgba(181,168,152,0.5);
       margin-bottom: 3.5rem;
     }
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 2.5rem;
-    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
     .form-group { margin-bottom: 2.2rem; }
     .form-group.full { grid-column: 1 / -1; }
     .form-group label {
@@ -440,9 +606,22 @@
       letter-spacing: 0.25em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.4s;
     }
-    .form-submit:hover { background: var(--taupe); color: var(--white); }
+    .form-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--taupe);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+      z-index: 0;
+    }
+    .form-submit:hover::after { transform: translateX(0); }
+    .form-submit:hover { color: var(--white); }
+    .form-submit span { position: relative; z-index: 1; }
 
     /* ── FOOTER ── */
     footer {
@@ -458,18 +637,8 @@
       text-align: center;
       margin-bottom: 1.5rem;
     }
-    .footer-line {
-      width: 60px;
-      height: 1px;
-      background: var(--taupe);
-      margin: 0 auto 2.5rem;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-    }
+    .footer-line { width: 60px; height: 1px; background: var(--taupe); margin: 0 auto 2.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
     .footer-col h4 {
       font-size: 0.6rem;
       letter-spacing: 0.38em;
@@ -499,10 +668,22 @@
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── PREFERS REDUCED MOTION ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .fleet-svg { clip-path: none !important; }
+      .fleet-specs li { opacity: 1 !important; transform: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -519,6 +700,7 @@
       .nav-links { display: none; }
       .form-grid { grid-template-columns: 1fr; }
       h1.hero-h1 { font-size: clamp(3rem, 17vw, 5.5rem); }
+      .hero-scroll { display: none; }
     }
   </style>
 </head>
@@ -540,12 +722,12 @@
     <div class="hero-left">
       <div class="hero-label">Private Driver — Paris &amp; IDF</div>
       <h1 class="hero-h1">
-        VOTRE<br>
-        <span class="accent">CONFORT</span>
+        <span class="line-wrap"><span class="inner">VOTRE</span></span>
+        <span class="line-wrap"><span class="inner accent">CONFORT</span></span>
       </h1>
       <div class="hero-rule"></div>
       <p class="hero-tagline">Votre satisfaction est notre priorité à chaque trajet. Discrétion, ponctualité et élégance.</p>
-      <a href="#reservation" class="hero-cta">Réserver maintenant</a>
+      <a href="#reservation" class="hero-cta"><span>Réserver maintenant</span></a>
     </div>
     <div class="hero-right">
       <div class="hero-circle">
@@ -563,7 +745,29 @@
         </div>
       </div>
     </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-text">Scroll</span>
+    </div>
   </section>
+
+  <!-- TICKER -->
+  <div class="ticker-band" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">Transferts Aéroports</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Courses Paris &amp; IDF</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Mise à Disposition</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Mercedes Classe V</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Disponible 24/7</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Chauffeur Professionnel</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Transferts Aéroports</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Courses Paris &amp; IDF</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Mise à Disposition</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Mercedes Classe V</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Disponible 24/7</span><span class="ticker-sep">·</span>
+      <span class="ticker-item">Chauffeur Professionnel</span><span class="ticker-sep">·</span>
+    </div>
+  </div>
 
   <!-- SERVICES -->
   <section class="services" id="services">
@@ -629,7 +833,7 @@
         <li>Tenue professionnelle chauffeur</li>
       </ul>
     </div>
-    <div class="fleet-svg reveal">
+    <div class="fleet-svg">
       <svg viewBox="0 0 540 220" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M60 150 Q58 120 80 110 L130 88 L200 72 L340 68 L420 80 L470 98 L490 118 L494 150 Z" stroke="#4A3728" stroke-width="1.5" fill="rgba(232,228,222,0.5)"/>
         <path d="M130 88 L145 72 L340 68 L360 80" stroke="#8B7355" stroke-width="1" opacity="0.5"/>
@@ -706,7 +910,7 @@
             <textarea id="message" name="message" placeholder="Précisions, bagages, demandes particulières..."></textarea>
           </div>
         </div>
-        <button type="submit" class="form-submit">Envoyer la demande</button>
+        <button type="submit" class="form-submit"><span>Envoyer la demande</span></button>
       </form>
     </div>
   </section>
@@ -738,15 +942,82 @@
   </footer>
 
   <script>
-    const observer = new IntersectionObserver((entries) => {
+    // Nav scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // General scroll reveal (skip service cards — handled separately)
+    const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
-          observer.unobserve(e.target);
+          revealObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal:not(.service-card)').forEach(el => revealObs.observe(el));
+
+    // Staggered service card reveals
+    const serviceCards = document.querySelectorAll('.service-card');
+    const cardObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = Array.from(serviceCards).indexOf(e.target);
+          setTimeout(() => e.target.classList.add('visible'), idx * 130);
+          cardObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    serviceCards.forEach(el => cardObs.observe(el));
+
+    // Fleet specs stagger
+    const specsEl = document.querySelector('.fleet-specs');
+    if (specsEl) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('animated');
+          }
+        });
+      }, { threshold: 0.25 }).observe(specsEl);
+    }
+
+    // Fleet SVG clip-path draw
+    const fleetSvgEl = document.querySelector('.fleet-svg');
+    if (fleetSvgEl) {
+      new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('drawn');
+          }
+        });
+      }, { threshold: 0.3 }).observe(fleetSvgEl);
+    }
+
+    // Counter animation for numeric stats
+    function countUp(el, target, duration) {
+      const num = parseInt(target);
+      if (isNaN(num)) return;
+      const start = performance.now();
+      (function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(num * ease);
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = target;
+      })(start);
+    }
+    const counterObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          countUp(e.target, e.target.textContent.trim(), 1200);
+          counterObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.stat-num').forEach(el => counterObs.observe(el));
   </script>
 
 </body>
