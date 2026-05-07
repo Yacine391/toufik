@@ -13,26 +13,36 @@
       overflow: hidden;
     }
 
-    /* ── IFRAMES plein écran ── */
+    /* ── IFRAMES ── */
     .frames {
       position: fixed;
       inset: 0;
     }
+
+    /* Inactif : complètement retiré du DOM visuel et tactile */
     .frame {
       position: absolute;
       inset: 0;
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       border: none;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .frame.active {
-      opacity: 1;
-      pointer-events: auto;
+      display: none;                      /* pas opacity — évite les blocages touch iOS */
+      -webkit-overflow-scrolling: touch;  /* scroll natif iOS */
+      overflow: auto;
     }
 
-    /* ── SWITCHER flottant ── */
+    /* Actif : fade-in rapide */
+    .frame.active {
+      display: block;
+      animation: fadein 0.2s ease;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── SÉLECTEUR FLOTTANT ── */
     .switcher {
       position: fixed;
       bottom: 24px;
@@ -41,22 +51,22 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      background: rgba(8,8,8,0.82);
+      background: rgba(8,8,8,0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 14px;
-      padding: 10px 10px;
+      padding: 10px;
     }
 
     .sw-label-top {
       font-family: -apple-system, 'Segoe UI', sans-serif;
-      font-size: 0.48rem;
+      font-size: 0.46rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: rgba(255,255,255,0.2);
       text-align: center;
-      padding-bottom: 6px;
+      padding-bottom: 7px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
       margin-bottom: 2px;
     }
@@ -65,20 +75,19 @@
       display: flex;
       align-items: center;
       gap: 9px;
-      padding: 7px 12px 7px 10px;
+      padding: 8px 12px 8px 10px;
       background: transparent;
       border: 1px solid transparent;
       border-radius: 9px;
       cursor: pointer;
-      transition: background 0.18s, border-color 0.18s;
+      transition: background 0.15s, border-color 0.15s;
       outline: none;
+      -webkit-tap-highlight-color: transparent;
     }
-    .sw-btn:hover {
-      background: rgba(255,255,255,0.06);
-    }
+    .sw-btn:hover  { background: rgba(255,255,255,0.06); }
     .sw-btn.active {
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.14);
     }
 
     .sw-dot {
@@ -88,20 +97,16 @@
     }
     .sw-name {
       font-family: -apple-system, 'Segoe UI', sans-serif;
-      font-size: 0.64rem;
+      font-size: 0.63rem;
       letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.38);
       text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
       white-space: nowrap;
-      transition: color 0.18s;
+      transition: color 0.15s;
     }
-    .sw-btn.active .sw-name {
-      color: rgba(255,255,255,0.9);
-    }
-    .sw-btn.active .sw-check {
-      display: block;
-    }
-    .sw-check {
+    .sw-btn.active .sw-name { color: rgba(255,255,255,0.9); }
+
+    .sw-pip {
       display: none;
       margin-left: auto;
       width: 5px; height: 5px;
@@ -109,26 +114,28 @@
       background: var(--acc);
       flex-shrink: 0;
     }
+    .sw-btn.active .sw-pip { display: block; }
 
-    /* ── MOBILE : switcher en bas centré, horizontal ── */
+    /* ── MOBILE : pilule horizontale centrée en bas ── */
     @media (max-width: 640px) {
       .switcher {
-        bottom: 16px;
+        bottom: 18px;
         right: auto;
         left: 50%;
         transform: translateX(-50%);
         flex-direction: row;
+        align-items: center;
         padding: 8px 10px;
         gap: 4px;
         border-radius: 50px;
       }
       .sw-label-top { display: none; }
       .sw-btn {
-        padding: 8px 14px;
+        padding: 9px 14px;
         border-radius: 40px;
         gap: 7px;
       }
-      .sw-name { font-size: 0.6rem; }
+      .sw-name { font-size: 0.58rem; }
     }
   </style>
 </head>
@@ -136,9 +143,9 @@
 
   <!-- IFRAMES -->
   <div class="frames">
-    <iframe id="f-mineral" class="frame active" src="mineral.html"       title="Minéral"></iframe>
-    <iframe id="f-rouge"   class="frame"        src="rouge-velvet.html"  title="Rouge Velvet"></iframe>
-    <iframe id="f-noir"    class="frame"        src="noir-dore.html"     title="Noir Doré"></iframe>
+    <iframe id="f-mineral" class="frame active" src="mineral.html"      title="Minéral"></iframe>
+    <iframe id="f-rouge"   class="frame"        src="rouge-velvet.html" title="Rouge Velvet"></iframe>
+    <iframe id="f-noir"    class="frame"        src="noir-dore.html"    title="Noir Doré"></iframe>
   </div>
 
   <!-- SÉLECTEUR -->
@@ -148,19 +155,19 @@
     <button class="sw-btn active" data-target="f-mineral" style="--acc:#8B7355">
       <span class="sw-dot" style="background:#F7F4F0;border:1.5px solid #8B7355;"></span>
       <span class="sw-name">Minéral</span>
-      <span class="sw-check"></span>
+      <span class="sw-pip"></span>
     </button>
 
     <button class="sw-btn" data-target="f-rouge" style="--acc:#C08830">
       <span class="sw-dot" style="background:#3A0C18;border:1.5px solid #C08830;"></span>
       <span class="sw-name">Rouge Velvet</span>
-      <span class="sw-check"></span>
+      <span class="sw-pip"></span>
     </button>
 
     <button class="sw-btn" data-target="f-noir" style="--acc:#D4AF37">
       <span class="sw-dot" style="background:#030303;border:1.5px solid #D4AF37;"></span>
       <span class="sw-name">Noir Doré</span>
-      <span class="sw-check"></span>
+      <span class="sw-pip"></span>
     </button>
   </div>
 
@@ -170,10 +177,24 @@
 
     btns.forEach(btn => {
       btn.addEventListener('click', () => {
+        // Désactive tout
         btns.forEach(b => b.classList.remove('active'));
         frames.forEach(f => f.classList.remove('active'));
+
+        // Active la cible
         btn.classList.add('active');
-        document.getElementById(btn.dataset.target).classList.add('active');
+        const target = document.getElementById(btn.dataset.target);
+        target.classList.add('active');
+
+        // Remet en haut de page (évite d'atterrir au milieu)
+        try { target.contentWindow.scrollTo(0, 0); } catch(e) {}
+      });
+    });
+
+    // Scroll en haut au chargement de chaque iframe
+    frames.forEach(f => {
+      f.addEventListener('load', () => {
+        try { f.contentWindow.scrollTo(0, 0); } catch(e) {}
       });
     });
   </script>
