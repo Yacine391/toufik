@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moove & Dream — Private Driver Paris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void:    #0C0408;
+      --deep:    #180810;
+      --wine:    #2C0A16;
+      --bord:    #480E1E;
+      --ruby:    #7A1830;
+      --ivory:   #F2EAE0;
+      --rose:    #C4ABA4;
+      --copper:  #C08830;
+      --gold:    #D4A040;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--void);
+      color: var(--ivory);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    @keyframes shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes ruleGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes navIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Gold shimmer text */
+    .shimmer {
+      background: linear-gradient(90deg, #B87828, #D4A040, #F0C860, #D4A040, #B87828);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 5s linear infinite;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(12,4,8,0.86);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(208,160,64,0.22);
+      border-radius: 60px;
+      padding: 0 2.5rem;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      white-space: nowrap;
+      animation: navIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--copper);
+      margin-right: 2.5rem;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(242,234,224,0.4);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--copper); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--void);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 80% at 30% 50%, rgba(72,14,30,0.75) 0%, rgba(44,10,22,0.45) 45%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(60deg, rgba(208,160,64,0.018) 0px, rgba(208,160,64,0.018) 1px, transparent 1px, transparent 18px);
+      pointer-events: none;
+    }
+
+    .hero-left {
+      padding: 9rem 3rem 6rem 5vw;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(208,160,64,0.7);
+      margin-bottom: 2.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s both;
+    }
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--copper);
+      opacity: 0.6;
+    }
+
+    h1.hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-style: italic;
+      font-size: clamp(4.2rem, 8.5vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.45s both;
+    }
+    h1.hero-h1 .ivory { color: var(--ivory); }
+    h1.hero-h1 .small-line {
+      font-size: 0.36em;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(196,171,164,0.5);
+      display: block;
+      margin-top: 0.7rem;
+      letter-spacing: 0.08em;
+      -webkit-text-fill-color: rgba(196,171,164,0.5);
+      background: none;
+    }
+
+    .hero-rule {
+      width: 70px;
+      height: 1px;
+      background: linear-gradient(to right, var(--copper), transparent);
+      margin: 2.2rem 0;
+      transform-origin: left;
+      animation: ruleGrow 0.8s cubic-bezier(0.22,1,0.36,1) 0.9s both;
+    }
+    .hero-tagline {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(196,171,164,0.65);
+      line-height: 1.85;
+      max-width: 38ch;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 1s both;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 1.15s both;
+    }
+    .cta-primary {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1px solid var(--copper);
+      color: var(--copper);
+      text-decoration: none;
+      font-size: 0.66rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    .cta-primary:hover { background: var(--copper); color: var(--void); }
+    .cta-secondary {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(196,171,164,0.4);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .cta-secondary:hover { color: var(--copper); }
+
+    /* Hero right — wine orb with stats */
+    .hero-right {
+      padding: 9rem 5vw 6rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.7s both;
+    }
+    .hero-orb {
+      width: clamp(260px, 35vw, 420px);
+      height: clamp(260px, 35vw, 420px);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(72,14,30,0.92) 0%, rgba(44,10,22,0.96) 60%, rgba(24,8,16,1) 100%);
+      border: 1px solid rgba(208,160,64,0.28);
+      box-shadow: 0 0 70px rgba(122,24,48,0.22), inset 0 0 40px rgba(100,20,40,0.12);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: floatY 6s ease-in-out infinite;
+      position: relative;
+    }
+    .hero-orb::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(208,160,64,0.1);
+    }
+    .orb-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.2rem 0;
+      width: 60%;
+    }
+    .orb-stat + .orb-stat { border-top: 1px solid rgba(208,160,64,0.14); }
+    .orb-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      color: var(--copper);
+      line-height: 1;
+    }
+    .orb-label {
+      font-size: 0.53rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(196,171,164,0.4);
+      margin-top: 0.4rem;
+    }
+
+    /* ── TICKER ── */
+    .ticker-band {
+      overflow: hidden;
+      background: var(--bord);
+      padding: 0.85rem 0;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-flex;
+      align-items: center;
+      animation: tickerMove 24s linear infinite;
+    }
+    .ticker-item {
+      font-size: 0.57rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(242,234,224,0.4);
+      padding: 0 2.5rem;
+    }
+    .ticker-sep { color: var(--copper); opacity: 0.45; font-size: 0.65rem; }
+
+    /* ── SERVICES ── */
+    .services { background: var(--deep); }
+    .services-header {
+      padding: 4.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(208,160,64,0.1);
+    }
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: rgba(208,160,64,0.5);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .services-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      color: var(--ivory);
+    }
+    .services-count {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: rgba(208,160,64,0.28);
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(208,160,64,0.08);
+    }
+    .service-card {
+      background: var(--deep);
+      padding: 3.5rem 2.5rem;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(122,24,48,0.32) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover { background: var(--wine); }
+    .service-card:hover::before { opacity: 1; }
+    .card-num {
+      position: absolute;
+      top: 2.2rem;
+      right: 2.2rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.32em;
+      color: rgba(208,160,64,0.26);
+    }
+    .card-rule {
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0.65;
+    }
+    .card-icon { margin-bottom: 1.5rem; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .card-desc {
+      font-size: 0.83rem;
+      font-weight: 300;
+      color: rgba(196,171,164,0.58);
+      line-height: 1.85;
+    }
+    .card-link {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--copper);
+      text-decoration: none;
+      transition: letter-spacing 0.3s;
+    }
+    .card-link:hover { letter-spacing: 0.3em; }
+
+    /* ── FLEET ── */
+    .fleet {
+      padding: 7rem 5vw;
+      background: var(--void);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw;
+      align-items: center;
+      position: relative;
+    }
+    .fleet::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 55% 70% at 70% 50%, rgba(72,14,30,0.38) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .fleet-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: clamp(3rem, 5.5vw, 4.8rem);
+      color: var(--ivory);
+      line-height: 0.95;
+      margin: 1.5rem 0 2rem;
+    }
+    .fleet-heading em { color: var(--copper); }
+    .fleet-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(196,171,164,0.6);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+      max-width: 42ch;
+    }
+    .fleet-specs { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .fleet-specs li {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(196,171,164,0.6);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .fleet-specs li::before { content: '◆'; color: var(--copper); font-size: 0.42rem; opacity: 0.7; }
+    .fleet-svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TRUST ── */
+    .trust {
+      padding: 4.5rem 5vw;
+      background: var(--wine);
+      text-align: center;
+      border-top: 1px solid rgba(208,160,64,0.1);
+      border-bottom: 1px solid rgba(208,160,64,0.1);
+    }
+    .trust-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--ivory);
+      max-width: 680px;
+      margin: 0 auto 1rem;
+      line-height: 1.45;
+    }
+    .trust-rule {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 1.5rem auto 2rem;
+    }
+    .trust-items {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      font-size: 0.66rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(208,160,64,0.52);
+    }
+
+    /* ── BOOKING ── */
+    .booking {
+      padding: 7rem 5vw;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(44,10,22,0.6) 0%, var(--void) 70%);
+    }
+    .booking-inner { max-width: 760px; margin: 0 auto; }
+    .booking-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(2.8rem, 5.5vw, 4rem);
+      font-weight: 400;
+      color: var(--ivory);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+    .booking-tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      color: rgba(208,160,64,0.45);
+      margin-bottom: 3.5rem;
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+    .form-group { margin-bottom: 2.2rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(208,160,64,0.48);
+      margin-bottom: 0.7rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(208,160,64,0.15);
+      color: var(--ivory);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      padding: 1rem 0;
+      outline: none;
+      transition: border-color 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group select option { background: var(--deep); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-bottom-color: var(--copper); }
+    .form-group textarea { resize: none; height: 80px; }
+    .form-submit {
+      margin-top: 1rem;
+      padding: 1.1rem 3.5rem;
+      background: var(--copper);
+      color: var(--void);
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+    .form-submit:hover { background: var(--bord); color: var(--ivory); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #070304;
+      border-top: 1px solid rgba(208,160,64,0.08);
+      padding: 4rem 5vw 2rem;
+    }
+    .footer-brand {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .footer-brand span {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2rem;
+    }
+    .footer-line {
+      width: 50px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      font-size: 0.58rem;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(208,160,64,0.5);
+      margin-bottom: 1.2rem;
+    }
+    .footer-col a, .footer-col p {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: rgba(242,234,224,0.3);
+      text-decoration: none;
+      margin-bottom: 0.6rem;
+      transition: color 0.25s;
+    }
+    .footer-col a:hover { color: var(--copper); }
+    .footer-copy {
+      text-align: center;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: rgba(242,234,224,0.14);
+      border-top: 1px solid rgba(208,160,64,0.07);
+      padding-top: 1.5rem;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 7rem 5vw 4rem; }
+      h1.hero-h1 { font-size: clamp(3.5rem, 13vw, 6.5rem); }
+      .services-grid { grid-template-columns: 1fr; }
+      .fleet { grid-template-columns: 1fr; }
+      .fleet-svg { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .trust-items { gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .form-grid { grid-template-columns: 1fr; }
+      h1.hero-h1 { font-size: clamp(3rem, 16vw, 5.5rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">M&amp;D</span>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#flotte">Flotte</a>
+      <a href="#reservation">Réservation</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-label">Paris · Aéroports · Île-de-France</div>
+      <h1 class="hero-h1">
+        <span class="ivory">Votre</span><br>
+        <span class="shimmer">Confort
+          <span class="small-line">Notre Priorité</span>
+        </span>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Moove &amp; Dream — chauffeur privé d'exception pour vos déplacements à Paris et en Île-de-France.</p>
+      <div class="hero-ctas">
+        <a href="#reservation" class="cta-primary">Réserver maintenant</a>
+        <a href="#services" class="cta-secondary">En savoir plus →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-orb">
+        <div class="orb-stat">
+          <span class="orb-num">7</span>
+          <span class="orb-label">Places</span>
+        </div>
+        <div class="orb-stat">
+          <span class="orb-num">24/7</span>
+          <span class="orb-label">Disponible</span>
+        </div>
+        <div class="orb-stat">
+          <span class="orb-num">IDF</span>
+          <span class="orb-label">Zone de trajet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-band" aria-hidden="true">
+    <div class="ticker-inner">
+      <span class="ticker-item">Transferts Aéroports</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Courses Paris &amp; IDF</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Mise à Disposition</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Mercedes Classe V</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Disponible 24/7</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Chauffeur Professionnel</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Transferts Aéroports</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Courses Paris &amp; IDF</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Mise à Disposition</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Mercedes Classe V</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Disponible 24/7</span><span class="ticker-sep">◆</span>
+      <span class="ticker-item">Chauffeur Professionnel</span><span class="ticker-sep">◆</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-label" style="margin-bottom:0.8rem;">01 — Prestations</div>
+        <h2 class="services-heading">Nos Services</h2>
+      </div>
+      <span class="services-count">03 Prestations</span>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="card-num">( 001 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C08830" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2L5 12h4v7h10v-7h4L14 2z"/>
+            <circle cx="14" cy="22" r="2"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Transferts Aéroports</h3>
+        <p class="card-desc">CDG, Orly, Beauvais — ponctualité garantie, suivi des vols en temps réel. Accueil personnalisé à votre arrivée.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">( 002 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C08830" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="11" r="4"/>
+            <path d="M14 24C14 24 5 17.5 5 11a9 9 0 0118 0c0 6.5-9 13-9 13z"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Courses Paris</h3>
+        <p class="card-desc">Déplacements dans toute l'Île-de-France. Confort premium, discrétion absolue pour chaque trajet.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
+      </div>
+      <div class="service-card reveal">
+        <span class="card-num">( 003 )</span>
+        <div class="card-rule"></div>
+        <div class="card-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#C08830" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="14" cy="14" r="11"/>
+            <path d="M14 7v7l4.5 2.5"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Mise à Disposition</h3>
+        <p class="card-desc">Chauffeur dédié à l'heure ou à la journée. Idéal pour événements professionnels et séminaires d'entreprise.</p>
+        <a href="#reservation" class="card-link">Réserver →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET -->
+  <section class="fleet" id="flotte">
+    <div class="fleet-text reveal">
+      <div class="section-label">02 — Véhicule</div>
+      <h2 class="fleet-heading">Notre<br><em>Flotte</em></h2>
+      <p class="fleet-desc">Un Mercedes Classe V haut de gamme, alliant élégance et espace pour 7 passagers dans un confort d'exception.</p>
+      <ul class="fleet-specs">
+        <li>Mercedes Classe V — 7 places</li>
+        <li>Climatisation bizone</li>
+        <li>WiFi à bord</li>
+        <li>Chargeurs USB &amp; prises 220V</li>
+        <li>Eau et friandises offertes</li>
+        <li>Tenue professionnelle chauffeur</li>
+      </ul>
+    </div>
+    <div class="fleet-svg reveal">
+      <svg viewBox="0 0 540 220" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60 150 Q58 120 80 110 L130 88 L200 72 L340 68 L420 80 L470 98 L490 118 L494 150 Z" stroke="#C08830" stroke-width="1.5" fill="rgba(72,14,30,0.3)"/>
+        <path d="M130 88 L145 72 L340 68 L360 80" stroke="#C08830" stroke-width="1" opacity="0.4"/>
+        <rect x="152" y="78" width="42" height="30" rx="3" fill="rgba(24,8,16,0.9)" stroke="#C08830" stroke-width="0.8"/>
+        <rect x="202" y="75" width="50" height="32" rx="3" fill="rgba(24,8,16,0.9)" stroke="#C08830" stroke-width="0.8"/>
+        <rect x="260" y="73" width="50" height="32" rx="3" fill="rgba(24,8,16,0.9)" stroke="#C08830" stroke-width="0.8"/>
+        <rect x="318" y="74" width="40" height="32" rx="3" fill="rgba(24,8,16,0.9)" stroke="#C08830" stroke-width="0.8"/>
+        <path d="M130 88 L152 78 L152 108 L100 108" stroke="#C08830" stroke-width="0.8" fill="rgba(24,8,16,0.65)"/>
+        <ellipse cx="84" cy="118" rx="10" ry="7" fill="none" stroke="#C08830" stroke-width="1"/>
+        <line x1="50" y1="150" x2="510" y2="150" stroke="rgba(208,160,64,0.15)" stroke-width="1"/>
+        <line x1="200" y1="80" x2="200" y2="148" stroke="rgba(208,160,64,0.2)" stroke-width="0.8"/>
+        <line x1="260" y1="78" x2="260" y2="148" stroke="rgba(208,160,64,0.2)" stroke-width="0.8"/>
+        <line x1="320" y1="78" x2="320" y2="148" stroke="rgba(208,160,64,0.2)" stroke-width="0.8"/>
+        <circle cx="150" cy="150" r="28" fill="rgba(24,8,16,0.95)" stroke="#C08830" stroke-width="1.5"/>
+        <circle cx="150" cy="150" r="18" fill="none" stroke="rgba(208,160,64,0.28)" stroke-width="1"/>
+        <circle cx="150" cy="150" r="6" fill="rgba(208,160,64,0.5)"/>
+        <line x1="132" y1="150" x2="168" y2="150" stroke="rgba(208,160,64,0.28)" stroke-width="0.8"/>
+        <line x1="150" y1="132" x2="150" y2="168" stroke="rgba(208,160,64,0.28)" stroke-width="0.8"/>
+        <line x1="137" y1="137" x2="163" y2="163" stroke="rgba(208,160,64,0.15)" stroke-width="0.8"/>
+        <line x1="163" y1="137" x2="137" y2="163" stroke="rgba(208,160,64,0.15)" stroke-width="0.8"/>
+        <circle cx="400" cy="150" r="28" fill="rgba(24,8,16,0.95)" stroke="#C08830" stroke-width="1.5"/>
+        <circle cx="400" cy="150" r="18" fill="none" stroke="rgba(208,160,64,0.28)" stroke-width="1"/>
+        <circle cx="400" cy="150" r="6" fill="rgba(208,160,64,0.5)"/>
+        <line x1="382" y1="150" x2="418" y2="150" stroke="rgba(208,160,64,0.28)" stroke-width="0.8"/>
+        <line x1="400" y1="132" x2="400" y2="168" stroke="rgba(208,160,64,0.28)" stroke-width="0.8"/>
+        <line x1="387" y1="137" x2="413" y2="163" stroke="rgba(208,160,64,0.15)" stroke-width="0.8"/>
+        <line x1="413" y1="137" x2="387" y2="163" stroke="rgba(208,160,64,0.15)" stroke-width="0.8"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="trust reveal">
+    <p class="trust-quote">"Votre satisfaction est notre priorité depuis chaque trajet."</p>
+    <div class="trust-rule"></div>
+    <div class="trust-items">
+      <span class="trust-item">★★★★★ Excellence</span>
+      <span class="trust-item">Ponctualité garantie</span>
+      <span class="trust-item">Discrétion absolue</span>
+      <span class="trust-item">Mercedes premium</span>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section class="booking" id="reservation">
+    <div class="booking-inner">
+      <h2 class="booking-title reveal"><span class="shimmer" style="font-family:'Cormorant Garamond',serif;font-style:italic;">Réserver</span><br>votre trajet</h2>
+      <p class="booking-tagline reveal">Chaque détail compte — précisez votre demande, nous nous occupons du reste.</p>
+      <form action="mailto:adouditoufik@gmail.com" method="post" enctype="text/plain">
+        <div class="form-grid">
+          <div class="form-group reveal">
+            <label for="nom">Nom complet</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" />
+          </div>
+          <div class="form-group reveal">
+            <label for="tel">Téléphone</label>
+            <input type="tel" id="tel" name="tel" placeholder="+33 6 00 00 00 00" />
+          </div>
+          <div class="form-group reveal">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="votre@email.com" />
+          </div>
+          <div class="form-group reveal">
+            <label for="type">Type de prestation</label>
+            <select id="type" name="type">
+              <option value="">Sélectionner</option>
+              <option>Transfert aéroport</option>
+              <option>Course Paris / IDF</option>
+              <option>Mise à disposition</option>
+            </select>
+          </div>
+          <div class="form-group reveal">
+            <label for="depart">Point de départ</label>
+            <input type="text" id="depart" name="depart" placeholder="Adresse de prise en charge" />
+          </div>
+          <div class="form-group reveal">
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" placeholder="Adresse d'arrivée" />
+          </div>
+          <div class="form-group reveal">
+            <label for="date">Date &amp; Heure</label>
+            <input type="datetime-local" id="date" name="date" />
+          </div>
+          <div class="form-group reveal">
+            <label for="passagers">Passagers</label>
+            <input type="number" id="passagers" name="passagers" min="1" max="7" placeholder="1 – 7" />
+          </div>
+          <div class="form-group full reveal">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Précisions, bagages, demandes particulières..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">Envoyer la demande</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-brand">
+      <span class="shimmer" style="font-family:'Cormorant Garamond',serif;font-style:italic;">Moove &amp; Dream</span>
+    </div>
+    <div class="footer-line"></div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#services">Services</a>
+        <a href="#flotte">Notre Flotte</a>
+        <a href="#reservation">Réservation</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>0769 385 715</p>
+        <a href="mailto:adouditoufik@gmail.com">adouditoufik@gmail.com</a>
+        <p>Paris &amp; Île-de-France</p>
+        <p>Disponible 24h/7j</p>
+      </div>
+      <div class="footer-col">
+        <h4>Notre Engagement</h4>
+        <p>Votre Confort, Notre priorité. Ponctualité, discrétion et excellence à chaque trajet.</p>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Moove &amp; Dream — Private Driver Paris. Tous droits réservés.</div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

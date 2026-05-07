@@ -2,8 +2,9 @@
 
 ## État actuel du projet
 - **Date** : 2026-04-15
-- **Phase** : Maquette initiale créée
-- **Stack** : HTML5 + CSS3 vanilla, aucun framework, une seule page `index.html`
+- **Phase** : 3 maquettes créées + pushées sur GitHub (prêt pour Vercel)
+- **Stack** : HTML5 + CSS3 vanilla, aucun framework
+- **Repo** : `git@github.com:Yacine391/toufik.git`
 
 ## Client
 - **Nom** : Toufik (Moove & Dream Private Driver)
@@ -13,32 +14,37 @@
 - **Services** : Paris / Transferts aéroports / Mise à Dispo
 - **Véhicule** : Mercedes van 7 places
 
-## Palette couleurs
-- Vert foncé : `#1B4332`
-- Or antique : `#C8A96E`
-- Crème : `#F5F0E8`
-- Noir profond : `#0D0D0D`
+## Structure des fichiers
+| Fichier | Rôle |
+|---------|------|
+| `index.html` | Design final retenu — Minéral blanc (DM Serif + DM Sans) |
+| `vert-dore.html` | Design 1 — Vert forêt + Or antique (Héritage VTC style) |
+| `mineral.html` | Design 2 — Taupe, Moka, Blanc pur, Gris perle (Aurora VTC style) |
+| `bordeaux.html` | Design 3 — Fond noir + accents bordeaux (Playfair + Raleway) |
+| `rouge-velvet.html` | Design 4 — Fond rouge bordeaux profond + ivoire + or (Cormorant Garamond + Outfit) |
+| `noir-dore.html` | Design 5 — Fond noir pur + écriture dorée et blanche (Cinzel + Josefin Sans) |
 
 ## Tâches terminées
-- [x] Maquette `index.html` créée (hero, services, à propos, flotte, réservation, contact, footer)
-- [x] Design vert doré — palette Héritage VTC appliquée
-- [x] Responsive mobile-first (breakpoints 900px, 768px, 480px)
-- [x] Menu hamburger CSS-only
-- [x] Formulaire de réservation (`mailto:adouditoufik@gmail.com`)
-- [x] SVG Mercedes Classe V dans la section Flotte
-- [x] Animations CSS (fadeInUp, hover effects)
+- [x] Design 1 : Vert Doré (`vert-dore.html`) — hero, services, flotte SVG, réservation, contact
+- [x] Design 2 : Minéral (`mineral.html`) — style épuré lumineux, Cormorant Garamond + Inter
+- [x] Design 3 : Luxe Intemporel (`bordeaux.html`) — style baroque opulent, shimmer animations
+- [x] Design 4 : Rouge Velvet (`rouge-velvet.html`) — fond bordeaux wine, ivoire, orb stats, Cormorant
+- [x] Design 5 : Noir Doré (`noir-dore.html`) — fond noir pur, or #D4AF37, Cinzel romain, frame géométrique
+- [x] `index.html` = design final minéral (choix client)
+- [x] Tous responsive mobile-first
+- [x] Formulaires réservation → `mailto:adouditoufik@gmail.com`
+- [x] Push GitHub — `Yacine391/toufik` branch `main`
 
 ## Tâches en cours
-- [ ] Validation visuelle avec le client (montrer la maquette)
-- [ ] Ajustements selon retours client
+- [ ] Déployer sur Vercel (connecter le repo GitHub)
+- [ ] Présenter les 3 designs au client pour choix
 
 ## Prochaines étapes
-1. Présenter la maquette au client
-2. Récupérer les vraies photos (chauffeur, véhicule, ambiance)
-3. Remplacer les gradients/SVG par les vraies photos
-4. Ajouter Google Maps embed pour la section contact (si besoin)
-5. Déploiement (Netlify ou hébergement choisi par client)
-6. Optionnel : formulaire de réservation branché sur un vrai backend (Formspree, Netlify Forms)
+1. Déployer sur Vercel (import GitHub repo → deploy automatique)
+2. Envoyer le lien Vercel au client pour qu'il choisisse son design
+3. Récupérer les vraies photos (chauffeur, véhicule, ambiance)
+4. Remplacer les gradients/SVG par les vraies photos dans le design retenu
+5. Optionnel : formulaire branché sur Formspree ou Netlify Forms
 
 ## Consignes permanentes
 - Toucher le minimum de code
