@@ -211,26 +211,67 @@
 
     /* ── FLEET ── */
     .fleet {
-      padding:7rem 5vw; background:var(--void);
-      display:grid; grid-template-columns:1fr 1fr; gap:5vw; align-items:center;
-      position:relative;
+      padding: 6rem 5vw 5rem;
+      background: var(--deep);
+      position: relative;
+      overflow: hidden;
     }
-    .fleet::before,.fleet::after {
-      content:''; position:absolute; left:0; right:0; height:1px;
-      background:linear-gradient(to right,transparent,rgba(192,174,148,.16),transparent);
+    .fleet::before, .fleet::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(192,174,148,.18), transparent);
     }
-    .fleet::before{top:0;} .fleet::after{bottom:0;}
+    .fleet::before { top: 0; } .fleet::after { bottom: 0; }
+    .fleet-header { text-align: center; margin-bottom: 3.5rem; }
     .fleet-heading {
-      font-family:'DM Sans',sans-serif; font-weight:900;
-      font-size:clamp(3rem,6vw,5.5rem); line-height:.9; letter-spacing:-.04em;
-      color:var(--white); margin-bottom:2rem;
+      font-family: 'DM Serif Display', serif; font-style: italic;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem); color: var(--white);
+      line-height: 1; margin-bottom: .7rem;
     }
-    .fleet-heading em { font-style:normal; color:var(--stone); }
-    .fleet-desc { font-size:.88rem; font-weight:300; color:var(--pearl); line-height:1.9; margin-bottom:2.5rem; max-width:42ch; }
-    .fleet-specs { list-style:none; display:flex; flex-direction:column; gap:.9rem; }
-    .fleet-specs li { font-size:.8rem; font-weight:400; color:var(--pearl); display:flex; align-items:center; gap:1rem; }
-    .fleet-specs li::before { content:'—'; color:var(--taupe); font-size:.7rem; }
-    .fleet-visual { display:flex; align-items:center; justify-content:center; }
+    .fleet-heading em { font-style: normal; color: var(--stone); }
+    .fleet-tagline {
+      font-size: .72rem; font-weight: 300; color: var(--pearl); opacity: .4; letter-spacing: .12em;
+    }
+    .fleet-stage {
+      position: relative; max-width: 860px; margin: 0 auto 3.5rem;
+    }
+    .fleet-stage-glow {
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 50px;
+      background: radial-gradient(ellipse, rgba(192,174,148,.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .fleet-specs-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      max-width: 860px; margin: 0 auto;
+      border: 1px solid rgba(192,174,148,.1);
+    }
+    .spec-cell {
+      padding: 1.8rem 2rem;
+      border-right: 1px solid rgba(192,174,148,.1);
+      border-bottom: 1px solid rgba(192,174,148,.1);
+      transition: background .25s;
+    }
+    .spec-cell:nth-child(3n) { border-right: none; }
+    .spec-cell:nth-child(n+4) { border-bottom: none; }
+    .spec-cell:hover { background: rgba(192,174,148,.04); }
+    .spec-n {
+      font-size: .48rem; letter-spacing: .38em; color: var(--taupe);
+      display: block; margin-bottom: .6rem;
+    }
+    .spec-title {
+      font-family: 'DM Serif Display', serif; font-style: italic;
+      font-size: 1rem; color: var(--white); display: block; margin-bottom: .3rem;
+    }
+    .spec-detail {
+      font-size: .66rem; font-weight: 300; color: var(--pearl); opacity: .38; letter-spacing: .06em;
+    }
+    @media(max-width:700px) {
+      .fleet-specs-grid { grid-template-columns: repeat(2,1fr); }
+      .spec-cell:nth-child(3n) { border-right: 1px solid rgba(192,174,148,.1); }
+      .spec-cell:nth-child(2n) { border-right: none; }
+      .spec-cell:nth-child(n+4) { border-bottom: 1px solid rgba(192,174,148,.1); }
+      .spec-cell:nth-child(n+5) { border-bottom: none; }
+    }
 
     /* ── BOOKING ── */
     .booking { padding:7rem 5vw; background:var(--slate); }
@@ -293,7 +334,7 @@
       .hero-left{padding:7rem 5vw 4rem;}
       h1.hero-h1{font-size:clamp(3.5rem,14vw,7rem);}
       .services-grid{grid-template-columns:1fr;}
-      .fleet{grid-template-columns:1fr;} .fleet-visual{display:none;}
+      /* fleet is now full-width, no grid override needed */
       .footer-grid{grid-template-columns:1fr;}
     }
     @media(max-width:600px){
@@ -387,44 +428,84 @@
   </section>
 
   <section class="fleet" id="flotte">
-    <div class="fleet-text reveal">
-      <span class="section-label">02 — Véhicule</span>
-      <h2 class="fleet-heading">Notre<br><em>Flotte</em></h2>
-      <p class="fleet-desc">Un Mercedes Classe V haut de gamme, alliant élégance et espace pour 7 passagers dans un confort exceptionnel.</p>
-      <ul class="fleet-specs">
-        <li>Mercedes Classe V — 7 places</li><li>Climatisation bizone</li><li>WiFi à bord</li>
-        <li>Chargeurs USB &amp; 220V</li><li>Eau et friandises offertes</li><li>Tenue professionnelle chauffeur</li>
-      </ul>
+    <div class="fleet-header reveal">
+      <span class="section-label" style="display:block;margin-bottom:1.2rem;">02 — Véhicule</span>
+      <h2 class="fleet-heading">Mercedes <em>Classe V</em></h2>
+      <p class="fleet-tagline">Van prestige · 7 places · Paris &amp; Île-de-France</p>
     </div>
-    <div class="fleet-visual reveal">
-      <svg viewBox="0 0 560 200" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="278" cy="192" rx="218" ry="7" fill="rgba(192,174,148,0.06)"/>
-        <path d="M 58,168 C 44,168 38,162 36,152 L 34,136 L 38,112 L 58,90 L 86,68 L 114,54 L 142,50 L 432,50 L 457,56 L 474,78 L 480,110 L 480,146 L 477,160 C 475,166 471,170 465,170 L 450,170 A 30,30 0 0,0 390,170 L 168,170 A 30,30 0 0,0 108,170 Z"
-          fill="rgba(192,174,148,0.07)" stroke="#8B7B68" stroke-width="1.4"/>
-        <path d="M 90,68 L 118,56 L 148,52 L 160,68 L 97,76 Z"
-          fill="rgba(20,20,22,0.9)" stroke="#8B7B68" stroke-width="0.8"/>
-        <rect x="168" y="56" width="78" height="58" rx="4" fill="rgba(20,20,22,0.9)" stroke="#8B7B68" stroke-width="0.7"/>
-        <rect x="254" y="56" width="78" height="58" rx="4" fill="rgba(20,20,22,0.9)" stroke="#8B7B68" stroke-width="0.7"/>
-        <rect x="340" y="56" width="84" height="58" rx="4" fill="rgba(20,20,22,0.9)" stroke="#8B7B68" stroke-width="0.7"/>
-        <line x1="252" y1="50" x2="252" y2="168" stroke="rgba(139,123,104,0.22)" stroke-width="1"/>
-        <line x1="338" y1="50" x2="338" y2="168" stroke="rgba(139,123,104,0.22)" stroke-width="1"/>
-        <line x1="160" y1="118" x2="464" y2="118" stroke="rgba(139,123,104,0.16)" stroke-width="0.8"/>
-        <path d="M 44,126 L 40,108 L 56,90 L 68,118 Z" fill="rgba(192,174,148,0.18)" stroke="#8B7B68" stroke-width="0.8"/>
-        <path d="M 464,82 L 474,82 L 480,112 L 470,112 Z" fill="rgba(192,174,148,0.18)" stroke="#8B7B68" stroke-width="0.8"/>
-        <rect x="294" y="108" width="20" height="5" rx="2.5" fill="rgba(139,123,104,0.3)"/>
-        <circle cx="138" cy="172" r="30" fill="#0D0D0F" stroke="#8B7B68" stroke-width="1.4"/>
-        <circle cx="138" cy="172" r="20" fill="none" stroke="rgba(139,123,104,0.28)" stroke-width="1"/>
-        <circle cx="138" cy="172" r="8" fill="rgba(192,174,148,0.35)"/>
-        <line x1="138" y1="152" x2="138" y2="192" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
-        <line x1="120" y1="163" x2="156" y2="181" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
-        <line x1="120" y1="181" x2="156" y2="163" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
-        <circle cx="420" cy="172" r="30" fill="#0D0D0F" stroke="#8B7B68" stroke-width="1.4"/>
-        <circle cx="420" cy="172" r="20" fill="none" stroke="rgba(139,123,104,0.28)" stroke-width="1"/>
-        <circle cx="420" cy="172" r="8" fill="rgba(192,174,148,0.35)"/>
-        <line x1="420" y1="152" x2="420" y2="192" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
-        <line x1="402" y1="163" x2="438" y2="181" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
-        <line x1="402" y1="181" x2="438" y2="163" stroke="rgba(139,123,104,0.22)" stroke-width="0.9"/>
+
+    <div class="fleet-stage reveal">
+      <svg viewBox="0 0 800 205" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="mnSpot" cx="50%" cy="92%" r="48%">
+            <stop offset="0%" stop-color="rgba(192,174,148,.1)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <rect width="800" height="205" fill="url(#mnSpot)"/>
+        <g transform="translate(120,0)">
+          <ellipse cx="278" cy="192" rx="218" ry="7" fill="rgba(192,174,148,0.07)"/>
+          <path d="M 58,168 C 44,168 38,162 36,152 L 34,136 L 38,112 L 58,90 L 86,68 L 114,54 L 142,50 L 432,50 L 457,56 L 474,78 L 480,110 L 480,146 L 477,160 C 475,166 471,170 465,170 L 450,170 A 30,30 0 0,0 390,170 L 168,170 A 30,30 0 0,0 108,170 Z"
+            fill="rgba(192,174,148,0.06)" stroke="#8B7B68" stroke-width="1.4"/>
+          <path d="M 90,68 L 118,56 L 148,52 L 160,68 L 97,76 Z"
+            fill="rgba(13,13,15,0.95)" stroke="#8B7B68" stroke-width="0.8"/>
+          <rect x="168" y="56" width="78" height="58" rx="4" fill="rgba(13,13,15,0.95)" stroke="#8B7B68" stroke-width="0.7"/>
+          <rect x="254" y="56" width="78" height="58" rx="4" fill="rgba(13,13,15,0.95)" stroke="#8B7B68" stroke-width="0.7"/>
+          <rect x="340" y="56" width="84" height="58" rx="4" fill="rgba(13,13,15,0.95)" stroke="#8B7B68" stroke-width="0.7"/>
+          <line x1="252" y1="50" x2="252" y2="168" stroke="rgba(139,123,104,0.24)" stroke-width="1"/>
+          <line x1="338" y1="50" x2="338" y2="168" stroke="rgba(139,123,104,0.24)" stroke-width="1"/>
+          <line x1="160" y1="118" x2="464" y2="118" stroke="rgba(139,123,104,0.18)" stroke-width="0.8"/>
+          <path d="M 44,126 L 40,108 L 56,90 L 68,118 Z" fill="rgba(192,174,148,0.2)" stroke="#8B7B68" stroke-width="0.8"/>
+          <path d="M 464,82 L 474,82 L 480,112 L 470,112 Z" fill="rgba(192,174,148,0.2)" stroke="#8B7B68" stroke-width="0.8"/>
+          <rect x="294" y="108" width="20" height="5" rx="2.5" fill="rgba(139,123,104,0.35)"/>
+          <circle cx="138" cy="172" r="30" fill="#0D0D0F" stroke="#8B7B68" stroke-width="1.4"/>
+          <circle cx="138" cy="172" r="20" fill="none" stroke="rgba(139,123,104,0.3)" stroke-width="1"/>
+          <circle cx="138" cy="172" r="8" fill="rgba(192,174,148,0.38)"/>
+          <line x1="138" y1="152" x2="138" y2="192" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+          <line x1="120" y1="163" x2="156" y2="181" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+          <line x1="120" y1="181" x2="156" y2="163" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+          <circle cx="420" cy="172" r="30" fill="#0D0D0F" stroke="#8B7B68" stroke-width="1.4"/>
+          <circle cx="420" cy="172" r="20" fill="none" stroke="rgba(139,123,104,0.3)" stroke-width="1"/>
+          <circle cx="420" cy="172" r="8" fill="rgba(192,174,148,0.38)"/>
+          <line x1="420" y1="152" x2="420" y2="192" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+          <line x1="402" y1="163" x2="438" y2="181" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+          <line x1="402" y1="181" x2="438" y2="163" stroke="rgba(139,123,104,0.24)" stroke-width="0.9"/>
+        </g>
       </svg>
+      <div class="fleet-stage-glow"></div>
+    </div>
+
+    <div class="fleet-specs-grid reveal">
+      <div class="spec-cell">
+        <span class="spec-n">01</span>
+        <span class="spec-title">7 Places</span>
+        <span class="spec-detail">Mercedes Classe V</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-n">02</span>
+        <span class="spec-title">Climatisation</span>
+        <span class="spec-detail">Bizone, contrôle individuel</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-n">03</span>
+        <span class="spec-title">WiFi Embarqué</span>
+        <span class="spec-detail">Connexion haut débit</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-n">04</span>
+        <span class="spec-title">Chargeurs</span>
+        <span class="spec-detail">USB &amp; prises 220V</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-n">05</span>
+        <span class="spec-title">Rafraîchissements</span>
+        <span class="spec-detail">Eau &amp; friandises à bord</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-n">06</span>
+        <span class="spec-title">Chauffeur Privé</span>
+        <span class="spec-detail">Tenue et discrétion</span>
+      </div>
     </div>
   </section>
 
