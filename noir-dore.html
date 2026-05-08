@@ -377,11 +377,6 @@
       --progress-bar-height: 2px;
       --progress-mask: transparent;
     }
-    .fleet-attribution {
-      text-align:center; font-size:.5rem; letter-spacing:.12em;
-      color:rgba(255,255,255,.1); margin-top:.6rem;
-    }
-    .fleet-attribution a { color:rgba(212,168,36,.25); text-decoration:none; }
     /* Mobile fallback */
     .fleet-mob { display:none; max-width:860px; margin:2rem auto 0; padding:0 5vw; }
     .fleet-mob-grid {
@@ -643,23 +638,22 @@
         </div>
       </div>
 
-      <!-- Mercedes Benz V-Class GLB — model-viewer (CC BY Mona x Supercars / Sketchfab) -->
+      <!-- Van 3D — Kenney CC0 -->
       <model-viewer
         class="fleet-van"
-        src="./assets/mercedes-v-class.glb"
+        src="./assets/van.glb"
         alt="Mercedes Benz V-Class Classe V"
         auto-rotate
         auto-rotate-delay="400"
         rotation-per-second="18deg"
         camera-controls
         disable-zoom
-        shadow-intensity="2.5"
-        shadow-softness="0.9"
-        exposure="0.80"
-        camera-orbit="-25deg 70deg auto"
+        shadow-intensity="3"
+        shadow-softness="0.95"
+        exposure="1.1"
+        camera-orbit="-30deg 72deg auto"
         environment-image="neutral">
       </model-viewer>
-      <p class="fleet-attribution">Modèle 3D · <a href="https://sketchfab.com/3d-models/mercedes-benz-v-class-61583f5c172f4e25a963e52e1e67c11a" target="_blank" rel="noopener">CC BY Mona x Supercars</a></p>
 
       <!-- Bottom callouts -->
       <div class="callouts-bot">
