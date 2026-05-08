@@ -370,7 +370,7 @@
       order:-1;
       background:linear-gradient(to top,rgba(212,168,36,.3),rgba(212,168,36,.04));
     }
-    .fleet-van { display:block; width:100%; height:360px; cursor:grab; }
+    .fleet-van { display:block; width:100%; height:480px; border:none; }
     /* Mobile fallback */
     .fleet-mob { display:none; max-width:860px; margin:2rem auto 0; padding:0 5vw; }
     .fleet-mob-grid {
@@ -498,7 +498,6 @@
       h1.hero-h1{ font-size:clamp(2.5rem,14vw,5rem); }
     }
   </style>
-  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js"}}</script>
 </head>
 <body>
 
@@ -632,8 +631,17 @@
         </div>
       </div>
 
-      <!-- Mercedes V-Class — 3D WebGL -->
-      <canvas id="van3d" class="fleet-van"></canvas>
+      <!-- Mercedes Benz V-Class — Sketchfab embed (CC Attribution — Mona x Supercars) -->
+      <iframe
+        class="fleet-van"
+        title="Mercedes Benz V Class"
+        frameborder="0"
+        allowfullscreen
+        mozallowfullscreen="true"
+        webkitallowfullscreen="true"
+        allow="autoplay; fullscreen; xr-spatial-tracking"
+        src="https://sketchfab.com/models/61583f5c172f4e25a963e52e1e67c11a/embed?autostart=1&autospin=0.2&ui_controls=0&ui_infos=0&ui_stop=0&preload=1&dnt=1">
+      </iframe>
 
       <!-- Bottom callouts -->
       <div class="callouts-bot">
@@ -732,222 +740,5 @@
     document.querySelectorAll('.reveal, .callout').forEach(el => obs.observe(el));
   </script>
 
-  <script type="module">
-    import * as THREE from 'three';
-
-    (function() {
-    const canvas = document.getElementById('van3d');
-    if (!canvas) return;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.95;
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x020202, 0.055);
-
-    const camera = new THREE.PerspectiveCamera(30, 2, 0.1, 60);
-    camera.position.set(6.2, 2.8, 4.8);
-    camera.lookAt(0, 1.2, 0);
-
-    function resize() {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      if (canvas.width !== w || canvas.height !== h) {
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-    }
-
-    // ── Materials ──────────────────────────────────────────────
-    const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0D0D1A, metalness: 0.75, roughness: 0.30 });
-    const glassMat = new THREE.MeshStandardMaterial({ color: 0x0C1820, metalness: 0.05, roughness: 0.0, transparent: true, opacity: 0.52 });
-    const goldMat  = new THREE.MeshStandardMaterial({ color: 0xD4A824, metalness: 0.92, roughness: 0.10, emissive: 0x3A2000, emissiveIntensity: 0.20 });
-    const hubMat   = new THREE.MeshStandardMaterial({ color: 0xC09018, metalness: 0.90, roughness: 0.14 });
-    const tireMat  = new THREE.MeshStandardMaterial({ color: 0x050507, metalness: 0.0, roughness: 0.97 });
-    const darkMat  = new THREE.MeshStandardMaterial({ color: 0x030306, metalness: 0.4, roughness: 0.6 });
-    const floorMat = new THREE.MeshStandardMaterial({ color: 0x020203, metalness: 0.25, roughness: 0.82 });
-
-    // ── Van group ──────────────────────────────────────────────
-    const van = new THREE.Group();
-    scene.add(van);
-
-    function part(geo, mat, px, py, pz, rx, ry, rz) {
-      const m = new THREE.Mesh(geo, mat);
-      m.position.set(px ?? 0, py ?? 0, pz ?? 0);
-      if (rx || ry || rz) m.rotation.set(rx ?? 0, ry ?? 0, rz ?? 0);
-      m.castShadow = true;
-      m.receiveShadow = true;
-      van.add(m);
-      return m;
-    }
-
-    // ── Body ───────────────────────────────────────────────────
-    part(new THREE.BoxGeometry(5.1, 1.92, 1.88), bodyMat,  0,    1.40,  0);
-    part(new THREE.BoxGeometry(0.68, 0.60, 1.84), bodyMat, -2.89, 0.74, 0); // nose
-    part(new THREE.BoxGeometry(0.14, 1.92, 1.88), bodyMat,  2.44, 1.40, 0); // rear flush
-    part(new THREE.BoxGeometry(0.24, 0.40, 1.80), darkMat, -2.89, 0.32, 0); // front bumper
-    part(new THREE.BoxGeometry(0.24, 0.40, 1.80), darkMat,  2.44, 0.32, 0); // rear bumper
-    part(new THREE.BoxGeometry(4.35, 0.10, 1.82), bodyMat, -0.18, 2.37, 0); // roof overhang
-
-    // ── Gold chrome trim ───────────────────────────────────────
-    part(new THREE.BoxGeometry(5.38, 0.036, 1.90), goldMat,  0,    1.04, 0); // belt line
-    part(new THREE.BoxGeometry(5.38, 0.034, 1.90), goldMat,  0,    0.41, 0); // door sill
-    part(new THREE.BoxGeometry(4.3,  0.04,  0.04), goldMat, -0.18, 2.47, 0.94); // roof rail L
-    part(new THREE.BoxGeometry(4.3,  0.04,  0.04), goldMat, -0.18, 2.47,-0.94); // roof rail R
-
-    // ── Windshield ─────────────────────────────────────────────
-    {
-      const ws = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.18, 1.74), glassMat);
-      ws.position.set(-2.08, 1.80, 0);
-      ws.rotation.z = -0.19;
-      ws.castShadow = true;
-      van.add(ws);
-    }
-
-    // ── Side windows (z = +0.94) ───────────────────────────────
-    part(new THREE.BoxGeometry(0.96, 0.74, 0.04), glassMat, -0.92, 1.68, 0.94);
-    part(new THREE.BoxGeometry(0.94, 0.74, 0.04), glassMat,  0.08, 1.68, 0.94);
-    part(new THREE.BoxGeometry(0.90, 0.74, 0.04), glassMat,  1.02, 1.68, 0.94);
-    part(new THREE.BoxGeometry(0.60, 0.74, 0.04), glassMat,  1.88, 1.68, 0.94); // rear quarter
-
-    // ── Headlights ─────────────────────────────────────────────
-    part(new THREE.BoxGeometry(0.09, 0.25, 0.92), goldMat, -2.56, 1.10, 0.56);
-    part(new THREE.BoxGeometry(0.07, 0.055, 1.08), goldMat,-2.56, 1.32, 0);    // DRL strip
-
-    // ── Rear lights ────────────────────────────────────────────
-    part(new THREE.BoxGeometry(0.07, 0.86, 0.09), goldMat, 2.47, 1.30,  0.90);
-    part(new THREE.BoxGeometry(0.07, 0.86, 0.09), goldMat, 2.47, 1.30, -0.90);
-
-    // ── Grille ─────────────────────────────────────────────────
-    for (let i = 0; i < 4; i++)
-      part(new THREE.BoxGeometry(0.06, 0.05, 1.18), goldMat, -2.58, 0.52 + i * 0.11, 0);
-
-    // ── Wheel arch covers ──────────────────────────────────────
-    part(new THREE.BoxGeometry(1.16, 0.18, 2.0), bodyMat, -1.65, 0.42, 0);
-    part(new THREE.BoxGeometry(1.16, 0.18, 2.0), bodyMat,  1.45, 0.42, 0);
-
-    // ── Door handle accents ────────────────────────────────────
-    part(new THREE.BoxGeometry(0.22, 0.04, 0.04), goldMat, -0.42, 1.24, 0.95);
-    part(new THREE.BoxGeometry(0.22, 0.04, 0.04), goldMat,  0.90, 1.24, 0.95);
-
-    // ── Mercedes star (simplified badge) ──────────────────────
-    part(new THREE.CylinderGeometry(0.09, 0.09, 0.04, 16), goldMat, -2.60, 1.56, 0);
-
-    // ── Wheels ─────────────────────────────────────────────────
-    function addWheels(xPos) {
-      [0.938, -0.938].forEach(zPos => {
-        const g = new THREE.Group();
-        g.position.set(xPos, 0.44, zPos);
-        van.add(g);
-
-        // Tire
-        const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.44, 0.44, 0.20, 36), tireMat);
-        tire.rotation.x = Math.PI / 2;
-        g.add(tire);
-
-        // Inner rim wall (dark rubber)
-        const inner = new THREE.Mesh(new THREE.CylinderGeometry(0.295, 0.295, 0.22, 32), tireMat);
-        inner.rotation.x = Math.PI / 2;
-        g.add(inner);
-
-        // Rim disc (gold)
-        const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.290, 0.290, 0.20, 16), hubMat);
-        rim.rotation.x = Math.PI / 2;
-        g.add(rim);
-
-        // 5 spokes
-        for (let i = 0; i < 5; i++) {
-          const sg = new THREE.Group();
-          sg.rotation.z = (i / 5) * Math.PI * 2;
-          const sm = new THREE.Mesh(new THREE.BoxGeometry(0.21, 0.044, 0.22), hubMat);
-          sm.position.x = 0.13;
-          sg.add(sm);
-          g.add(sg);
-        }
-
-        // Hub cap
-        const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.22, 12), goldMat);
-        hub.rotation.x = Math.PI / 2;
-        g.add(hub);
-
-        // Center dot
-        const dot = new THREE.Mesh(new THREE.CylinderGeometry(0.022, 0.022, 0.23, 8), goldMat);
-        dot.rotation.x = Math.PI / 2;
-        g.add(dot);
-      });
-    }
-    addWheels(-1.65);
-    addWheels(1.45);
-
-    // ── Ground plane ───────────────────────────────────────────
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(22, 16), floorMat);
-    floor.rotation.x = -Math.PI / 2;
-    floor.receiveShadow = true;
-    scene.add(floor);
-
-    // Gold reflection strip under van
-    const glow = new THREE.Mesh(
-      new THREE.PlaneGeometry(5.8, 1.2),
-      new THREE.MeshBasicMaterial({ color: 0xD4A824, transparent: true, opacity: 0.032 })
-    );
-    glow.rotation.x = -Math.PI / 2;
-    glow.position.y = 0.002;
-    scene.add(glow);
-
-    // ── Lights ─────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0x1A1A2E, 25));
-
-    // Key — warm gold from front-top (camera side)
-    const key = new THREE.DirectionalLight(0xE8C060, 22);
-    key.position.set(4, 8, 6);
-    key.castShadow = true;
-    key.shadow.mapSize.set(2048, 2048);
-    key.shadow.camera.left = -6; key.shadow.camera.right = 6;
-    key.shadow.camera.top = 5;   key.shadow.camera.bottom = -1;
-    key.shadow.camera.far = 22;
-    scene.add(key);
-
-    // Fill — cool blue from left-back
-    const fill = new THREE.DirectionalLight(0x1A2868, 10);
-    fill.position.set(-5, 3, -4);
-    scene.add(fill);
-
-    // Top — white overhead to define the roof
-    const top = new THREE.DirectionalLight(0xFFFFFF, 8);
-    top.position.set(0, 10, 0);
-    scene.add(top);
-
-    // Rim — blue from behind
-    const rim = new THREE.DirectionalLight(0x2040B8, 5);
-    rim.position.set(0, 3, -8);
-    scene.add(rim);
-
-    // Gold accent point near front
-    const goldPt = new THREE.PointLight(0xD4A824, 28, 6);
-    goldPt.position.set(-3.5, 2.5, 3.5);
-    scene.add(goldPt);
-
-    // Warm fill under van
-    const underPt = new THREE.PointLight(0xA07820, 5, 3.2);
-    underPt.position.set(0, 0.1, 0);
-    scene.add(underPt);
-
-    // ── Animation ──────────────────────────────────────────────
-    let angle = Math.PI * 0.82;
-    function animate() {
-      requestAnimationFrame(animate);
-      resize();
-      angle += 0.0038;
-      van.rotation.y = angle;
-      renderer.render(scene, camera);
-    }
-    animate();
-    })();
-  </script>
 </body>
 </html>
