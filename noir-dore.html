@@ -310,76 +310,77 @@
 
     /* ── FLEET ── */
     .fleet {
-      padding: 6rem 5vw 5rem;
+      padding: 5rem 0 5.5rem;
       background: var(--void);
       position: relative;
-      overflow: hidden;
     }
     .fleet::before {
       content:''; display:block;
       position:absolute; left:0; right:0; height:1px; top:0;
-      background:linear-gradient(to right,transparent,rgba(212,175,55,.2),transparent);
+      background:linear-gradient(to right,transparent,rgba(212,175,55,.22),transparent);
     }
-    .fleet::after {
-      content:''; display:block;
-      position:absolute; left:0; right:0; height:1px; bottom:0;
-      background:linear-gradient(to right,transparent,rgba(212,175,55,.1),transparent);
+    .fleet-intro { text-align:center; padding:0 5vw; margin-bottom:2.5rem; }
+    .fleet-eyebrow {
+      display:block; font-size:.52rem; letter-spacing:.44em; text-transform:uppercase;
+      color:rgba(212,175,55,.42); margin-bottom:1.5rem;
     }
-    .fleet-header { text-align: center; margin-bottom: 3.5rem; }
-    .fleet-label { display:block; margin-bottom:1rem; }
-    .fleet-heading {
+    .fleet-model {
       font-family:'Cinzel',serif; font-weight:600;
-      font-size:clamp(2.2rem,4.5vw,3.8rem); letter-spacing:.08em;
-      color:var(--white); line-height:1; margin-bottom:.8rem;
+      font-size:clamp(2.5rem,6.5vw,5.2rem); line-height:.88; letter-spacing:.08em; color:var(--white);
     }
-    .fleet-heading em {
-      font-style:italic; color:var(--gold);
-      font-family:'Josefin Sans',sans-serif; font-weight:300; letter-spacing:.12em;
+    .fleet-model em {
+      font-family:'Josefin Sans',sans-serif; font-style:italic; font-weight:300;
+      font-size:.55em; color:var(--gold); display:block; margin-top:.5rem; letter-spacing:.14em;
     }
-    .fleet-tagline {
-      font-size:.7rem; font-weight:300; color:rgba(255,255,255,.25); letter-spacing:.14em;
+    .fleet-tagline-sm {
+      display:block; font-size:.68rem; font-weight:300; color:rgba(255,255,255,.2);
+      letter-spacing:.18em; margin-top:.9rem;
     }
-    .fleet-stage {
-      position: relative; max-width: 860px; margin: 0 auto 3.5rem;
+    /* Blueprint callout diagram */
+    .fleet-diagram { max-width:860px; margin:0 auto; padding:0 5vw; }
+    .callouts-top,.callouts-bot {
+      display:flex; justify-content:space-around; padding:0 7%;
     }
-    .fleet-stage-glow {
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 60%; height: 50px;
-      background: radial-gradient(ellipse, rgba(212,175,55,.07) 0%, transparent 70%);
-      pointer-events: none;
+    .callouts-top { margin-bottom:.3rem; }
+    .callouts-bot { margin-top:.3rem; }
+    .callout {
+      display:flex; align-items:center; flex:1; max-width:32%;
+      opacity:0; transform:translateY(18px);
+      transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1);
     }
-    .fleet-specs-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      max-width: 860px; margin: 0 auto;
-      border: 1px solid rgba(212,175,55,.14);
+    .callout-t { flex-direction:column; }
+    .callout-b { flex-direction:column; }
+    .callout.visible { opacity:1; transform:translateY(0); }
+    .callout:nth-child(1){ transition-delay:.1s; }
+    .callout:nth-child(2){ transition-delay:.28s; }
+    .callout:nth-child(3){ transition-delay:.46s; }
+    .c-card {
+      text-align:center; width:100%;
+      border:1px solid rgba(212,175,55,.14);
+      padding:.65rem .9rem; background:rgba(7,7,7,.75);
     }
-    .spec-cell {
-      padding: 1.8rem 2rem;
-      border-right: 1px solid rgba(212,175,55,.1);
-      border-bottom: 1px solid rgba(212,175,55,.1);
-      transition: background .25s;
+    .c-num { display:block; font-family:'Cinzel',serif; font-size:.42rem; letter-spacing:.44em; color:rgba(212,175,55,.45); margin-bottom:.3rem; }
+    .c-name { display:block; font-family:'Cinzel',serif; font-size:.82rem; letter-spacing:.06em; color:var(--white); margin-bottom:.18rem; line-height:1.2; }
+    .c-det { display:block; font-family:'Josefin Sans',sans-serif; font-size:.58rem; font-weight:300; color:rgba(255,255,255,.26); letter-spacing:.08em; }
+    .c-stem {
+      width:1px; height:38px; align-self:center; flex-shrink:0;
+      background:linear-gradient(to bottom,rgba(212,175,55,.3),rgba(212,175,55,.04));
     }
-    .spec-cell:nth-child(3n) { border-right: none; }
-    .spec-cell:nth-child(n+4) { border-bottom: none; }
-    .spec-cell:hover { background: rgba(212,175,55,.04); }
-    .spec-n {
-      font-family:'Cinzel',serif; font-size:.46rem; letter-spacing:.4em;
-      color:rgba(212,175,55,.38); display:block; margin-bottom:.6rem;
+    .callout-b .c-stem {
+      order:-1;
+      background:linear-gradient(to top,rgba(212,175,55,.3),rgba(212,175,55,.04));
     }
-    .spec-title {
-      font-family:'Cinzel',serif; font-size:.86rem; letter-spacing:.06em;
-      color:var(--white); display:block; margin-bottom:.3rem;
+    .fleet-van { display:block; width:100%; }
+    /* Mobile fallback */
+    .fleet-mob { display:none; max-width:860px; margin:2rem auto 0; padding:0 5vw; }
+    .fleet-mob-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:1px; background:rgba(212,175,55,.1); border:1px solid rgba(212,175,55,.12);
     }
-    .spec-detail {
-      font-family:'Josefin Sans',sans-serif; font-size:.66rem; font-weight:300;
-      color:rgba(255,255,255,.28); letter-spacing:.06em;
-    }
-    @media(max-width:700px) {
-      .fleet-specs-grid { grid-template-columns: repeat(2,1fr); }
-      .spec-cell:nth-child(3n) { border-right: 1px solid rgba(212,175,55,.1); }
-      .spec-cell:nth-child(2n) { border-right: none; }
-      .spec-cell:nth-child(n+4) { border-bottom: 1px solid rgba(212,175,55,.1); }
-      .spec-cell:nth-child(n+5) { border-bottom: none; }
+    .mob-cell { background:var(--void); padding:1.1rem 1.4rem; }
+    @media(max-width:680px) {
+      .callouts-top,.callouts-bot { display:none; }
+      .fleet-mob { display:block; }
     }
 
     /* ── TRUST ── */
@@ -607,14 +608,31 @@
   </section>
 
   <section class="fleet" id="flotte">
-    <div class="fleet-header reveal">
-      <span class="section-label fleet-label">02 — Véhicule</span>
-      <h2 class="fleet-heading">Mercedes <em>Classe V</em></h2>
-      <p class="fleet-tagline">Van prestige · 7 places · Paris &amp; Île-de-France</p>
+    <div class="fleet-intro reveal">
+      <span class="fleet-eyebrow">02 — Véhicule</span>
+      <h2 class="fleet-model">MERCEDES<em>Classe V</em></h2>
+      <span class="fleet-tagline-sm">Van prestige · 7 places · Paris &amp; Île-de-France</span>
     </div>
 
-    <div class="fleet-stage reveal">
-      <svg viewBox="0 0 800 205" width="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="fleet-diagram">
+      <!-- Top callouts -->
+      <div class="callouts-top">
+        <div class="callout callout-t">
+          <div class="c-card"><span class="c-num">I</span><span class="c-name">7 Places</span><span class="c-det">Mercedes Classe V</span></div>
+          <div class="c-stem"></div>
+        </div>
+        <div class="callout callout-t">
+          <div class="c-card"><span class="c-num">II</span><span class="c-name">Climatisation</span><span class="c-det">Bizone individuelle</span></div>
+          <div class="c-stem"></div>
+        </div>
+        <div class="callout callout-t">
+          <div class="c-card"><span class="c-num">III</span><span class="c-name">WiFi à bord</span><span class="c-det">Connexion haut débit</span></div>
+          <div class="c-stem"></div>
+        </div>
+      </div>
+
+      <!-- Van -->
+      <svg class="fleet-van" viewBox="0 0 800 205" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="ndSpot" cx="50%" cy="92%" r="48%">
             <stop offset="0%" stop-color="rgba(212,175,55,.07)"/>
@@ -626,8 +644,7 @@
           <ellipse cx="278" cy="192" rx="218" ry="7" fill="rgba(212,175,55,0.07)"/>
           <path d="M 58,168 C 44,168 38,162 36,152 L 34,136 L 38,112 L 58,90 L 86,68 L 114,54 L 142,50 L 432,50 L 457,56 L 474,78 L 480,110 L 480,146 L 477,160 C 475,166 471,170 465,170 L 450,170 A 30,30 0 0,0 390,170 L 168,170 A 30,30 0 0,0 108,170 Z"
             fill="rgba(212,175,55,0.05)" stroke="#D4AF37" stroke-width="1.4"/>
-          <path d="M 90,68 L 118,56 L 148,52 L 160,68 L 97,76 Z"
-            fill="rgba(212,175,55,0.14)" stroke="#D4AF37" stroke-width="0.8"/>
+          <path d="M 90,68 L 118,56 L 148,52 L 160,68 L 97,76 Z" fill="rgba(212,175,55,0.14)" stroke="#D4AF37" stroke-width="0.8"/>
           <rect x="168" y="56" width="78" height="58" rx="4" fill="rgba(212,175,55,0.1)" stroke="#D4AF37" stroke-width="0.7"/>
           <rect x="254" y="56" width="78" height="58" rx="4" fill="rgba(212,175,55,0.1)" stroke="#D4AF37" stroke-width="0.7"/>
           <rect x="340" y="56" width="84" height="58" rx="4" fill="rgba(212,175,55,0.1)" stroke="#D4AF37" stroke-width="0.7"/>
@@ -651,39 +668,33 @@
           <line x1="402" y1="181" x2="438" y2="163" stroke="rgba(212,175,55,0.28)" stroke-width="0.9"/>
         </g>
       </svg>
-      <div class="fleet-stage-glow"></div>
+
+      <!-- Bottom callouts -->
+      <div class="callouts-bot">
+        <div class="callout callout-b">
+          <div class="c-stem"></div>
+          <div class="c-card"><span class="c-num">IV</span><span class="c-name">Chargeurs</span><span class="c-det">USB &amp; 220V</span></div>
+        </div>
+        <div class="callout callout-b">
+          <div class="c-stem"></div>
+          <div class="c-card"><span class="c-num">V</span><span class="c-name">Rafraîchissements</span><span class="c-det">Eau &amp; friandises</span></div>
+        </div>
+        <div class="callout callout-b">
+          <div class="c-stem"></div>
+          <div class="c-card"><span class="c-num">VI</span><span class="c-name">Chauffeur Privé</span><span class="c-det">Tenue &amp; discrétion</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="fleet-specs-grid reveal">
-      <div class="spec-cell">
-        <span class="spec-n">I</span>
-        <span class="spec-title">7 Places</span>
-        <span class="spec-detail">Mercedes Classe V</span>
-      </div>
-      <div class="spec-cell">
-        <span class="spec-n">II</span>
-        <span class="spec-title">Climatisation</span>
-        <span class="spec-detail">Bizone, contrôle individuel</span>
-      </div>
-      <div class="spec-cell">
-        <span class="spec-n">III</span>
-        <span class="spec-title">WiFi Embarqué</span>
-        <span class="spec-detail">Connexion haut débit</span>
-      </div>
-      <div class="spec-cell">
-        <span class="spec-n">IV</span>
-        <span class="spec-title">Chargeurs</span>
-        <span class="spec-detail">USB &amp; prises 220V</span>
-      </div>
-      <div class="spec-cell">
-        <span class="spec-n">V</span>
-        <span class="spec-title">Rafraîchissements</span>
-        <span class="spec-detail">Eau &amp; friandises à bord</span>
-      </div>
-      <div class="spec-cell">
-        <span class="spec-n">VI</span>
-        <span class="spec-title">Chauffeur Privé</span>
-        <span class="spec-detail">Tenue et discrétion</span>
+    <!-- Mobile fallback (callouts hidden <680px) -->
+    <div class="fleet-mob">
+      <div class="fleet-mob-grid">
+        <div class="mob-cell"><span class="c-num">I</span><span class="c-name">7 Places</span><span class="c-det">Mercedes Classe V</span></div>
+        <div class="mob-cell"><span class="c-num">II</span><span class="c-name">Climatisation</span><span class="c-det">Bizone individuelle</span></div>
+        <div class="mob-cell"><span class="c-num">III</span><span class="c-name">WiFi à bord</span><span class="c-det">Haut débit</span></div>
+        <div class="mob-cell"><span class="c-num">IV</span><span class="c-name">Chargeurs</span><span class="c-det">USB &amp; 220V</span></div>
+        <div class="mob-cell"><span class="c-num">V</span><span class="c-name">Rafraîchissements</span><span class="c-det">Eau &amp; friandises</span></div>
+        <div class="mob-cell"><span class="c-num">VI</span><span class="c-name">Chauffeur Privé</span><span class="c-det">Tenue &amp; discrétion</span></div>
       </div>
     </div>
   </section>
@@ -752,7 +763,7 @@
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal, .callout').forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
