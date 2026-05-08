@@ -1,9 +1,9 @@
 # Road Map — Moove & Dream VTC (Toufik)
 
 ## État actuel du projet
-- **Date** : 2026-04-15
-- **Phase** : 3 maquettes créées + pushées sur GitHub (prêt pour Vercel)
-- **Stack** : HTML5 + CSS3 vanilla, aucun framework
+- **Date** : 2026-05-08
+- **Phase** : Design final noir-doré livré avec van 3D Three.js
+- **Stack** : HTML5 + CSS3 vanilla + Three.js (CDN ES module)
 - **Repo** : `git@github.com:Yacine391/toufik.git`
 
 ## Client
@@ -17,7 +17,7 @@
 ## Structure des fichiers
 | Fichier | Rôle |
 |---------|------|
-| `index.html` | Design final retenu — Minéral blanc (DM Serif + DM Sans) |
+| `index.html` | iframe → `noir-dore.html` (design final retenu par client) |
 | `vert-dore.html` | Design 1 — Vert forêt + Or antique (Héritage VTC style) |
 | `mineral.html` | Design 2 — Taupe, Moka, Blanc pur, Gris perle (Aurora VTC style) |
 | `bordeaux.html` | Design 3 — Fond noir + accents bordeaux (Playfair + Raleway) |
@@ -30,14 +30,16 @@
 - [x] Design 3 : Luxe Intemporel (`bordeaux.html`) — style baroque opulent, shimmer animations
 - [x] Design 4 : Rouge Velvet (`rouge-velvet.html`) — fond bordeaux wine, ivoire, orb stats, Cormorant
 - [x] Design 5 : Noir Doré (`noir-dore.html`) — fond noir pur, or #D4AF37, Cinzel romain, frame géométrique
-- [x] `index.html` = design final minéral (choix client)
+- [x] `index.html` = iframe noir-doré (design final retenu)
 - [x] Tous responsive mobile-first
 - [x] Formulaires réservation → `mailto:adouditoufik@gmail.com`
+- [x] Section flotte : van 3D WebGL (Three.js) avec rotation auto
+- [x] Couleur or mise à jour : #D4A824 (ambre chaud, 86 occurrences)
+- [x] Blueprint callout diagram (6 specs autour du van)
 - [x] Push GitHub — `Yacine391/toufik` branch `main`
 
 ## Tâches en cours
 - [ ] Déployer sur Vercel (connecter le repo GitHub)
-- [ ] Présenter les 3 designs au client pour choix
 
 ## Prochaines étapes
 1. Déployer sur Vercel (import GitHub repo → deploy automatique)
