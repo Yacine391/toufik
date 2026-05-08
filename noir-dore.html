@@ -504,7 +504,6 @@
       h1.hero-h1{ font-size:clamp(2.5rem,14vw,5rem); }
     }
   </style>
-  <link rel="preload" href="./assets/van.glb" as="fetch" crossorigin="anonymous">
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
@@ -653,9 +652,7 @@
         shadow-softness="0.95"
         exposure="1.1"
         camera-orbit="-30deg 72deg auto"
-        environment-image="neutral"
-        loading="eager"
-        reveal="auto">
+        environment-image="neutral">
       </model-viewer>
 
       <!-- Bottom callouts -->
