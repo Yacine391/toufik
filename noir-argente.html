@@ -11,48 +11,89 @@
     html { scroll-behavior: smooth; }
 
     :root {
-      --bg:     #070707;
-      --bg2:    #0c0c0c;
-      --bg3:    #121212;
-      --border: #1e1e1e;
-      --bd2:    #2c2c2c;
-      --white:  #ffffff;
-      --s100:   #e8e8e8;
-      --s200:   #c0c0c0;
-      --s400:   #808080;
-      --s600:   #484848;
-      --font:   'Raleway', sans-serif;
+      --bg:    #070707;
+      --bg2:   #0c0c0c;
+      --bg3:   #121212;
+      --bd:    #1e1e1e;
+      --bd2:   #2c2c2c;
+      --white: #ffffff;
+      --s100:  #e8e8e8;
+      --s200:  #c0c0c0;
+      --s400:  #808080;
+      --s600:  #484848;
+      --fn:    'Raleway', sans-serif;
     }
 
-    body {
-      font-family: var(--font);
-      background: var(--bg);
-      color: var(--white);
-      overflow-x: hidden;
+    body { font-family: var(--fn); background: var(--bg); color: var(--white); overflow-x: hidden; }
+
+    /* ── SIDE NAV ── */
+    #sidenav {
+      position: fixed; right: 28px; top: 50%; transform: translateY(-50%);
+      z-index: 500; display: flex; flex-direction: column; gap: 14px;
     }
+    .sn-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--s600); cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .sn-dot:hover, .sn-dot.active { background: var(--s200); transform: scale(1.5); }
+    .sn-dot::after {
+      content: attr(data-label);
+      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+      font-size: 9px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--s200);
+      white-space: nowrap; opacity: 0; transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .sn-dot:hover::after { opacity: 1; }
+    @media (max-width: 900px) { #sidenav { display: none; } }
 
     /* ── HEADER ── */
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      height: 58px;
-      display: flex; align-items: center; justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: 58px; display: flex; align-items: center; justify-content: space-between;
       padding: 0 48px;
-      background: rgba(7,7,7,0.96);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(7,7,7,0.96); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bd);
+      transition: height 0.3s, padding 0.3s;
     }
-    .h-logo {
-      font-size: 13px; font-weight: 600; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--white);
-    }
+    header.compact { height: 48px; }
+    .h-logo { font-size: 13px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; }
     .h-star { color: var(--s200); opacity: 0.9; }
-    .h-dest {
-      font-size: 9px; font-weight: 400; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--s400);
+    .h-nav { display: flex; gap: 32px; }
+    .h-nav a {
+      font-size: 9px; font-weight: 500; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--s400); text-decoration: none;
+      transition: color 0.2s;
     }
+    .h-nav a:hover { color: var(--white); }
+    @media (max-width: 768px) { .h-nav { display: none; } header { padding: 0 20px; } }
 
-    /* ── HERO ── */
-    .hero {
+    /* ── SHARED ── */
+    .sec { padding: 100px max(5vw, 32px); }
+    .sec-head { text-align: center; margin-bottom: 64px; }
+    .sec-row { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 10px; }
+    .sec-line { flex: 1; max-width: 80px; height: 1px; background: var(--bd2); }
+    .sec-title { font-size: 18px; font-weight: 700; letter-spacing: 0.38em; text-transform: uppercase; }
+    .sec-sub { font-size: 9px; font-weight: 300; letter-spacing: 0.44em; text-transform: uppercase; color: var(--s400); }
+    .eyebrow { font-size: 9px; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: var(--s400); }
+
+    /* ── REVEAL ── */
+    .rev { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rev.in { opacity: 1; transform: translateY(0); }
+    .rev-l { opacity: 0; transform: translateX(-32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rev-l.in { opacity: 1; transform: translateX(0); }
+    .rev-r { opacity: 0; transform: translateX(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .rev-r.in { opacity: 1; transform: translateX(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; } .d6 { transition-delay: 0.6s; }
+
+    /* ══════════════════════════════════════════════
+       1. HERO
+    ══════════════════════════════════════════════ */
+    #hero {
       min-height: 100vh; padding-top: 58px;
       display: grid; grid-template-columns: 44% 56%;
       background: var(--bg);
@@ -64,319 +105,235 @@
     .hero-eyebrow {
       font-size: 9px; font-weight: 500; letter-spacing: 0.42em;
       text-transform: uppercase; color: var(--s400); margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
     }
     h1 {
-      font-size: clamp(2.8rem, 5.5vw, 5.2rem);
-      font-weight: 800; line-height: 0.95;
-      letter-spacing: 0.04em; text-transform: uppercase;
+      font-size: clamp(2.8rem, 5.5vw, 5.2rem); font-weight: 800;
+      line-height: 0.95; letter-spacing: 0.04em; text-transform: uppercase;
       color: var(--white); margin-bottom: 28px;
     }
+    .h1-w1 { display: block; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards; }
+    .h1-w2 { display: block; opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards; }
     .hero-rule {
       width: 42px; height: 1px;
       background: linear-gradient(to right, var(--s200), transparent);
-      margin-bottom: 24px;
+      margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s ease 0.9s forwards;
     }
     .hero-tagline {
-      font-size: 13px; font-weight: 300;
-      color: var(--s400); line-height: 1.85;
+      font-size: 13px; font-weight: 300; color: var(--s400); line-height: 1.85;
       max-width: 360px; margin-bottom: 44px;
+      opacity: 0; animation: fadeUp 0.8s ease 1.0s forwards;
     }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 14px;
-      padding: 15px 34px;
-      background: var(--white); color: var(--bg);
-      font-family: var(--font); font-weight: 700;
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      text-decoration: none; cursor: pointer; border: none;
-      width: fit-content; transition: background 0.25s;
+      padding: 15px 34px; background: var(--white); color: var(--bg);
+      font-family: var(--fn); font-weight: 700; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; border: none; cursor: pointer; width: fit-content;
+      transition: background 0.25s;
+      opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
     }
     .hero-cta:hover { background: var(--s100); }
     .hero-right {
       display: flex;
       background: radial-gradient(ellipse 80% 70% at 60% 55%, #141414 0%, var(--bg) 75%);
+      opacity: 0; animation: fadeIn 1.4s ease 0.6s forwards;
     }
-    .hero-van {
-      width: 100%; min-height: calc(100vh - 58px);
-      background: transparent;
-      --progress-bar-color: rgba(192,192,192,0.4);
+    .hero-van { width: 100%; min-height: calc(100vh - 58px); background: transparent; --progress-bar-color: rgba(192,192,192,0.3); }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 80px 20px 60px; }
+      h1 { font-size: clamp(2.4rem, 11vw, 3.8rem); }
     }
 
     /* ── TICKER ── */
-    .ticker {
-      overflow: hidden; white-space: nowrap;
-      padding: 11px 0;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .ticker-inner {
-      display: inline-flex; align-items: center;
-      animation: scrollTicker 32s linear infinite;
-    }
-    @keyframes scrollTicker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .t-item {
-      font-size: 9px; font-weight: 500;
-      letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--s600); padding: 0 26px;
-    }
-    .t-sep { color: var(--border); font-size: 7px; }
+    .ticker { overflow: hidden; white-space: nowrap; padding: 11px 0; background: var(--bg2); border-top: 1px solid var(--bd); border-bottom: 1px solid var(--bd); }
+    .ticker-inner { display: inline-flex; align-items: center; animation: tickMove 32s linear infinite; }
+    @keyframes tickMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .t-item { font-size: 9px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--s600); padding: 0 26px; }
+    .t-sep { color: var(--bd2); font-size: 7px; }
 
-    /* ── BOOKING ── */
-    .booking {
-      padding: 80px max(5vw, 32px) 100px;
+    /* ══════════════════════════════════════════════
+       2. SERVICES
+    ══════════════════════════════════════════════ */
+    #services { background: var(--bg2); }
+    .srv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--bd); border: 1px solid var(--bd); max-width: 1100px; margin: 0 auto; }
+    .srv-card {
+      background: var(--bg2); padding: 44px 36px;
+      position: relative; cursor: default;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.35s, background 0.35s, transform 0.35s;
     }
+    .srv-card:hover { border-bottom-color: var(--s200); background: var(--bg3); transform: translateY(-3px); }
+    .srv-num { position: absolute; top: 24px; right: 24px; font-size: 8px; font-weight: 600; letter-spacing: 0.3em; color: var(--s600); }
+    .srv-icon { margin-bottom: 24px; color: var(--s400); }
+    .srv-name { font-size: 15px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .srv-desc { font-size: 12px; font-weight: 300; color: var(--s400); line-height: 1.8; margin-bottom: 28px; }
+    .srv-link { font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--s200); text-decoration: none; transition: letter-spacing 0.3s; }
+    .srv-link:hover { letter-spacing: 0.32em; }
+    @media (max-width: 768px) { .srv-grid { grid-template-columns: 1fr; } }
 
-    .section-head {
-      text-align: center; margin-bottom: 56px;
-    }
-    .section-head-row {
-      display: flex; align-items: center;
-      justify-content: center; gap: 20px;
-      margin-bottom: 10px;
-    }
-    .sh-line { flex: 1; max-width: 90px; height: 1px; background: var(--bd2); }
-    .sh-title {
-      font-size: 20px; font-weight: 700;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--white);
-    }
-    .sh-sub {
-      font-size: 9px; font-weight: 300;
-      letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--s400);
-    }
+    /* ══════════════════════════════════════════════
+       3. FLOTTE
+    ══════════════════════════════════════════════ */
+    #flotte { background: var(--bg); padding-bottom: 0; }
+    .fleet-intro { text-align: center; padding: 0 max(5vw,32px) 0; margin-bottom: 20px; }
+    .fleet-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
+    .fleet-title span { display: block; font-size: 0.38em; font-weight: 300; letter-spacing: 0.3em; color: var(--s400); margin-top: 10px; }
+    .fleet-van-wrap { width: 100%; position: relative; }
+    .fleet-3d { display: block; width: 100%; height: 520px; background: var(--bg); --progress-bar-color: rgba(200,200,200,0.35); }
+    .fleet-specs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--bd); border-top: 1px solid var(--bd); }
+    .fleet-spec { background: var(--bg2); padding: 22px 18px; text-align: center; }
+    .fleet-spec-num { font-size: 22px; font-weight: 700; color: var(--white); letter-spacing: 0.02em; }
+    .fleet-spec-label { font-size: 8px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--s400); margin-top: 6px; display: block; }
+    @media (max-width: 900px) { .fleet-specs { grid-template-columns: repeat(3, 1fr); } .fleet-3d { height: 320px; } }
+    @media (max-width: 500px) { .fleet-specs { grid-template-columns: repeat(2, 1fr); } }
 
-    .book-grid {
-      display: grid; grid-template-columns: 1fr 320px;
-      gap: 0 50px; max-width: 1060px; margin: 0 auto;
+    /* ══════════════════════════════════════════════
+       4. DESTINATIONS
+    ══════════════════════════════════════════════ */
+    #destinations { background: var(--bg2); }
+    .dest-layout { display: grid; grid-template-columns: 1fr 380px; gap: 80px; max-width: 1100px; margin: 0 auto; align-items: center; }
+    .dest-map-wrap { position: relative; }
+    .dest-svg { width: 100%; max-width: 380px; display: block; margin: 0 auto; }
+    .city-dot {
+      opacity: 0; transform: scale(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
+    .city-dot.in { opacity: 1; transform: scale(1); }
+    .city-pulse {
+      animation: pulse 2.5s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes pulse { 0%,100% { opacity: 0.2; r: 8; } 50% { opacity: 0.06; r: 14; } }
+    .dest-list { display: flex; flex-direction: column; gap: 0; }
+    .dest-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 22px 0; border-bottom: 1px solid var(--bd);
+      opacity: 0; transform: translateX(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .dest-item.in { opacity: 1; transform: translateX(0); }
+    .dest-item:first-child { border-top: 1px solid var(--bd); }
+    .dest-dot-s { width: 5px; height: 5px; border-radius: 50%; background: var(--s200); flex-shrink: 0; margin-top: 5px; }
+    .dest-city { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .dest-info { font-size: 10px; font-weight: 300; color: var(--s400); line-height: 1.6; }
+    @media (max-width: 900px) { .dest-layout { grid-template-columns: 1fr; gap: 40px; } }
 
-    /* Fields */
+    /* ══════════════════════════════════════════════
+       5. À PROPOS
+    ══════════════════════════════════════════════ */
+    #apropos { background: var(--bg); }
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1100px; margin: 0 auto; align-items: center; }
+    .about-text .tagline { font-size: 13px; font-weight: 300; color: var(--s400); line-height: 1.9; margin-top: 20px; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--bd); border: 1px solid var(--bd); }
+    .stat-box { background: var(--bg2); padding: 36px 28px; }
+    .stat-num {
+      font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 800;
+      color: var(--white); line-height: 1; letter-spacing: -0.02em;
+    }
+    .stat-num sup { font-size: 0.5em; font-weight: 400; vertical-align: super; color: var(--s200); }
+    .stat-label { font-size: 9px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--s400); margin-top: 8px; display: block; }
+    @media (max-width: 768px) { .about-layout { grid-template-columns: 1fr; gap: 40px; } }
+
+    /* ══════════════════════════════════════════════
+       6. RÉSERVATION
+    ══════════════════════════════════════════════ */
+    #reservation { background: var(--bg2); }
+    .book-grid { display: grid; grid-template-columns: 1fr 320px; gap: 0 50px; max-width: 1060px; margin: 0 auto; }
     .fields { display: flex; flex-direction: column; }
-    .field {
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0 15px;
-    }
-    .field label {
-      display: block;
-      font-size: 8px; font-weight: 600;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--s400); margin-bottom: 10px;
-    }
+    .field { border-bottom: 1px solid var(--bd); padding: 18px 0 15px; }
+    .field label { display: block; font-size: 8px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--s400); margin-bottom: 10px; }
     .field-row { display: flex; align-items: center; gap: 10px; }
-    .field input,
-    .field select {
+    .field input, .field select {
       flex: 1; background: transparent; border: none; outline: none;
-      font-family: var(--font); font-size: 13px; font-weight: 300;
-      color: var(--s100); padding: 2px 0; -webkit-appearance: none; appearance: none;
-      color-scheme: dark;
+      font-family: var(--fn); font-size: 13px; font-weight: 300;
+      color: var(--s100); padding: 2px 0; -webkit-appearance: none; appearance: none; color-scheme: dark;
     }
     .field input::placeholder { color: var(--s600); }
     .field select option { background: #111; color: var(--s100); }
     .fi { color: var(--s600); flex-shrink: 0; }
-
     .pax-row { display: flex; align-items: center; gap: 22px; }
-    .pax-btn {
-      width: 30px; height: 30px;
-      border: 1px solid var(--bd2); background: transparent;
-      color: var(--s200); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font); font-size: 18px; line-height: 1;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .pax-btn { width: 30px; height: 30px; border: 1px solid var(--bd2); background: transparent; color: var(--s200); cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: var(--fn); font-size: 18px; line-height: 1; transition: border-color 0.2s, color 0.2s; }
     .pax-btn:hover { border-color: var(--s200); color: var(--white); }
-    .pax-val {
-      font-size: 14px; font-weight: 300;
-      color: var(--white); min-width: 24px; text-align: center;
-    }
-
-    /* Calendar */
-    .cal {
-      border: 1px solid var(--border);
-      padding: 22px;
-      background: var(--bg2);
-      align-self: start;
-    }
-    .cal-hd {
-      display: flex; align-items: center;
-      justify-content: space-between; margin-bottom: 18px;
-    }
-    .cal-month {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--white);
-    }
-    .cal-nav {
-      background: none; border: none; color: var(--s400);
-      cursor: pointer; font-family: var(--font);
-      font-size: 13px; padding: 4px 8px; line-height: 1;
-      transition: color 0.2s;
-    }
+    .pax-val { font-size: 14px; font-weight: 300; color: var(--white); min-width: 24px; text-align: center; }
+    .cal { border: 1px solid var(--bd); padding: 22px; background: var(--bg); align-self: start; }
+    .cal-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .cal-month { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+    .cal-nav { background: none; border: none; color: var(--s400); cursor: pointer; font-family: var(--fn); font-size: 13px; padding: 4px 8px; transition: color 0.2s; }
     .cal-nav:hover { color: var(--white); }
-    .cal-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr);
-      gap: 1px;
-    }
-    .cdn {
-      font-size: 7.5px; font-weight: 600;
-      letter-spacing: 0.05em; text-align: center;
-      color: var(--s600); padding: 0 0 9px;
-    }
-    .cd {
-      aspect-ratio: 1;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 300;
-      color: var(--s400); cursor: pointer;
-      transition: background 0.15s, color 0.15s;
-    }
-    .cd:hover:not(.cd-other) { background: var(--bg3); color: var(--white); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; }
+    .cdn { font-size: 7.5px; font-weight: 600; text-align: center; color: var(--s600); padding: 0 0 9px; }
+    .cd { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 300; color: var(--s400); cursor: pointer; transition: background 0.15s, color 0.15s; }
+    .cd:hover:not(.cd-other) { background: var(--bd2); color: var(--white); }
     .cd.cd-today { color: var(--white); outline: 1px solid var(--s600); outline-offset: -1px; }
     .cd.cd-sel { background: var(--white); color: var(--bg); }
     .cd.cd-other { color: var(--bd2); pointer-events: none; }
-
-    .cal-avail {
-      margin-top: 14px;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 9px; font-weight: 300;
-      color: var(--s400); letter-spacing: 0.05em;
-    }
+    .cal-avail { margin-top: 14px; display: flex; align-items: center; gap: 8px; font-size: 9px; font-weight: 300; color: var(--s400); }
     .avail-dot { width: 6px; height: 6px; border-radius: 50%; background: #5a9; flex-shrink: 0; }
-
-    /* Special request */
-    .field-full {
-      max-width: 1060px; margin: 0 auto;
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0 15px;
-    }
-    .field-full label {
-      display: block; font-size: 8px; font-weight: 600;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--s400); margin-bottom: 10px;
-    }
-    .field-full textarea {
-      width: 100%; background: transparent; border: none; outline: none;
-      font-family: var(--font); font-size: 13px; font-weight: 300;
-      color: var(--s100); resize: none; height: 68px;
-      color-scheme: dark;
-    }
+    .field-full { max-width: 1060px; margin: 0 auto; border-bottom: 1px solid var(--bd); padding: 18px 0 15px; }
+    .field-full label { display: block; font-size: 8px; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--s400); margin-bottom: 10px; }
+    .field-full textarea { width: 100%; background: transparent; border: none; outline: none; font-family: var(--fn); font-size: 13px; font-weight: 300; color: var(--s100); resize: none; height: 68px; color-scheme: dark; }
     .field-full textarea::placeholder { color: var(--s600); }
-
-    /* Features */
-    .features {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      max-width: 1060px; margin: 48px auto 0;
-      border: 1px solid var(--border);
-      background: var(--border);
-      gap: 1px;
-    }
-    .feat {
-      background: var(--bg2); padding: 22px 18px;
-      display: flex; flex-direction: column; gap: 9px;
-    }
+    .features { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1060px; margin: 48px auto 0; border: 1px solid var(--bd); background: var(--bd); gap: 1px; }
+    .feat { background: var(--bg2); padding: 22px 18px; display: flex; flex-direction: column; gap: 9px; }
     .feat-icon { color: var(--s400); }
-    .feat-name {
-      font-size: 8px; font-weight: 700;
-      letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--s200);
-    }
-    .feat-desc {
-      font-size: 10px; font-weight: 300;
-      color: var(--s600); line-height: 1.6;
-    }
-
-    /* Submit */
-    .submit-area {
-      max-width: 1060px; margin: 36px auto 0;
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-    }
-    .btn-submit {
-      width: 100%; padding: 17px;
-      background: var(--white); color: var(--bg);
-      border: none; cursor: pointer;
-      font-family: var(--font); font-weight: 700;
-      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
-      display: flex; align-items: center; justify-content: center; gap: 16px;
-      transition: background 0.2s;
-    }
+    .feat-name { font-size: 8px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--s200); }
+    .feat-desc { font-size: 10px; font-weight: 300; color: var(--s600); line-height: 1.6; }
+    .submit-area { max-width: 1060px; margin: 36px auto 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .btn-submit { width: 100%; padding: 17px; background: var(--white); color: var(--bg); border: none; cursor: pointer; font-family: var(--fn); font-weight: 700; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 16px; transition: background 0.2s; }
     .btn-submit:hover { background: var(--s100); }
-    .submit-note {
-      font-size: 9px; font-weight: 300;
-      color: var(--s600); letter-spacing: 0.12em;
-    }
+    .submit-note { font-size: 9px; font-weight: 300; color: var(--s600); letter-spacing: 0.12em; }
+    @media (max-width: 900px) { .book-grid { grid-template-columns: 1fr; } .features { grid-template-columns: 1fr 1fr; } }
 
     /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 22px 48px;
-      background: var(--bg2);
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    footer { border-top: 1px solid var(--bd); padding: 22px 48px; background: var(--bg); display: flex; align-items: center; justify-content: space-between; }
     .f-brand { font-size: 13px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; }
-    .f-tag { font-size: 10px; font-weight: 300; color: var(--s400); letter-spacing: 0.05em; }
+    .f-tag { font-size: 10px; font-weight: 300; color: var(--s400); }
     .f-contact { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-    .f-contact a {
-      font-size: 9px; font-weight: 300; color: var(--s400);
-      text-decoration: none; letter-spacing: 0.1em;
-      text-transform: uppercase; transition: color 0.2s;
-    }
+    .f-contact a { font-size: 9px; font-weight: 300; color: var(--s400); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .f-contact a:hover { color: var(--white); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { display: none; }
-      h1 { font-size: clamp(2.4rem, 11vw, 3.5rem); }
-      .book-grid { grid-template-columns: 1fr; }
-      .cal { margin-top: 24px; }
-      .features { grid-template-columns: 1fr 1fr; }
-      footer { flex-direction: column; gap: 12px; text-align: center; }
-      .f-contact { align-items: center; }
-    }
-    @media (max-width: 600px) {
-      header { padding: 0 20px; }
-      .h-dest { display: none; }
-      .hero-left { padding: 60px 20px; }
-      .booking { padding: 60px 20px 80px; }
-      footer { padding: 20px; }
-    }
-
-    /* ── REVEAL ── */
-    .rev {
-      opacity: 0; transform: translateY(18px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .rev.in { opacity: 1; transform: translateY(0); }
+    @media (max-width: 600px) { footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; } .f-contact { align-items: center; } }
   </style>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
 
+<!-- SIDE NAV (built by JS) -->
+<nav id="sidenav"></nav>
+
 <!-- HEADER -->
-<header>
+<header id="hdr">
   <span class="h-logo">M &amp; D</span>
-  <svg class="h-star" viewBox="0 0 40 40" width="30" height="30" fill="none">
+  <svg class="h-star" viewBox="0 0 40 40" width="28" height="28" fill="none">
     <circle cx="20" cy="20" r="18.5" stroke="currentColor" stroke-width="0.8"/>
     <line x1="20" y1="20" x2="20" y2="2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     <line x1="20" y1="20" x2="36" y2="29.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     <line x1="20" y1="20" x2="4" y2="29.2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     <circle cx="20" cy="20" r="1.5" fill="currentColor"/>
   </svg>
-  <span class="h-dest">PARIS · NICE · CANNES · SAINT-TROPEZ · MONACO</span>
+  <nav class="h-nav">
+    <a href="#services">Services</a>
+    <a href="#flotte">Flotte</a>
+    <a href="#destinations">Destinations</a>
+    <a href="#apropos">À propos</a>
+    <a href="#reservation">Réservation</a>
+  </nav>
 </header>
 
-<!-- HERO -->
-<section class="hero">
+<!-- ══ 1. HERO ══ -->
+<section id="hero">
   <div class="hero-left">
     <span class="hero-eyebrow">PRIVATE DRIVER · FRANCE</span>
-    <h1>RÉSERVER<br>VOTRE TRAJET.</h1>
+    <h1>
+      <span class="h1-w1">RÉSERVER</span>
+      <span class="h1-w2">VOTRE TRAJET.</span>
+    </h1>
     <div class="hero-rule"></div>
-    <p class="hero-tagline">
-      Moove &amp; Dream — Chauffeur privé d'exception pour vos déplacements
-      à Paris, Nice, Cannes, Saint-Tropez et Monaco.
-    </p>
+    <p class="hero-tagline">Moove &amp; Dream — Chauffeur privé d'exception pour vos déplacements à Paris, Nice, Cannes, Saint-Tropez et Monaco.</p>
     <a href="#reservation" class="hero-cta">
       RÉSERVER MAINTENANT
       <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -385,21 +342,7 @@
     </a>
   </div>
   <div class="hero-right">
-    <model-viewer
-      class="hero-van"
-      src="./assets/van.glb"
-      alt="Mercedes Classe V — Moove &amp; Dream"
-      auto-rotate
-      auto-rotate-delay="600"
-      rotation-per-second="13deg"
-      camera-controls
-      disable-zoom
-      shadow-intensity="1.8"
-      shadow-softness="0.92"
-      exposure="0.88"
-      camera-orbit="-25deg 78deg auto"
-      environment-image="neutral">
-    </model-viewer>
+    <model-viewer class="hero-van" src="./assets/van.glb" alt="Mercedes Classe V" auto-rotate auto-rotate-delay="600" rotation-per-second="13deg" camera-controls disable-zoom shadow-intensity="1.8" shadow-softness="0.92" exposure="0.88" camera-orbit="-25deg 78deg auto" environment-image="neutral"></model-viewer>
   </div>
 </section>
 
@@ -429,76 +372,257 @@
   </div>
 </div>
 
-<!-- BOOKING -->
-<section class="booking" id="reservation">
-
-  <div class="section-head rev">
-    <div class="section-head-row">
-      <div class="sh-line"></div>
-      <span class="sh-title">RÉSERVER</span>
-      <div class="sh-line"></div>
+<!-- ══ 2. SERVICES ══ -->
+<section id="services" class="sec">
+  <div class="sec-head rev">
+    <div class="sec-row"><div class="sec-line"></div><span class="sec-title">SERVICES</span><div class="sec-line"></div></div>
+    <div class="sec-sub">NOS PRESTATIONS</div>
+  </div>
+  <div class="srv-grid">
+    <div class="srv-card rev d1">
+      <span class="srv-num">01</span>
+      <div class="srv-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <path d="M14 4L6 13h5v6h6v-6h5L14 4z"/><circle cx="14" cy="23" r="1.5"/>
+        </svg>
+      </div>
+      <div class="srv-name">Transferts Aéroports</div>
+      <p class="srv-desc">CDG, Orly, Beauvais — ponctualité garantie, suivi des vols en temps réel. Accueil personnalisé à votre arrivée, prise en charge des bagages.</p>
+      <a href="#reservation" class="srv-link">Réserver →</a>
     </div>
-    <div class="sh-sub">VOTRE TRAJET</div>
+    <div class="srv-card rev d2">
+      <span class="srv-num">02</span>
+      <div class="srv-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <circle cx="14" cy="11" r="4"/><path d="M14 26C14 26 4 19 4 11a10 10 0 0120 0c0 8-10 15-10 15z"/>
+        </svg>
+      </div>
+      <div class="srv-name">Paris &amp; Île-de-France</div>
+      <p class="srv-desc">Déplacements dans toute la région parisienne. Confort premium, discrétion absolue. Professionnels, événements, sorties privées.</p>
+      <a href="#reservation" class="srv-link">Réserver →</a>
+    </div>
+    <div class="srv-card rev d3">
+      <span class="srv-num">03</span>
+      <div class="srv-icon">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <path d="M5 14 Q8 6 14 4 Q20 6 23 14 Q20 22 14 24 Q8 22 5 14Z"/>
+          <path d="M14 4v20M5 14h18"/>
+        </svg>
+      </div>
+      <div class="srv-name">Côte d'Azur &amp; Monaco</div>
+      <p class="srv-desc">Nice, Cannes, Saint-Tropez, Monaco, Antibes. Longue distance Paris → Côte d'Azur ou mise à disposition sur la Riviera.</p>
+      <a href="#reservation" class="srv-link">Réserver →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. FLOTTE ══ -->
+<section id="flotte">
+  <div class="fleet-intro sec" style="padding-bottom: 40px;">
+    <div class="sec-head rev">
+      <div class="sec-row"><div class="sec-line"></div><span class="sec-title">FLOTTE</span><div class="sec-line"></div></div>
+      <div class="sec-sub">MERCEDES CLASSE V</div>
+    </div>
+    <div class="fleet-title rev d1">
+      MERCEDES
+      <span>Van Prestige · 7 Places · Paris &amp; France</span>
+    </div>
+  </div>
+  <div class="fleet-van-wrap">
+    <model-viewer class="fleet-3d" src="./assets/van.glb" alt="Mercedes Classe V" auto-rotate auto-rotate-delay="400" rotation-per-second="16deg" camera-controls disable-zoom shadow-intensity="2" shadow-softness="0.9" exposure="0.95" camera-orbit="-30deg 75deg auto" environment-image="neutral"></model-viewer>
+    <div class="fleet-specs">
+      <div class="fleet-spec rev d1"><div class="fleet-spec-num">7</div><span class="fleet-spec-label">Places</span></div>
+      <div class="fleet-spec rev d2"><div class="fleet-spec-num">WiFi</div><span class="fleet-spec-label">Haut débit</span></div>
+      <div class="fleet-spec rev d3"><div class="fleet-spec-num">A/C</div><span class="fleet-spec-label">Climatisation bizone</span></div>
+      <div class="fleet-spec rev d4"><div class="fleet-spec-num">USB</div><span class="fleet-spec-label">Chargeurs à bord</span></div>
+      <div class="fleet-spec rev d5"><div class="fleet-spec-num">24/7</div><span class="fleet-spec-label">Disponible</span></div>
+      <div class="fleet-spec rev d6"><div class="fleet-spec-num">VIP</div><span class="fleet-spec-label">Tenue professionnelle</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. DESTINATIONS ══ -->
+<section id="destinations" class="sec">
+  <div class="sec-head rev">
+    <div class="sec-row"><div class="sec-line"></div><span class="sec-title">DESTINATIONS</span><div class="sec-line"></div></div>
+    <div class="sec-sub">PARTOUT EN FRANCE</div>
+  </div>
+  <div class="dest-layout">
+    <div class="dest-map-wrap">
+      <svg class="dest-svg" viewBox="0 0 360 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- France outline (simplified) -->
+        <path d="M195 14 L240 12 L285 22 L332 62 L352 108 L360 162 L348 210 L362 255 L338 298 L316 348 L282 390 L240 408 L192 410 L148 398 L105 374 L68 340 L44 298 L32 250 L38 200 L26 158 L38 118 L28 86 L58 60 L95 36 L148 20 Z" stroke="#2a2a2a" stroke-width="1" fill="rgba(18,18,18,0.5)"/>
+
+        <!-- PARIS (208, 118) -->
+        <g class="city-dot" data-city="paris">
+          <circle class="city-pulse" cx="208" cy="118" r="8" fill="none" stroke="#c0c0c0" stroke-width="0.5"/>
+          <circle cx="208" cy="118" r="4" fill="#c0c0c0" opacity="0.9"/>
+          <circle cx="208" cy="118" r="2" fill="#ffffff"/>
+        </g>
+        <!-- LYON (272, 255) -->
+        <g class="city-dot" data-city="lyon">
+          <circle class="city-pulse" cx="272" cy="255" r="6" fill="none" stroke="#808080" stroke-width="0.5"/>
+          <circle cx="272" cy="255" r="3" fill="#808080" opacity="0.8"/>
+          <circle cx="272" cy="255" r="1.5" fill="#c0c0c0"/>
+        </g>
+        <!-- NICE (318, 342) -->
+        <g class="city-dot" data-city="nice">
+          <circle class="city-pulse" cx="318" cy="342" r="7" fill="none" stroke="#c0c0c0" stroke-width="0.5"/>
+          <circle cx="318" cy="342" r="3.5" fill="#c0c0c0" opacity="0.9"/>
+          <circle cx="318" cy="342" r="1.8" fill="#ffffff"/>
+        </g>
+        <!-- CANNES (306, 352) -->
+        <g class="city-dot" data-city="cannes">
+          <circle class="city-pulse" cx="306" cy="352" r="6" fill="none" stroke="#a0a0a0" stroke-width="0.5"/>
+          <circle cx="306" cy="352" r="3" fill="#a0a0a0" opacity="0.85"/>
+          <circle cx="306" cy="352" r="1.5" fill="#e0e0e0"/>
+        </g>
+        <!-- SAINT-TROPEZ (295, 362) -->
+        <g class="city-dot" data-city="sainttropez">
+          <circle class="city-pulse" cx="295" cy="362" r="5" fill="none" stroke="#808080" stroke-width="0.5"/>
+          <circle cx="295" cy="362" r="2.5" fill="#808080" opacity="0.8"/>
+          <circle cx="295" cy="362" r="1.2" fill="#c0c0c0"/>
+        </g>
+        <!-- MONACO (325, 336) -->
+        <g class="city-dot" data-city="monaco">
+          <circle class="city-pulse" cx="325" cy="336" r="6" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+          <circle cx="325" cy="336" r="3" fill="#e0e0e0" opacity="0.9"/>
+          <circle cx="325" cy="336" r="1.5" fill="#ffffff"/>
+        </g>
+
+        <!-- City labels -->
+        <text x="216" y="115" font-family="Raleway,sans-serif" font-size="8" font-weight="600" fill="#e0e0e0" letter-spacing="1">PARIS</text>
+        <text x="280" y="252" font-family="Raleway,sans-serif" font-size="7" fill="#808080" letter-spacing="1">LYON</text>
+        <text x="326" y="340" font-family="Raleway,sans-serif" font-size="7" font-weight="600" fill="#c0c0c0" letter-spacing="1">NICE</text>
+        <text x="310" y="349" font-family="Raleway,sans-serif" font-size="6.5" fill="#a0a0a0" letter-spacing="0.5">CANNES</text>
+        <text x="266" y="362" font-family="Raleway,sans-serif" font-size="6" fill="#808080" letter-spacing="0.5">ST-TROPEZ</text>
+        <text x="328" y="333" font-family="Raleway,sans-serif" font-size="6.5" fill="#c0c0c0" letter-spacing="0.5">MC</text>
+      </svg>
+    </div>
+
+    <div class="dest-list">
+      <div class="dest-item" data-delay="0">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Paris &amp; Île-de-France</div>
+          <div class="dest-info">CDG · Orly · Beauvais · Versailles · Disneyland. Toute la région, 24h/7j.</div>
+        </div>
+      </div>
+      <div class="dest-item" data-delay="100">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Nice &amp; Côte d'Azur</div>
+          <div class="dest-info">Aéroport Nice Côte d'Azur, centre-ville, hébergements haut de gamme.</div>
+        </div>
+      </div>
+      <div class="dest-item" data-delay="200">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Cannes</div>
+          <div class="dest-info">Palais des Festivals, Croisette, hôtels 5 étoiles. Festival, MIPIM, TFWA.</div>
+        </div>
+      </div>
+      <div class="dest-item" data-delay="300">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Monaco</div>
+          <div class="dest-info">Principauté, Grand Prix, Casino. Discrétion et ponctualité garanties.</div>
+        </div>
+      </div>
+      <div class="dest-item" data-delay="400">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Saint-Tropez &amp; Antibes</div>
+          <div class="dest-info">Port de Saint-Tropez, Juan-les-Pins, Cap d'Antibes. Villégiature de luxe.</div>
+        </div>
+      </div>
+      <div class="dest-item" data-delay="500">
+        <div class="dest-dot-s"></div>
+        <div>
+          <div class="dest-city">Paris → Côte d'Azur</div>
+          <div class="dest-info">Longue distance porte-à-porte. Confort premium sur toute la France.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. À PROPOS ══ -->
+<section id="apropos" class="sec">
+  <div class="sec-head rev">
+    <div class="sec-row"><div class="sec-line"></div><span class="sec-title">À PROPOS</span><div class="sec-line"></div></div>
+    <div class="sec-sub">MOOVE &amp; DREAM</div>
+  </div>
+  <div class="about-layout">
+    <div class="about-text rev-l">
+      <span class="eyebrow">Chauffeur privé d'exception</span>
+      <p class="tagline">
+        Moove &amp; Dream, c'est un service de chauffeur privé fondé sur trois valeurs : ponctualité, discrétion et excellence. À bord d'un Mercedes Classe V, chaque trajet devient une expérience à part entière.
+        <br><br>
+        De Paris à Monaco, nous accompagnons particuliers et professionnels pour tous types de déplacements — transferts aéroports, évènements, séminaires, voyages longue distance.
+      </p>
+    </div>
+    <div class="about-stats rev-r" id="statsSection">
+      <div class="stat-box">
+        <div class="stat-num"><span class="counter" data-target="5">0</span><sup>+</sup></div>
+        <span class="stat-label">Années d'expérience</span>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num"><span class="counter" data-target="500">0</span><sup>+</sup></div>
+        <span class="stat-label">Clients satisfaits</span>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num"><span class="counter" data-target="2000">0</span><sup>+</sup></div>
+        <span class="stat-label">Trajets réalisés</span>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num"><span class="counter" data-target="7">0</span></div>
+        <span class="stat-label">Places Mercedes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. RÉSERVATION ══ -->
+<section id="reservation" class="sec">
+  <div class="sec-head rev">
+    <div class="sec-row"><div class="sec-line"></div><span class="sec-title">RÉSERVER</span><div class="sec-line"></div></div>
+    <div class="sec-sub">VOTRE TRAJET</div>
   </div>
 
   <form id="resForm">
     <div class="book-grid">
-
-      <!-- FIELDS -->
       <div class="fields">
-
-        <div class="field rev">
+        <div class="field rev d1">
           <label>DATE</label>
           <div class="field-row">
             <input type="text" id="dateDisp" placeholder="Sélectionnez une date" readonly style="cursor:pointer"/>
             <input type="hidden" name="date" id="dateVal"/>
-            <span class="fi">
-              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.1">
-                <rect x="1" y="2" width="13" height="12"/><path d="M1 6h13M5 1v2M10 1v2"/>
-              </svg>
-            </span>
+            <span class="fi"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.1"><rect x="1" y="2" width="13" height="12"/><path d="M1 6h13M5 1v2M10 1v2"/></svg></span>
           </div>
         </div>
-
-        <div class="field rev">
+        <div class="field rev d2">
           <label>HEURE</label>
           <div class="field-row">
-            <input type="time" name="heure" placeholder="Sélectionnez une heure"/>
-            <span class="fi">
-              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.1">
-                <circle cx="7.5" cy="7.5" r="6"/><path d="M7.5 4.5v3l2 1.5"/>
-              </svg>
-            </span>
+            <input type="time" name="heure"/>
+            <span class="fi"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="7.5" cy="7.5" r="6"/><path d="M7.5 4.5v3l2 1.5"/></svg></span>
           </div>
         </div>
-
-        <div class="field rev">
+        <div class="field rev d3">
           <label>LIEU DE PRISE EN CHARGE</label>
           <div class="field-row">
             <input type="text" name="depart" placeholder="Adresse de départ"/>
-            <span class="fi">
-              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.1">
-                <circle cx="7" cy="6.5" r="2.5"/>
-                <path d="M7 15C7 15 1 10.5 1 6.5a6 6 0 0112 0C13 10.5 7 15 7 15z"/>
-              </svg>
-            </span>
+            <span class="fi"><svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="7" cy="6.5" r="2.5"/><path d="M7 15C7 15 1 10.5 1 6.5a6 6 0 0112 0C13 10.5 7 15 7 15z"/></svg></span>
           </div>
         </div>
-
-        <div class="field rev">
+        <div class="field rev d4">
           <label>LIEU DE DESTINATION</label>
           <div class="field-row">
             <input type="text" name="destination" placeholder="Adresse d'arrivée"/>
-            <span class="fi">
-              <svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.1">
-                <circle cx="7" cy="6.5" r="2.5"/>
-                <path d="M7 15C7 15 1 10.5 1 6.5a6 6 0 0112 0C13 10.5 7 15 7 15z"/>
-              </svg>
-            </span>
+            <span class="fi"><svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="7" cy="6.5" r="2.5"/><path d="M7 15C7 15 1 10.5 1 6.5a6 6 0 0112 0C13 10.5 7 15 7 15z"/></svg></span>
           </div>
         </div>
-
-        <div class="field rev">
+        <div class="field rev d5">
           <label>TYPE DE PRESTATION</label>
           <div class="field-row">
             <select name="type">
@@ -514,22 +638,16 @@
                 <option>Saint-Tropez</option>
                 <option>Monaco</option>
                 <option>Antibes / Juan-les-Pins</option>
-                <option>Grasse / Mougins</option>
               </optgroup>
               <optgroup label="Longue distance">
                 <option>Paris → Côte d'Azur</option>
                 <option>Mise à disposition — France entière</option>
               </optgroup>
             </select>
-            <span class="fi">
-              <svg width="11" height="7" viewBox="0 0 11 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
-                <path d="M1 1l4.5 4.5L10 1"/>
-              </svg>
-            </span>
+            <span class="fi"><svg width="11" height="7" viewBox="0 0 11 7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M1 1l4.5 4.5L10 1"/></svg></span>
           </div>
         </div>
-
-        <div class="field rev">
+        <div class="field rev d6">
           <label>NOMBRE DE PASSAGERS</label>
           <div class="pax-row">
             <button type="button" class="pax-btn" id="decPax">−</button>
@@ -538,10 +656,8 @@
           </div>
           <input type="hidden" name="passagers" id="paxInput" value="1"/>
         </div>
-
       </div>
 
-      <!-- CALENDAR -->
       <div class="cal rev">
         <div class="cal-hd">
           <button type="button" class="cal-nav" id="calPrev">&#8592;</button>
@@ -549,65 +665,45 @@
           <button type="button" class="cal-nav" id="calNext">&#8594;</button>
         </div>
         <div class="cal-grid" id="calGrid"></div>
-        <div class="cal-avail">
-          <div class="avail-dot"></div>
-          Disponibilités disponibles
-        </div>
+        <div class="cal-avail"><div class="avail-dot"></div>Disponibilités disponibles</div>
       </div>
-
     </div>
 
-    <!-- SPECIAL REQUEST -->
     <div class="field-full rev">
       <label>DEMANDE SPÉCIALE (OPTIONNEL)</label>
       <textarea name="message" placeholder="Précisions, demandes particulières..."></textarea>
     </div>
 
-    <!-- FEATURES -->
     <div class="features rev">
       <div class="feat">
-        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1">
-          <circle cx="10" cy="10" r="8.5"/><path d="M10 5.5v4.5l2.5 1.5"/>
-        </svg>
+        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1"><circle cx="10" cy="10" r="8.5"/><path d="M10 5.5v4.5l2.5 1.5"/></svg>
         <div class="feat-name">PONCTUALITÉ</div>
         <div class="feat-desc">Service sur-mesure et ponctuel</div>
       </div>
       <div class="feat">
-        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1">
-          <path d="M10 1.5l8 4v5.5c0 4.5-8 8.5-8 8.5S2 15.5 2 11V5.5l8-4z"/>
-        </svg>
+        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M10 1.5l8 4v5.5c0 4.5-8 8.5-8 8.5S2 15.5 2 11V5.5l8-4z"/></svg>
         <div class="feat-name">CONFIDENTIALITÉ</div>
         <div class="feat-desc">Discrétion et sécurité garanties</div>
       </div>
       <div class="feat">
-        <svg class="feat-icon" width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.1">
-          <rect x="1" y="3" width="20" height="9" rx="1"/>
-          <path d="M4 3L6 1h10l2 2"/>
-          <circle cx="5.5" cy="12" r="2.5"/><circle cx="16.5" cy="12" r="2.5"/>
-        </svg>
+        <svg class="feat-icon" width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.1"><rect x="1" y="3" width="20" height="9" rx="1"/><path d="M4 3L6 1h10l2 2"/><circle cx="5.5" cy="12" r="2.5"/><circle cx="16.5" cy="12" r="2.5"/></svg>
         <div class="feat-name">VÉHICULES MERCEDES</div>
         <div class="feat-desc">Confort et élégance à bord</div>
       </div>
       <div class="feat">
-        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1">
-          <path d="M10 1.5l2.3 6H18l-4.8 3.5 1.8 6L10 13.5l-5 3.5 1.8-6L2 7.5h5.7L10 1.5z"/>
-        </svg>
+        <svg class="feat-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M10 1.5l2.3 6H18l-4.8 3.5 1.8 6L10 13.5l-5 3.5 1.8-6L2 7.5h5.7L10 1.5z"/></svg>
         <div class="feat-name">SERVICE PREMIUM</div>
         <div class="feat-desc">Chauffeurs professionnels expérimentés</div>
       </div>
     </div>
 
-    <!-- SUBMIT -->
     <div class="submit-area rev">
       <button type="submit" class="btn-submit">
         RÉSERVER MAINTENANT
-        <svg width="15" height="10" viewBox="0 0 15 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-          <path d="M1 5h13M9 1l5 4-5 4"/>
-        </svg>
+        <svg width="15" height="10" viewBox="0 0 15 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 5h13M9 1l5 4-5 4"/></svg>
       </button>
       <span class="submit-note">Confirmation immédiate par e-mail</span>
     </div>
-
   </form>
 </section>
 
@@ -622,76 +718,150 @@
 </footer>
 
 <script>
+(function() {
+  // ── SIDE NAV ──
+  var sections = [
+    {id:'hero',      label:'Accueil'},
+    {id:'services',  label:'Services'},
+    {id:'flotte',    label:'Flotte'},
+    {id:'destinations', label:'Destinations'},
+    {id:'apropos',   label:'À propos'},
+    {id:'reservation',  label:'Réservation'}
+  ];
+  var nav = document.getElementById('sidenav');
+  var dots = [];
+  sections.forEach(function(s) {
+    var d = document.createElement('div');
+    d.className = 'sn-dot';
+    d.setAttribute('data-label', s.label);
+    d.setAttribute('data-target', s.id);
+    d.addEventListener('click', function() {
+      document.getElementById(s.id).scrollIntoView({behavior:'smooth'});
+    });
+    nav.appendChild(d);
+    dots.push({el: d, id: s.id});
+  });
+
+  // ── HEADER COMPACT ──
+  window.addEventListener('scroll', function() {
+    document.getElementById('hdr').classList.toggle('compact', window.scrollY > 80);
+  }, {passive: true});
+
+  // ── ACTIVE SECTION TRACKING ──
+  var secEls = sections.map(function(s) { return document.getElementById(s.id); });
+  var navObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        dots.forEach(function(d) {
+          d.el.classList.toggle('active', d.id === e.target.id);
+        });
+      }
+    });
+  }, {threshold: 0.4});
+  secEls.forEach(function(el) { if (el) navObs.observe(el); });
+
+  // ── SCROLL REVEAL ──
+  var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
+    });
+  }, {threshold: 0.08});
+  document.querySelectorAll('.rev, .rev-l, .rev-r').forEach(function(el) { revObs.observe(el); });
+
+  // ── COUNTER ANIMATION ──
+  function animCounter(el, target, duration) {
+    var start = 0, startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var counterDone = false;
+  var cntObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !counterDone) {
+        counterDone = true;
+        document.querySelectorAll('.counter').forEach(function(el) {
+          animCounter(el, parseInt(el.getAttribute('data-target'), 10), 1800);
+        });
+        cntObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.5});
+  var statsEl = document.getElementById('statsSection');
+  if (statsEl) cntObs.observe(statsEl);
+
+  // ── DESTINATION DOTS ──
+  var destDone = false;
+  var destObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !destDone) {
+        destDone = true;
+        var cityDots = document.querySelectorAll('.city-dot');
+        cityDots.forEach(function(dot, i) {
+          setTimeout(function() { dot.classList.add('in'); }, i * 220);
+        });
+        var destItems = document.querySelectorAll('.dest-item');
+        destItems.forEach(function(item) {
+          var delay = parseInt(item.getAttribute('data-delay') || '0', 10);
+          setTimeout(function() { item.classList.add('in'); }, delay + 300);
+        });
+        destObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.2});
+  var destEl = document.getElementById('destinations');
+  if (destEl) destObs.observe(destEl);
+
   // ── CALENDAR ──
-  const MFR = ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'];
-  const DFR = ['LUN','MAR','MER','JEU','VEN','SAM','DIM'];
-  let curDate = new Date(), selDate = null;
+  var MFR = ['JANVIER','FÉVRIER','MARS','AVRIL','MAI','JUIN','JUILLET','AOÛT','SEPTEMBRE','OCTOBRE','NOVEMBRE','DÉCEMBRE'];
+  var DFR = ['LUN','MAR','MER','JEU','VEN','SAM','DIM'];
+  var curDate = new Date(), selDate = null;
 
   function buildCal() {
-    const y = curDate.getFullYear(), m = curDate.getMonth();
+    var y = curDate.getFullYear(), m = curDate.getMonth();
     document.getElementById('calLabel').textContent = MFR[m] + ' ' + y;
-    const g = document.getElementById('calGrid');
+    var g = document.getElementById('calGrid');
     while (g.firstChild) g.removeChild(g.firstChild);
-
     DFR.forEach(function(d) {
-      const el = document.createElement('div');
-      el.className = 'cdn';
-      el.textContent = d;
-      g.appendChild(el);
+      var el = document.createElement('div');
+      el.className = 'cdn'; el.textContent = d; g.appendChild(el);
     });
-
-    const first = new Date(y, m, 1);
-    let start = first.getDay();
+    var first = new Date(y, m, 1), start = first.getDay();
     start = start === 0 ? 6 : start - 1;
-    const today = new Date();
-    const dim = new Date(y, m + 1, 0).getDate();
-    const dimP = new Date(y, m, 0).getDate();
-
-    for (let i = 0; i < start; i++) {
-      const el = document.createElement('div');
-      el.className = 'cd cd-other';
-      el.textContent = String(dimP - start + 1 + i);
-      g.appendChild(el);
+    var today = new Date(), dim = new Date(y, m + 1, 0).getDate();
+    var dimP = new Date(y, m, 0).getDate();
+    for (var i = 0; i < start; i++) {
+      var el = document.createElement('div');
+      el.className = 'cd cd-other'; el.textContent = String(dimP - start + 1 + i); g.appendChild(el);
     }
-
-    for (let d = 1; d <= dim; d++) {
-      const el = document.createElement('div');
-      el.className = 'cd';
-      el.textContent = String(d);
-      if (d === today.getDate() && m === today.getMonth() && y === today.getFullYear()) {
-        el.classList.add('cd-today');
-      }
-      if (selDate && d === selDate.getDate() && m === selDate.getMonth() && y === selDate.getFullYear()) {
-        el.classList.add('cd-sel');
-      }
+    for (var d = 1; d <= dim; d++) {
       (function(day) {
+        var el = document.createElement('div'); el.className = 'cd'; el.textContent = String(day);
+        if (day === today.getDate() && m === today.getMonth() && y === today.getFullYear()) el.classList.add('cd-today');
+        if (selDate && day === selDate.getDate() && m === selDate.getMonth() && y === selDate.getFullYear()) el.classList.add('cd-sel');
         el.addEventListener('click', function() {
           selDate = new Date(y, m, day);
-          const s = String(day).padStart(2,'0') + '/' + String(m+1).padStart(2,'0') + '/' + y;
+          var s = String(day).padStart(2,'0') + '/' + String(m+1).padStart(2,'0') + '/' + y;
           document.getElementById('dateDisp').value = s;
           document.getElementById('dateVal').value = s;
           buildCal();
         });
+        g.appendChild(el);
       })(d);
-      g.appendChild(el);
     }
-
-    const tot = start + dim;
-    const rem = tot % 7 === 0 ? 0 : 7 - (tot % 7);
-    for (let i = 1; i <= rem; i++) {
-      const el = document.createElement('div');
-      el.className = 'cd cd-other';
-      el.textContent = String(i);
-      g.appendChild(el);
+    var tot = start + dim, rem = tot % 7 === 0 ? 0 : 7 - (tot % 7);
+    for (var j = 1; j <= rem; j++) {
+      var el2 = document.createElement('div'); el2.className = 'cd cd-other'; el2.textContent = String(j); g.appendChild(el2);
     }
   }
-
-  document.getElementById('calPrev').addEventListener('click', function() {
-    curDate.setMonth(curDate.getMonth() - 1); buildCal();
-  });
-  document.getElementById('calNext').addEventListener('click', function() {
-    curDate.setMonth(curDate.getMonth() + 1); buildCal();
-  });
+  document.getElementById('calPrev').addEventListener('click', function() { curDate.setMonth(curDate.getMonth()-1); buildCal(); });
+  document.getElementById('calNext').addEventListener('click', function() { curDate.setMonth(curDate.getMonth()+1); buildCal(); });
   buildCal();
 
   // ── PASSENGER COUNTER ──
@@ -714,19 +884,11 @@
       'DESTINATION : ' + (f.get('destination') || '—'),
       'PRESTATION : ' + (f.get('type') || '—'),
       'PASSAGERS : ' + (f.get('passagers') || '—'),
-      '',
-      'MESSAGE : ' + (f.get('message') || '—')
+      '', 'MESSAGE : ' + (f.get('message') || '—')
     ].join('\n');
     window.location.href = 'mailto:adouditoufik@gmail.com?subject=R%C3%A9servation%20Moove%20%26%20Dream&body=' + encodeURIComponent(b);
   });
-
-  // ── REVEAL ON SCROLL ──
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.rev').forEach(function(el) { obs.observe(el); });
+})();
 </script>
 </body>
 </html>
