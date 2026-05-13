@@ -314,6 +314,19 @@
     .f-contact a { font-size: 9px; font-weight: 300; color: var(--s400); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
     .f-contact a:hover { color: var(--white); }
     @media (max-width: 600px) { footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px; } .f-contact { align-items: center; } }
+
+    /* ── SILVER GRADIENT — tous les textes affichés en blanc → argent métallique ── */
+    .h-logo,
+    .srv-name,
+    .fleet-title,
+    .dest-city,
+    .cal-month,
+    .f-brand,
+    .pax-val {
+      background: var(--silver-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
