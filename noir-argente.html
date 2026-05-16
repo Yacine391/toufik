@@ -144,11 +144,18 @@
     }
     .hero-cta:hover { background: var(--s100); }
     .hero-right {
-      display: flex;
+      display: flex; align-items: center; justify-content: center;
+      min-height: calc(100vh - 58px);
       background: radial-gradient(ellipse 80% 70% at 60% 55%, #141414 0%, var(--bg) 75%);
       opacity: 0; animation: fadeIn 1.4s ease 0.6s forwards;
+      padding: 40px 20px;
     }
-    .hero-van { width: 100%; min-height: calc(100vh - 58px); background: transparent; --progress-bar-color: rgba(192,192,192,0.3); }
+    .hero-van {
+      width: 100%; max-width: 700px; height: auto; display: block;
+      filter: drop-shadow(0 24px 60px rgba(0,0,0,0.9));
+      -webkit-mask-image: radial-gradient(ellipse 82% 88% at 54% 50%, black 40%, transparent 82%);
+      mask-image: radial-gradient(ellipse 82% 88% at 54% 50%, black 40%, transparent 82%);
+    }
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @media (max-width: 900px) {
@@ -193,7 +200,12 @@
     .fleet-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
     .fleet-title span { display: block; font-size: 0.38em; font-weight: 300; letter-spacing: 0.3em; color: var(--s400); margin-top: 10px; }
     .fleet-van-wrap { width: 100%; position: relative; }
-    .fleet-3d { display: block; width: 100%; height: 520px; background: var(--bg); --progress-bar-color: rgba(200,200,200,0.35); }
+    .fleet-img {
+      display: block; width: 100%; height: 520px; object-fit: contain; object-position: center;
+      filter: drop-shadow(0 30px 80px rgba(0,0,0,0.9));
+      -webkit-mask-image: radial-gradient(ellipse 78% 76% at 50% 44%, black 40%, transparent 78%);
+      mask-image: radial-gradient(ellipse 78% 76% at 50% 44%, black 40%, transparent 78%);
+    }
     .fleet-specs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--bd); border-top: 1px solid var(--bd); }
     .fleet-spec { background: var(--bg2); padding: 22px 18px; text-align: center; }
     .fleet-spec-num {
@@ -203,7 +215,7 @@
       background-clip: text;
     }
     .fleet-spec-label { font-size: 8px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--s400); margin-top: 6px; display: block; }
-    @media (max-width: 900px) { .fleet-specs { grid-template-columns: repeat(3, 1fr); } .fleet-3d { height: 320px; } }
+    @media (max-width: 900px) { .fleet-specs { grid-template-columns: repeat(3, 1fr); } .fleet-img { height: 320px; } }
     @media (max-width: 500px) { .fleet-specs { grid-template-columns: repeat(2, 1fr); } }
 
     /* ══════════════════════════════════════════════
@@ -328,7 +340,6 @@
       background-clip: text;
     }
   </style>
-  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -372,7 +383,7 @@
     </a>
   </div>
   <div class="hero-right">
-    <model-viewer class="hero-van" src="./assets/van.glb" alt="Mercedes Classe V" auto-rotate auto-rotate-delay="600" rotation-per-second="13deg" camera-controls disable-zoom shadow-intensity="1.8" shadow-softness="0.92" exposure="0.88" camera-orbit="-25deg 78deg auto" environment-image="neutral"></model-viewer>
+    <img class="hero-van" src="./assets/van-noir.png" alt="Mercedes Classe V">
   </div>
 </section>
 
@@ -459,7 +470,7 @@
     </div>
   </div>
   <div class="fleet-van-wrap">
-    <model-viewer class="fleet-3d" src="./assets/van.glb" alt="Mercedes Classe V" auto-rotate auto-rotate-delay="400" rotation-per-second="16deg" camera-controls disable-zoom shadow-intensity="2" shadow-softness="0.9" exposure="0.95" camera-orbit="-30deg 75deg auto" environment-image="neutral"></model-viewer>
+    <img class="fleet-img" src="./assets/van-noir.png" alt="Mercedes Classe V">
     <div class="fleet-specs">
       <div class="fleet-spec rev d1"><div class="fleet-spec-num">7</div><span class="fleet-spec-label">Places</span></div>
       <div class="fleet-spec rev d2"><div class="fleet-spec-num">WiFi</div><span class="fleet-spec-label">Haut débit</span></div>
