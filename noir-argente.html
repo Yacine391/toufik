@@ -150,12 +150,7 @@
       opacity: 0; animation: fadeIn 1.4s ease 0.6s forwards;
       padding: 40px 20px;
     }
-    .hero-van {
-      width: 100%; max-width: 700px; height: auto; display: block;
-      filter: drop-shadow(0 24px 60px rgba(0,0,0,0.9));
-      -webkit-mask-image: radial-gradient(ellipse 88% 92% at 54% 48%, black 55%, transparent 88%);
-      mask-image: radial-gradient(ellipse 88% 92% at 54% 48%, black 55%, transparent 88%);
-    }
+    .hero-van { width: 100%; max-width: 760px; height: auto; display: block; }
     @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @media (max-width: 900px) {
@@ -200,12 +195,7 @@
     .fleet-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
     .fleet-title span { display: block; font-size: 0.38em; font-weight: 300; letter-spacing: 0.3em; color: var(--s400); margin-top: 10px; }
     .fleet-van-wrap { width: 100%; position: relative; }
-    .fleet-img {
-      display: block; width: 100%; height: 520px; object-fit: contain; object-position: center;
-      filter: drop-shadow(0 30px 80px rgba(0,0,0,0.9));
-      -webkit-mask-image: radial-gradient(ellipse 88% 92% at 50% 48%, black 55%, transparent 88%);
-      mask-image: radial-gradient(ellipse 88% 92% at 50% 48%, black 55%, transparent 88%);
-    }
+    .fleet-img { display: block; width: 100%; max-height: 480px; object-fit: contain; object-position: center; }
     .fleet-specs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--bd); border-top: 1px solid var(--bd); }
     .fleet-spec { background: var(--bg2); padding: 22px 18px; text-align: center; }
     .fleet-spec-num {
@@ -215,7 +205,7 @@
       background-clip: text;
     }
     .fleet-spec-label { font-size: 8px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--s400); margin-top: 6px; display: block; }
-    @media (max-width: 900px) { .fleet-specs { grid-template-columns: repeat(3, 1fr); } .fleet-img { height: 320px; } }
+    @media (max-width: 900px) { .fleet-specs { grid-template-columns: repeat(3, 1fr); } .fleet-img { max-height: 240px; } }
     @media (max-width: 500px) { .fleet-specs { grid-template-columns: repeat(2, 1fr); } }
 
     /* ══════════════════════════════════════════════
